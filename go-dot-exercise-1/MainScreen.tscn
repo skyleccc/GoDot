@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://cu27fej6g7g5g"]
+
+[ext_resource type="PackedScene" uid="uid://3fr73gsx4v23" path="res://textHelloWorld.tscn" id="1_cshku"]
+[ext_resource type="Texture2D" uid="uid://wuk3vl06nmbi" path="res://360_F_266510645_oPn4QXPoHLS77ADPUawxHktJXkwueshI.jpg" id="1_i8u74"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i8u74"]
+size = Vector2(1199.125, 24.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ih8ls"]
+size = Vector2(23, 650)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_453mu"]
+size = Vector2(27.0625, 673.25)
+
+[node name="MainScreen" type="Node2D" unique_id=1177669252]
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1009293009]
+position = Vector2(574.5, 324)
+scale = Vector2(2.1314814, 1.8055556)
+texture = ExtResource("1_i8u74")
+
+[node name="Text" parent="." unique_id=1769106145 instance=ExtResource("1_cshku")]
+position = Vector2(547, 326)
+scale = Vector2(1.2, 1.2)
+
+[node name="Borders" type="Node2D" parent="." unique_id=1512648180]
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Borders" unique_id=303537092]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D4" unique_id=1839359278]
+position = Vector2(562.875, -13)
+shape = SubResource("RectangleShape2D_i8u74")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Borders" unique_id=1092043166]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D3" unique_id=1959707840]
+position = Vector2(576.4375, 662)
+shape = SubResource("RectangleShape2D_i8u74")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Borders" unique_id=1737033305]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Borders/StaticBody2D2" unique_id=332404849]
+position = Vector2(-12.5, 324)
+shape = SubResource("RectangleShape2D_ih8ls")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Borders" unique_id=364271996]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D" unique_id=798068484]
+position = Vector2(1162.4688, 311.375)
+shape = SubResource("RectangleShape2D_453mu")

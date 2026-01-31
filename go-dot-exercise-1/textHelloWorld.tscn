@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://3fr73gsx4v23"]
+
+[ext_resource type="Script" uid="uid://b8jl56a6wh030" path="res://text_hello_world.gd" id="1_lgwwh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hyssu"]
+size = Vector2(115, 16)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hyssu"]
+
+[node name="Text" type="CharacterBody2D" unique_id=751865625]
+script = ExtResource("1_lgwwh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=177758928]
+position = Vector2(2.5, 2)
+shape = SubResource("RectangleShape2D_hyssu")
+
+[node name="LineEdit" type="Label" parent="." unique_id=1004789675]
+modulate = Color(0, 0, 0, 1)
+offset_left = -60.0
+offset_top = -14.0
+offset_right = 66.0
+offset_bottom = 17.0
+text = "HELLO WORLD"
+label_settings = SubResource("LabelSettings_hyssu")
+horizontal_alignment = 1
+vertical_alignment = 1
