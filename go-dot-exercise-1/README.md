@@ -1,4 +1,4 @@
-![til](./GoDot/go-dot-exercise-1/Output.gif)
+![Output](https://github.com/user-attachments/assets/ab033786-9060-429c-b3e5-be09526a50a3)
 
 Made by: Justin Alec Antonio
 
