@@ -1,4 +1,4 @@
-![til](./go-dot-exercise-1/Output.gif)
+![til](./GoDot/go-dot-exercise-1/Output.gif)
 
 Made by: Justin Alec Antonio
 
