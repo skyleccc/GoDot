@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://ckvallhqeubem"
+path="res://.godot/imported/Spikes.aseprite-dd981b342c7ac342c46e37364bd31157.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Prototype Pack/Spikes/Spikes.aseprite"
+dest_files=["res://.godot/imported/Spikes.aseprite-dd981b342c7ac342c46e37364bd31157.res"]
+
+[params]
+

@@ -1,0 +1,148 @@
+[gd_scene format=3 uid="uid://ckdojb3k5k0nr"]
+
+[ext_resource type="Script" uid="uid://dwqdwy0khd3vy" path="res://portal/portal.gd" id="1_bxscs"]
+[ext_resource type="Texture2D" uid="uid://bfrubn2q114ws" path="res://asssets/portals/PORTAL BLUE-Sheet.png" id="2_knorx"]
+[ext_resource type="Texture2D" uid="uid://b5xoyg64dm35q" path="res://asssets/portals/PORTAL ORANGE-Sheet.png" id="3_cp31a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ribra"]
+atlas = ExtResource("2_knorx")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvhp1"]
+atlas = ExtResource("2_knorx")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5u8w"]
+atlas = ExtResource("2_knorx")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ah1yy"]
+atlas = ExtResource("2_knorx")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sbhlt"]
+atlas = ExtResource("2_knorx")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xyv7e"]
+atlas = ExtResource("2_knorx")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxjsh"]
+atlas = ExtResource("2_knorx")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8j2ey"]
+atlas = ExtResource("2_knorx")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4ven"]
+atlas = ExtResource("3_cp31a")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kpnp"]
+atlas = ExtResource("3_cp31a")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqxad"]
+atlas = ExtResource("3_cp31a")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ht11y"]
+atlas = ExtResource("3_cp31a")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_76eqw"]
+atlas = ExtResource("3_cp31a")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6ctn"]
+atlas = ExtResource("3_cp31a")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uc42u"]
+atlas = ExtResource("3_cp31a")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8ody"]
+atlas = ExtResource("3_cp31a")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2evpl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ribra")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvhp1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g5u8w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ah1yy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sbhlt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xyv7e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxjsh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8j2ey")
+}],
+"loop": true,
+"name": &"BluePortal",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q4ven")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1kpnp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqxad")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ht11y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_76eqw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p6ctn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uc42u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8ody")
+}],
+"loop": true,
+"name": &"OrangePortal",
+"speed": 20.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_knorx"]
+size = Vector2(6.25, 25)
+
+[node name="Portal2" type="Area2D" unique_id=1186338649]
+collision_layer = 0
+collision_mask = 9
+script = ExtResource("1_bxscs")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=274089453]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_2evpl")
+animation = &"BluePortal"
+autoplay = "BluePortal"
+
+[node name="TeleportBox" type="CollisionShape2D" parent="." unique_id=410635502]
+position = Vector2(3, 2)
+shape = SubResource("RectangleShape2D_knorx")

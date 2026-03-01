@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://cpci16sni363c"]
+
+[ext_resource type="Texture2D" uid="uid://cv0mdvcdc8oyu" path="res://asssets/enemies/Warped shooting fx files/Pixelart/Pulse/frames/pulse1.png" id="1_871c6"]
+[ext_resource type="Texture2D" uid="uid://ipj4etqd0fm5" path="res://asssets/enemies/Warped shooting fx files/Pixelart/Pulse/frames/pulse2.png" id="2_nl44v"]
+[ext_resource type="Texture2D" uid="uid://o4ge0j13fmvg" path="res://asssets/enemies/Warped shooting fx files/Pixelart/Pulse/frames/pulse3.png" id="3_b1j15"]
+[ext_resource type="Texture2D" uid="uid://d06yswi05y33k" path="res://asssets/enemies/Warped shooting fx files/Pixelart/Pulse/frames/pulse4.png" id="4_jlolu"]
+[ext_resource type="Script" uid="uid://l8e24c2v8hjp" path="res://hazards/turret_bullet.gd" id="5_bullet"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_32v7o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_871c6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_nl44v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_b1j15")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_jlolu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nl44v"]
+size = Vector2(24.999998, 13.333333)
+
+[node name="TurretBullet" type="CharacterBody2D" unique_id=1785840412]
+scale = Vector2(0.6, 0.6)
+collision_layer = 8
+collision_mask = 27
+script = ExtResource("5_bullet")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=33597316]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_32v7o")
+frame = 3
+frame_progress = 0.4094652
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=208195926]
+position = Vector2(16.666666, 1.6666666)
+shape = SubResource("RectangleShape2D_nl44v")

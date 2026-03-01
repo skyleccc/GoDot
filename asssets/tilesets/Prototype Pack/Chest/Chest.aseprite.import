@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://86gjsmpy856u"
+path="res://.godot/imported/Chest.aseprite-17c2960c3d24397c38e46bcc0f436a4c.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Prototype Pack/Chest/Chest.aseprite"
+dest_files=["res://.godot/imported/Chest.aseprite-17c2960c3d24397c38e46bcc0f436a4c.res"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://daxr3x8gkm5xy"
+path="res://.godot/imported/PlayerHologram.aseprite-0b3360e33f342914b3d5688c63bc05f3.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Prototype Pack/PlayerHologram/PlayerHologram.aseprite"
+dest_files=["res://.godot/imported/PlayerHologram.aseprite-0b3360e33f342914b3d5688c63bc05f3.res"]
+
+[params]
+

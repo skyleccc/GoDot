@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://df47pcipyhdy4"]
+
+[ext_resource type="Script" uid="uid://c86dmudh1eyby" path="res://portal/portal_gun.gd" id="1_trd4h"]
+[ext_resource type="PackedScene" uid="uid://ckdojb3k5k0nr" path="res://portal/PortalBlue.tscn" id="2_2epnt"]
+
+[node name="PortalGun" type="Node2D" unique_id=527889898]
+script = ExtResource("1_trd4h")
+blue_portal_scene = ExtResource("2_2epnt")
+orange_portal_scene = ExtResource("2_2epnt")

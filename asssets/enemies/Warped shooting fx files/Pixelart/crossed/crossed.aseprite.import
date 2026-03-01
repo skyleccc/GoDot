@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bpkiwjwft2gwj"
+path="res://.godot/imported/crossed.aseprite-b682e623f04bc9791c182a54f217ca39.res"
+
+[deps]
+
+source_file="res://asssets/enemies/Warped shooting fx files/Pixelart/crossed/crossed.aseprite"
+dest_files=["res://.godot/imported/crossed.aseprite-b682e623f04bc9791c182a54f217ca39.res"]
+
+[params]
+

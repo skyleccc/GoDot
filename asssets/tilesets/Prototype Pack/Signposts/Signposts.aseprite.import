@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dsttp8i17xh2n"
+path="res://.godot/imported/Signposts.aseprite-91fc6aad3e8b67824512f8d5d9877b7a.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Prototype Pack/Signposts/Signposts.aseprite"
+dest_files=["res://.godot/imported/Signposts.aseprite-91fc6aad3e8b67824512f8d5d9877b7a.res"]
+
+[params]
+

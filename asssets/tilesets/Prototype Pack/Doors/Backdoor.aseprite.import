@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c5afa8m2jn5c1"
+path="res://.godot/imported/Backdoor.aseprite-32558adaa39fb5a5113837e8d3d9b5a1.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Prototype Pack/Doors/Backdoor.aseprite"
+dest_files=["res://.godot/imported/Backdoor.aseprite-32558adaa39fb5a5113837e8d3d9b5a1.res"]
+
+[params]
+

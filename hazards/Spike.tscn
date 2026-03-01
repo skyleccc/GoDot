@@ -1,0 +1,126 @@
+[gd_scene format=4 uid="uid://c65m3w6poefid"]
+
+[ext_resource type="Script" uid="uid://dmu5qlcndha6s" path="res://hazards/spike.gd" id="1_hyx1m"]
+[ext_resource type="Texture2D" uid="uid://dyp3un3ybeqfm" path="res://asssets/tilesets/Prototype Pack/Spikes/SpikeSingleHidden.png" id="1_mtxpd"]
+
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_eeelq"]
+_data = PackedByteArray("AAADAAUAAAABAAAA0AIAAN4AAADYAAAAUklGRtAAAABXRUJQVlA4TMMAAAAvz0I3EE+gpm0jKPxRdr7/bj4gitpGcsKf4/56Owqnpm0jKPxpFkDvn24QEBT5P1oA/j/ge5epVTXgfplEgOG0tm0nIteRqSe1kB0KjQQ3ilD0Xf+pORH9N5C2TaZg+1V4+J//FvBf5rtWKqsIraxOrGyIXAv/g//wH/7Df/gP/+E/B8J/mW9kTdEb+a+2ejfyX/2mW/evVBWhqvXT/StVdaLq+3T/StWk6vgu3b6qxljVezq2L/4H/+E//If/kBj+8wAA")
+size_override = Vector2(720, 222)
+
+[sub_resource type="Animation" id="Animation_mtxpd"]
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Thorn:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.20000002, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_hyx1m"]
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Thorn:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_hwh8s"]
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Thorn:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8myo6"]
+_data = {
+&"Activate": SubResource("Animation_mtxpd"),
+&"Activated": SubResource("Animation_hyx1m"),
+&"Hidden": SubResource("Animation_hwh8s")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hyx1m"]
+size = Vector2(5, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_portal"]
+size = Vector2(16, 4)
+
+[node name="Spike" type="Area2D" unique_id=1639419919]
+scale = Vector2(2, 2)
+script = ExtResource("1_hyx1m")
+
+[node name="Pit" type="Sprite2D" parent="." unique_id=1687603829]
+texture_filter = 1
+position = Vector2(0, -5)
+texture = ExtResource("1_mtxpd")
+
+[node name="Thorn" type="Sprite2D" parent="." unique_id=160211840]
+texture_filter = 1
+position = Vector2(96, 26)
+texture = SubResource("PortableCompressedTexture2D_eeelq")
+hframes = 3
+vframes = 2
+frame = 1
+metadata/_aseprite_wizard_interface_config_ = {
+"animation_section": false,
+"layer_section": true,
+"output_section": false,
+"pending_changes": {},
+"slice_section": true
+}
+metadata/_aseprite_wizard_config_ = {
+"convert_fps_field": 60.0,
+"convert_ms_field": 16.0,
+"convert_to_fps": false,
+"embed_tex": true,
+"i_mode": 0,
+"keep_anim_length": false,
+"layers": ["Spike"],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "AnimationPlayer",
+"scale": "1.0",
+"slice": "",
+"source": "res://asssets/tilesets/Prototype Pack/Spikes/Spikes.aseprite",
+"source_uid": 5518101969638317112
+}
+metadata/_aseprite_wizard_source_file_hash_ = "edfc5c99821bb12c4ea6d71c99220d47"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=586853386]
+libraries/ = SubResource("AnimationLibrary_8myo6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=416420698]
+position = Vector2(-0.5, -1.5)
+shape = SubResource("RectangleShape2D_hyx1m")
+
+[node name="PortalSurface" type="StaticBody2D" parent="." unique_id=265606829]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PortalSurface" unique_id=1030369400]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_portal")

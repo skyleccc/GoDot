@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://8mgxb77xwyeh"
+path="res://.godot/imported/PlayerCombat.aseprite-a3d6c66f2dfd7795354e742852f52b66.res"
+
+[deps]
+
+source_file="res://asssets/character/Prototype Pack/Aseprite/PlayerCombat.aseprite"
+dest_files=["res://.godot/imported/PlayerCombat.aseprite-a3d6c66f2dfd7795354e742852f52b66.res"]
+
+[params]
+

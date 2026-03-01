@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dbgfjvjs717j4"
+path="res://.godot/imported/Terminals.aseprite-def1a7e949a60dac9e7e34d6f36e9073.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Prototype Pack/Terminals/Terminals.aseprite"
+dest_files=["res://.godot/imported/Terminals.aseprite-def1a7e949a60dac9e7e34d6f36e9073.res"]
+
+[params]
+

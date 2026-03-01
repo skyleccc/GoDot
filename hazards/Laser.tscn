@@ -1,0 +1,136 @@
+[gd_scene format=4 uid="uid://d05ihsescdp0j"]
+
+[ext_resource type="Script" uid="uid://7fui7geon2pd" path="res://hazards/laser.gd" id="1_j13iv"]
+
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_qfc7r"]
+_data = PackedByteArray("AAADAAUAAAABAAAAgAAAAEABAAAyAwAAUklGRioDAABXRUJQVlA4TB4DAAAvf8BPED9AqIFxZfSfvxAiCCIImTDE5HDrHxGZtE1gPvbNv8Ed8x8A/rdEYaSlDSS51t621QfK0pw7IJg2FcI8aJqygSqNX/M/NtK4ftuBPvL/0xsi+u/AbdtIYnbbTeeA58A+Al8CapVzFpFOL8dvESG50nA7Lcc58eBm/2/kOSpARLz30M9RUyHGCNuK0RE952qFiFqX1RzVaIuoFc6Vv4A2VyDxPbW1TKgWzYVYgGyI1RD4MoUWunXOThX0tUjJ1Ig+JbpF2dinhtBf5j1GZZuZOleeyIy4fSu1NZx6jxb0MPWZ/U+E6JSV3OcQVXs8es6Gn7R1zjnNOWHb2mm2P1su6h8MW+ibkl775xNzHmHctNrzOXUOa22AshY9ngDlf45AjPxcbXS6ztEUBKtFL+spqu6pXwoXVvtce/U+Rt0XW0S894Y5Vmm4nZZjN5MjHtzs/40VOX7Lo5rLlXNWyVHix4Ba5ZxFpDPMkYbbaTka5oCIeO9hmAMIAHRz7DTAM+Psh6cOXNDWuvrB6WqZc5WhMuezgxcAnt1wXiM4HZgTnVJTc6Eo5MqFSMPqDzE6hIKkqk3cFP2lLJTQ3iU6CtpChPV7H501GCzzYE5f7aSvDc6ecXNOh+cHe6hv2trDuPOC4WkLseWNNlfNVQMT1IeCnOrcswfKaQuwHUTEe2+YY5WG22k5doY5cs4iYpHjx4Ba5ZxFpDPMkYbbaTka5oCIeO9hmANIyc3HCEdnIDl2DlmO3VMH4rAnOdb6eW4nEc0aZh1jc13MKRpyXxgwoBaPclHHmlCC5zpTVnRfq31Lz7WYd6bgeM4CO4nlOjotsJhzvL2uZj5XonYL9PMxmiN6X9Ih188La47cF26nYHCzRMR7b5hjlYbbaTl2hjlyziJikePHgFrlnEWkM8yRhttpORrmgIh472GYA+gbi33eGtgnGEg8iqPXEWptl2oXdQUD4KA+vADvXV0TzOE9RLmCuvD2PtFz0zOBcvU3NTGRRQsKz6FhnPou/QY9iw3LhWR/ovceEfHeG+ZYpeF2Wo6dYY6cs4hY5PgKUAA=")
+size_override = Vector2(128, 320)
+
+[sub_resource type="Animation" id="Animation_j13iv"]
+length = 0.49
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.07, 0.14, 0.21, 0.28, 0.35, 0.42),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_j47eg"]
+length = 1.12
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.07, 0.14, 0.21, 0.28, 0.35, 0.42, 0.49, 0.56, 0.63, 0.7, 0.77, 0.84, 0.91, 0.98, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11, 8, 9, 10, 11, 8, 9, 10, 11, 8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_sbrhn"]
+length = 0.58
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.07, 0.14, 0.21, 0.28),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15, 0]
+}
+
+[sub_resource type="Animation" id="Animation_pbnc1"]
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mtafs"]
+_data = {
+&"Activate": SubResource("Animation_j13iv"),
+&"Activated": SubResource("Animation_j47eg"),
+&"Deactivate": SubResource("Animation_sbrhn"),
+&"Deactivated": SubResource("Animation_pbnc1")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qfc7r"]
+size = Vector2(12, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j13iv"]
+size = Vector2(4, 48)
+
+[node name="Laser" type="Node2D" unique_id=2145471457]
+script = ExtResource("1_j13iv")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=178720225]
+texture_filter = 1
+texture = SubResource("PortableCompressedTexture2D_qfc7r")
+hframes = 4
+vframes = 4
+frame = 8
+metadata/_aseprite_wizard_interface_config_ = {
+"layer_section": true,
+"pending_changes": {},
+"slice_section": false
+}
+metadata/_aseprite_wizard_config_ = {
+"convert_fps_field": 60.0,
+"convert_ms_field": 16.0,
+"convert_to_fps": false,
+"embed_tex": true,
+"i_mode": 0,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": true,
+"player": "AnimationPlayer",
+"scale": "1.0",
+"slice": "",
+"source": "res://asssets/tilesets/Prototype Pack/Laser/Laser.aseprite",
+"source_uid": 626064433647745679
+}
+metadata/_aseprite_wizard_source_file_hash_ = "ebaecf55a4f08081c3aa18cee3045155"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=746436618]
+root_node = NodePath("../Sprite2D")
+libraries/ = SubResource("AnimationLibrary_mtafs")
+autoplay = &"Activated"
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1909107294]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1437853312]
+shape = SubResource("RectangleShape2D_qfc7r")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=951739679]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=856209411]
+shape = SubResource("RectangleShape2D_j13iv")

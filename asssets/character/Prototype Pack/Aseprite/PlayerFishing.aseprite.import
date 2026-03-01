@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://ds71ej3vnw8cj"
+path="res://.godot/imported/PlayerFishing.aseprite-ded57e2d84c4da5c4212b59ba54a0f57.res"
+
+[deps]
+
+source_file="res://asssets/character/Prototype Pack/Aseprite/PlayerFishing.aseprite"
+dest_files=["res://.godot/imported/PlayerFishing.aseprite-ded57e2d84c4da5c4212b59ba54a0f57.res"]
+
+[params]
+
