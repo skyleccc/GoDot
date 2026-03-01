@@ -1,4 +1,4 @@
-# GoDotExercise1
+# Portal-style 2D Platformer Game (Godot Exercise/Project)
 
 A 2D platformer built in **Godot 4.6** featuring a full **Portal gun** mechanic — place linked blue and orange portals on surfaces and fling yourself through them with preserved momentum. *"Speedy thing goes in, speedy thing comes out."*
 
