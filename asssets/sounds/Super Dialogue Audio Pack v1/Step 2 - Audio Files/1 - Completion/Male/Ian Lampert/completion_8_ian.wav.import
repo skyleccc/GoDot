@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://diwqbq4fpq4d4"
+path="res://.godot/imported/completion_8_ian.wav-8d53d5beb490d1865e35b60f3420fc57.sample"
+
+[deps]
+
+source_file="res://asssets/sounds/Super Dialogue Audio Pack v1/Step 2 - Audio Files/1 - Completion/Male/Ian Lampert/completion_8_ian.wav"
+dest_files=["res://.godot/imported/completion_8_ian.wav-8d53d5beb490d1865e35b60f3420fc57.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

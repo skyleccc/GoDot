@@ -19,7 +19,7 @@ var _timer: float = 0.0
 var _grouped: bool = false  ## Set true by SpikeGroup — disables self-managed timing.
 
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
-@onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var collision_shape: CollisionShape2D = $HitBox
 
 
 func _ready() -> void:
@@ -70,6 +70,8 @@ func _enter_hidden() -> void:
 func _enter_activating() -> void:
 	_state = SpikeState.ACTIVATING
 	anim_player.play("Activate")
+	# Enable hitbox 0.3s into the Activate animation
+	get_tree().create_timer(0.3).timeout.connect(_enable_hitbox_early)
 
 
 func _on_animation_finished(anim_name: StringName) -> void:
@@ -79,18 +81,31 @@ func _on_animation_finished(anim_name: StringName) -> void:
 			activate_animation_finished.emit()
 
 
+func _enable_hitbox_early() -> void:
+	if not is_instance_valid(collision_shape):
+		return
+	if _state == SpikeState.ACTIVATING:
+		collision_shape.disabled = false
+		# Overlap data updates next physics frame; defer the check.
+		get_tree().physics_frame.connect(_damage_overlapping, CONNECT_ONE_SHOT)
+
+
 func _enter_activated() -> void:
 	_state = SpikeState.ACTIVATED
 	_timer = activated_duration
 	collision_shape.disabled = false
 	anim_player.play("Activated")
-	# Damage any player already overlapping
+	# Overlap data updates next physics frame; defer the check.
+	get_tree().physics_frame.connect(_damage_overlapping, CONNECT_ONE_SHOT)
+
+
+func _damage_overlapping() -> void:
 	for body in get_overlapping_bodies():
 		_try_damage(body)
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if _state == SpikeState.ACTIVATED:
+	if _state == SpikeState.ACTIVATED or _state == SpikeState.ACTIVATING:
 		_try_damage(body)
 
 

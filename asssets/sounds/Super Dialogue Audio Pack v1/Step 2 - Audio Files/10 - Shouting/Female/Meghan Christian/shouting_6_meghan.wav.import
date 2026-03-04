@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bg1n1egfaqdm6"
+path="res://.godot/imported/shouting_6_meghan.wav-7b1e331f107b2c8e5aa5b2b437153160.sample"
+
+[deps]
+
+source_file="res://asssets/sounds/Super Dialogue Audio Pack v1/Step 2 - Audio Files/10 - Shouting/Female/Meghan Christian/shouting_6_meghan.wav"
+dest_files=["res://.godot/imported/shouting_6_meghan.wav-7b1e331f107b2c8e5aa5b2b437153160.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

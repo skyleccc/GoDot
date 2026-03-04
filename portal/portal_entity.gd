@@ -22,6 +22,11 @@ var pre_teleport_velocity := Vector2.ZERO
 ## Maximum number of slide iterations per frame to prevent infinite loops
 const MAX_SLIDES := 4
 
+## Maximum depenetration attempts when resolving overlaps after teleport
+const MAX_DEPENETRATION_STEPS := 8
+## Small test motion length used to probe for overlaps
+const DEPENETRATION_PROBE := 0.5
+
 func _process(delta: float) -> void:
 	if launched_by_portal:
 		_portal_launch_timer -= delta
@@ -33,8 +38,31 @@ func _process(delta: float) -> void:
 func notify_portal_launch() -> void:
 	launched_by_portal = true
 	_portal_launch_timer = PORTAL_LAUNCH_DURATION
+	is_grounded = false
+
+## Push the body out of any solid it overlaps (e.g. after portal teleport).
+## Uses test-only move_and_collide probes to find overlap normals and
+## nudges the body outward until it sits in free space.
+func resolve_collision_overlaps() -> void:
+	for i in MAX_DEPENETRATION_STEPS:
+		# Probe with a tiny motion in every cardinal direction to find overlaps
+		var pushed := false
+		for dir in [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]:
+			var collision := move_and_collide(dir * DEPENETRATION_PROBE, true)  # test only
+			if collision and collision.get_depth() > 0.1:
+				# We're overlapping — push out along collision normal
+				var push := collision.get_normal() * (collision.get_depth() + 1.0)
+				global_position += push
+				pushed = true
+				break  # re-check from new position
+		if not pushed:
+			break  # no overlaps found, we're clear
 
 func custom_move_and_slide(delta: float) -> void:
+	# Snapshot velocity before any collision resolution — portals use this
+	# so entry speed isn't lost when the floor eats the velocity first.
+	pre_teleport_velocity = velocity
+
 	is_grounded = false
 	var motion := velocity * delta
 	var slides := 0

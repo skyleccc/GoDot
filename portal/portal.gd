@@ -9,14 +9,50 @@ extends Area2D
 
 @export var linked_portal: Area2D
 
+@export_group("Audio")
+## Max distance (px) for enter/exit teleport sounds
+@export var sfx_max_distance: float = 2000.0
+## Max distance (px) for the ambient hum loop
+@export var ambient_max_distance: float = 500.0
+## Volume (dB) for the ambient hum loop
+@export var ambient_volume_db: float = -10.0
+
+@onready var sound_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var ambient_player: AudioStreamPlayer2D = $AmbientLoopPlayer
+
+## Sound list
+const ENTER_SOUND: AudioStream = preload("res://portal/sounds/portal_enter_01.wav")
+const EXIT_SOUND: AudioStream = preload("res://portal/sounds/portal_exit_01.wav")
+const AMBIENT_LOOP_SOUND: AudioStream = preload("res://portal/sounds/portal_ambient_loop1.wav")
+
 ## Extra padding on top of the hitbox-based offset
-const EXIT_PADDING := 4.0
+const EXIT_PADDING := 20.0
 ## Speed multiplier applied on portal exit (1.0 = no change)
 @export var speed_multiplier: float = 1.0
 ## Cooldown to prevent instant re-teleport between the pair
 const COOLDOWN_DURATION := 0.15
 
+
 var _cooldown: bool = false
+
+func _ready() -> void:
+	# Apply exported audio settings
+	if sound_player:
+		sound_player.max_distance = sfx_max_distance
+	if ambient_player:
+		ambient_player.max_distance = ambient_max_distance
+		ambient_player.volume_db = ambient_volume_db
+
+	# Start the ambient hum loop when the portal spawns
+	if ambient_player and AMBIENT_LOOP_SOUND:
+		ambient_player.stream = AMBIENT_LOOP_SOUND
+		ambient_player.finished.connect(_on_ambient_finished)
+		ambient_player.play()
+
+func _on_ambient_finished() -> void:
+	# Restart the ambient loop (wav files don't loop by default)
+	if ambient_player and is_instance_valid(ambient_player):
+		ambient_player.play()
 
 func get_normal() -> Vector2:
 	return global_transform.x.normalized()
@@ -99,7 +135,9 @@ func _get_exit_buffer(body: CharacterBody2D) -> float:
 	return maxf(-min_proj, 0.0) + EXIT_PADDING
 
 func _teleport(body: PortalEntity) -> void:
-	var entry_speed: float = body.velocity.length()
+	# Use pre_teleport_velocity (captured before collision resolution)
+	# so falling speed isn't lost when the floor slides it to zero first.
+	var entry_speed: float = maxf(body.velocity.length(), body.pre_teleport_velocity.length())
 
 	# Exit direction = the exit portal's outward normal (the piston direction)
 	var push_dir: Vector2 = linked_portal.get_normal()
@@ -110,6 +148,9 @@ func _teleport(body: PortalEntity) -> void:
 	# Place body at exit portal, pushed out by the piston
 	body.global_position = linked_portal.global_position + push_dir * exit_buffer
 
+	# Resolve any overlap with walls/floors at the exit position
+	body.resolve_collision_overlaps()
+
 	# Piston fires at entry speed, scaled by the multiplier.
 	var exit_speed: float = entry_speed * linked_portal.speed_multiplier
 	body.velocity = push_dir * exit_speed
@@ -117,9 +158,18 @@ func _teleport(body: PortalEntity) -> void:
 	body.is_grounded = false
 	body.notify_portal_launch()
 
+	# Play enter sound on entry portal, exit sound on exit portal
+	_play_sound(ENTER_SOUND)
+	linked_portal._play_sound(EXIT_SOUND)
+
 	# Cooldown both portals
 	_start_cooldown()
 	linked_portal._start_cooldown()
+
+func _play_sound(stream: AudioStream) -> void:
+	if sound_player and is_instance_valid(sound_player) and stream:
+		sound_player.stream = stream
+		sound_player.play()
 
 func _start_cooldown() -> void:
 	_cooldown = true

@@ -52,7 +52,7 @@ enum State { IDLE, ROAM, CHASE, ATTACK, HURT, DEATH, DASH }
 @export var wall_ray_length: float = 15.0
 
 # ── Strike frame constants (0-indexed) ─────────────────────────────────────────
-const MELEE_FRAMES: Array[int] = [2, 3, 4, 6, 7]
+const MELEE_FRAMES: Array[int] = [2, 3, 6, 7]
 const BULLET_FRAME: int = 13
 
 # Preloads

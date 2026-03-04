@@ -10,10 +10,22 @@ extends Node2D
 @export var blue_portal_scene: PackedScene
 @export var orange_portal_scene: PackedScene
 
+@onready var sound_player: AudioStreamPlayer = $AudioStreamPlayer
+
+# Sound list
+const SHOOT_BLUE_SOUND: AudioStream = preload("res://portal/sounds/portalgun_shoot_blue1.wav")
+const SHOOT_ORANGE_SOUND: AudioStream = preload("res://portal/sounds/portalgun_shoot_red1.wav")
+const SHOOT_FAIL_SOUND: AudioStream = preload("res://portal/sounds/portal_invalid_surface3.wav")
+const RESET_PORTAL_SOUND: AudioStream = preload("res://portal/sounds/portal_close1.wav")
+
 ## How far the raycast reaches
 const RAY_LENGTH := 2000.0
 ## Collision mask for portal-able surfaces (layer 2 = Walls, layer 6 = PortalSurfaces)
 const SURFACE_MASK := 34
+## Half-height of the PortalWallSurface collision shape (36 / 2)
+const PORTAL_HALF_HEIGHT := 18.0
+## Number of probe rays along the portal height to validate wall coverage
+const SURFACE_CHECK_STEPS := 4
 
 var active_blue_portal: Node2D = null
 var active_orange_portal: Node2D = null
@@ -31,17 +43,19 @@ func _process(_delta: float) -> void:
 
 	# Fire portals
 	if Input.is_action_just_pressed("BluePortal"):
-		_spawn_portal("blue")
+		_play_sound(SHOOT_BLUE_SOUND) if _spawn_portal("blue") else _play_sound(SHOOT_FAIL_SOUND)
+
 	elif Input.is_action_just_pressed("OrangePortal"):
-		_spawn_portal("orange")
+		_play_sound(SHOOT_ORANGE_SOUND) if _spawn_portal("orange") else _play_sound(SHOOT_FAIL_SOUND)
 
 	# Reset both portals
 	if Input.is_action_just_pressed("ResetPortals"):
 		_clear_portals()
+		_play_sound(RESET_PORTAL_SOUND)
 
 func _update_aim() -> void:
 	var result := _raycast_to_surface()
-	if result:
+	if result and _is_surface_valid_for_portal(result.position, result.normal):
 		_aim_hit_pos = result.position
 		_aim_hit_normal = result.normal
 		_aim_valid = true
@@ -49,10 +63,21 @@ func _update_aim() -> void:
 		_aim_hit_pos = global_position + global_transform.x * RAY_LENGTH
 		_aim_valid = false
 
-func _spawn_portal(type: String) -> void:
+## Plays the given audio stream. Note: using a single AudioStreamPlayer means
+## a new sound will cut off any currently playing sound.
+func _play_sound(stream: AudioStream) -> void:
+	if sound_player and is_instance_valid(sound_player) and stream:
+		sound_player.stream = stream
+		sound_player.play()
+
+func _spawn_portal(type: String) -> bool:
 	var result := _raycast_to_surface()
 	if not result:
-		return  # No valid surface hit
+		return false  # No valid surface hit
+
+	# Verify the wall covers the full portal height
+	if not _is_surface_valid_for_portal(result.position, result.normal):
+		return false
 
 	# Create the portal instance
 	var new_portal: Node2D
@@ -77,6 +102,7 @@ func _spawn_portal(type: String) -> void:
 
 	# Link portals together if both exist
 	_link_portals()
+	return true
 
 func _raycast_to_surface() -> Dictionary:
 	var space_state := get_world_2d().direct_space_state
@@ -96,6 +122,30 @@ func _link_portals() -> void:
 	elif active_orange_portal:
 		active_orange_portal.linked_portal = null
 
+## Checks whether the wall surface at hit_pos fully covers the portal height.
+## Casts probe rays at evenly-spaced points along the portal's span.
+## Returns false if any probe misses, meaning the wall has a gap or edge.
+func _is_surface_valid_for_portal(hit_pos: Vector2, hit_normal: Vector2) -> bool:
+	# Tangent runs along the wall surface (perpendicular to normal)
+	var tangent := Vector2(-hit_normal.y, hit_normal.x)
+	var probe_start := 5.0   # start ray slightly in front of the wall
+	var probe_depth := 15.0  # cast into the wall
+
+	var space_state := get_world_2d().direct_space_state
+
+	# Check evenly-spaced points from -PORTAL_HALF_HEIGHT to +PORTAL_HALF_HEIGHT
+	for i in range(SURFACE_CHECK_STEPS + 1):
+		var t: float = -PORTAL_HALF_HEIGHT + (2.0 * PORTAL_HALF_HEIGHT) * i / SURFACE_CHECK_STEPS
+		var origin := hit_pos + tangent * t + hit_normal * probe_start
+		var target := origin - hit_normal * probe_depth
+		var query := PhysicsRayQueryParameters2D.create(origin, target, SURFACE_MASK)
+		query.collide_with_areas = false
+		query.collide_with_bodies = true
+		var probe_result := space_state.intersect_ray(query)
+		if not probe_result:
+			return false
+	return true
+
 func _clear_portals() -> void:
 	if active_blue_portal:
 		active_blue_portal.queue_free()
@@ -103,5 +153,3 @@ func _clear_portals() -> void:
 	if active_orange_portal:
 		active_orange_portal.queue_free()
 		active_orange_portal = null
-
-

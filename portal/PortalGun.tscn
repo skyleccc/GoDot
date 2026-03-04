@@ -1,9 +1,22 @@
 [gd_scene format=3 uid="uid://df47pcipyhdy4"]
 
 [ext_resource type="Script" uid="uid://c86dmudh1eyby" path="res://portal/portal_gun.gd" id="1_trd4h"]
-[ext_resource type="PackedScene" uid="uid://ckdojb3k5k0nr" path="res://portal/PortalBlue.tscn" id="2_2epnt"]
+[ext_resource type="PackedScene" uid="uid://v6aqatvrduqp" path="res://portal/PortalBlue.tscn" id="2_2epnt"]
+[ext_resource type="PackedScene" uid="uid://b8yectbh3wxy4" path="res://portal/PortalOrange.tscn" id="3_2epnt"]
+[ext_resource type="Texture2D" uid="uid://cpn8oewiek5b0" path="res://asssets/guns/Pixel sci-fi weapon/Sci-Fi pistol 2.png" id="4_twq0i"]
+
+[sub_resource type="AudioStreamWAV" id="AudioStreamWAV_twq0i"]
 
 [node name="PortalGun" type="Node2D" unique_id=527889898]
 script = ExtResource("1_trd4h")
 blue_portal_scene = ExtResource("2_2epnt")
-orange_portal_scene = ExtResource("2_2epnt")
+orange_portal_scene = ExtResource("3_2epnt")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=646509992]
+texture_filter = 1
+position = Vector2(0, -2.3841858e-07)
+scale = Vector2(0.043701176, 0.043701176)
+texture = ExtResource("4_twq0i")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1242681443]
+stream = SubResource("AudioStreamWAV_twq0i")

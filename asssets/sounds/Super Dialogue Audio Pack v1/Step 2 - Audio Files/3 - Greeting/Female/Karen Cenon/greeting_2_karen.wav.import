@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dwsea84y53tln"
+path="res://.godot/imported/greeting_2_karen.wav-f7c94f6446fb2b9bc03f802803e28a95.sample"
+
+[deps]
+
+source_file="res://asssets/sounds/Super Dialogue Audio Pack v1/Step 2 - Audio Files/3 - Greeting/Female/Karen Cenon/greeting_2_karen.wav"
+dest_files=["res://.godot/imported/greeting_2_karen.wav-f7c94f6446fb2b9bc03f802803e28a95.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

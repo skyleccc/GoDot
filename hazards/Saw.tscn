@@ -53,8 +53,8 @@ animations = [{
 "speed": 25.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rrx5f"]
-size = Vector2(19, 32.5)
+[sub_resource type="CircleShape2D" id="CircleShape2D_ea18p"]
+radius = 16.03122
 
 [node name="Saw" type="Node2D" unique_id=332343394]
 show_behind_parent = true
@@ -70,8 +70,7 @@ frame_progress = 0.43489045
 [node name="Area2D" type="Area2D" parent="." unique_id=1738797129]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=780772669]
-position = Vector2(-7, 0.25)
-shape = SubResource("RectangleShape2D_rrx5f")
+shape = SubResource("CircleShape2D_ea18p")
 
 [node name="EndPoint" type="Marker2D" parent="." unique_id=1408913955]
 position = Vector2(0, -32)

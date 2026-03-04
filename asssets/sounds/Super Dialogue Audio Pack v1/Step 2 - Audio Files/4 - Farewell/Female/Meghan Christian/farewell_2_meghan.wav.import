@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c1d3xi62yrp38"
+path="res://.godot/imported/farewell_2_meghan.wav-ba4c56a74a0a8d6804b3f3aa289db874.sample"
+
+[deps]
+
+source_file="res://asssets/sounds/Super Dialogue Audio Pack v1/Step 2 - Audio Files/4 - Farewell/Female/Meghan Christian/farewell_2_meghan.wav"
+dest_files=["res://.godot/imported/farewell_2_meghan.wav-ba4c56a74a0a8d6804b3f3aa289db874.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
