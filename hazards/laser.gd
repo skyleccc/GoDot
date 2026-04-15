@@ -4,6 +4,7 @@ extends Node2D
 
 @export var damage: int = 20
 @export var damage_interval: float = 0.5  ## seconds between each damage tick
+@export var applies_slow: bool = true
 
 var _damage_timer: float = 0.0
 var _targets_in_area: Array[Node2D] = []
@@ -24,14 +25,14 @@ func _process(delta: float) -> void:
 		_damage_timer = damage_interval
 		for target in _targets_in_area:
 			if target.has_method("take_damage"):
-				target.take_damage(damage, global_position)
+				target.take_damage(damage, global_position, true, applies_slow)
 
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.has_method("take_damage"):
 		_targets_in_area.append(body)
 		# Deal damage immediately on contact
-		body.take_damage(damage, global_position)
+		body.take_damage(damage, global_position, true, applies_slow)
 		_damage_timer = damage_interval
 
 

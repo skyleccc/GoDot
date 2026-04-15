@@ -1,0 +1,17 @@
+[configuration]
+
+entry_symbol = "godot_gif_init"
+compatibility_minimum = "4.1"
+reloadable = true
+
+[libraries]
+
+windows.debug.x86_64 = "godot_gif.windows.template_debug.x86_64.dll"
+windows.release.x86_64 = "godot_gif.windows.template_release.x86_64.dll"
+android.debug.arm64 = "libgodot_gif.android.template_debug.arm64.so"
+android.release.arm64 = "libgodot_gif.android.template_release.arm64.so"
+
+[icons]
+
+GIFTexture = "icons/GIFTexture.svg"
+GIFPlayer = "icons/GIFPlayer.svg"

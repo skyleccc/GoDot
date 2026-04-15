@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://bearfqvn8f7w6"
+path="res://.godot/imported/control_panel_deactivate.gif-72347de25351fe0d795e3e533b1b15c5.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Foozle_2DT0001_Science_Fiction_Labs_Tileset/Barrier_Control_Panel/control_panel_deactivate.gif"
+dest_files=["res://.godot/imported/control_panel_deactivate.gif-72347de25351fe0d795e3e533b1b15c5.res"]
+
+[params]
+
+storage/compress=true

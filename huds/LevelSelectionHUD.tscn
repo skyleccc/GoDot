@@ -1,0 +1,139 @@
+[gd_scene format=3 uid="uid://dxlp0dxl4u5jd"]
+
+[ext_resource type="Texture2D" uid="uid://clvg8677uwhgu" path="res://huds/components/titlescreen_dusk_animated.gif" id="1_t4mvd"]
+[ext_resource type="Script" path="res://huds/level_selection_hud.gd" id="2_2v63t"]
+
+[sub_resource type="FontVariation" id="FontVariation_t4mvd"]
+
+[node name="LevelSelectionHud" type="Control" unique_id=106893953]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_2v63t")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1576353612]
+modulate = Color(0.5729883, 0.5729883, 0.5729883, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_t4mvd")
+expand_mode = 3
+
+[node name="GIFPlayer" type="GIFPlayer" parent="TextureRect" unique_id=1879342551]
+gif = ExtResource("1_t4mvd")
+visible = false
+layout_mode = 0
+offset_left = 21.121826
+offset_top = -4031.0
+offset_right = 3700.1218
+offset_bottom = -1962.0
+
+[node name="BackButton" type="Button" parent="." unique_id=489330061]
+layout_mode = 1
+offset_left = 12.0
+offset_top = 14.0
+offset_right = 118.0
+offset_bottom = 62.0
+text = "Back"
+
+[node name="LevelList" type="GridContainer" parent="." unique_id=882563721]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -235.0
+offset_top = -186.5
+offset_right = 235.0
+offset_bottom = -76.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 8
+
+[node name="Button" type="Button" parent="LevelList" unique_id=2046651243]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "1"
+
+[node name="Button2" type="Button" parent="LevelList" unique_id=1202894464]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "2"
+
+[node name="Button3" type="Button" parent="LevelList" unique_id=539073022]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "3"
+
+[node name="Button4" type="Button" parent="LevelList" unique_id=1457333904]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "4"
+
+[node name="Button5" type="Button" parent="LevelList" unique_id=191581110]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "5"
+
+[node name="Button6" type="Button" parent="LevelList" unique_id=1789121143]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "6"
+
+[node name="Button7" type="Button" parent="LevelList" unique_id=480439083]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "7"
+
+[node name="Button8" type="Button" parent="LevelList" unique_id=1959088397]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "8"
+
+[node name="Button9" type="Button" parent="LevelList" unique_id=1580688873]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "9"
+
+[node name="Button10" type="Button" parent="LevelList" unique_id=530695005]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "10"
+
+[node name="Button11" type="Button" parent="LevelList" unique_id=565966189]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "11"
+
+[node name="Button12" type="Button" parent="LevelList" unique_id=785734533]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "12"
+
+[node name="Label" type="Label" parent="." unique_id=1780069772]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -139.5
+offset_top = -283.0
+offset_right = 142.5
+offset_bottom = -214.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("FontVariation_t4mvd")
+theme_override_font_sizes/font_size = 50
+text = "Level Select"
+horizontal_alignment = 1
+vertical_alignment = 1

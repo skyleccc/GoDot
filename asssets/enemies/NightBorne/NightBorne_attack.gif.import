@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://8hwjseae3b1e"
+path="res://.godot/imported/NightBorne_attack.gif-f5d2afd1fa3af74bc5a2bee52fb21035.res"
+
+[deps]
+
+source_file="res://asssets/enemies/NightBorne/NightBorne_attack.gif"
+dest_files=["res://.godot/imported/NightBorne_attack.gif-f5d2afd1fa3af74bc5a2bee52fb21035.res"]
+
+[params]
+
+storage/compress=true

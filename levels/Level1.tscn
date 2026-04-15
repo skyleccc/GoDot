@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://tfyf48glqoxi" path="res://hazards/spike_group.gd" id="9_vcl05"]
 [ext_resource type="PackedScene" uid="uid://c65m3w6poefid" path="res://hazards/Spike.tscn" id="10_nn0v1"]
 [ext_resource type="PackedScene" uid="uid://vehj50puik7c" path="res://hazards/Saw.tscn" id="11_nn0v1"]
+[ext_resource type="PackedScene" uid="uid://dqta1qxd6epnr" path="res://interactables/Spawn.tscn" id="12_kdcll"]
+[ext_resource type="PackedScene" uid="uid://dd43j4ktu3mp1" path="res://interactables/Exit.tscn" id="13_j4pg1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dkril"]
 texture = ExtResource("1_2j4y6")
@@ -999,5 +1001,11 @@ position = Vector2(623, 96)
 
 [node name="EndPoint" parent="Saw" index="2" unique_id=1408913955]
 position = Vector2(0, -89)
+
+[node name="Spawn" parent="." unique_id=1975179952 instance=ExtResource("12_kdcll")]
+position = Vector2(208, -9)
+
+[node name="Exit" parent="." unique_id=1524804408 instance=ExtResource("13_j4pg1")]
+position = Vector2(458, 95)
 
 [editable path="Saw"]

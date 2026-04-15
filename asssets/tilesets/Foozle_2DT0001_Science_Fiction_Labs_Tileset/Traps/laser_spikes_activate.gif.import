@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://dp3i7uyljvbqw"
+path="res://.godot/imported/laser_spikes_activate.gif-7b3e41821e979fde1c08302a742c69cf.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Foozle_2DT0001_Science_Fiction_Labs_Tileset/Traps/laser_spikes_activate.gif"
+dest_files=["res://.godot/imported/laser_spikes_activate.gif-7b3e41821e979fde1c08302a742c69cf.res"]
+
+[params]
+
+storage/compress=true

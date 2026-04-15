@@ -1,0 +1,98 @@
+[gd_scene format=4 uid="uid://dd43j4ktu3mp1"]
+
+[ext_resource type="Script" uid="uid://jqn4qn73cm6" path="res://interactables/exit.gd" id="1_6310n"]
+
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_ngkh6"]
+_data = PackedByteArray("AAADAAUAAAABAAAAAAEAAAABAACMAQAAUklGRoQBAABXRUJQVlA4THgBAAAv/8A/ED9AqIFxZfSfvxAKyKIGmTDE5HDrHxGZtE2U9Jt/iZv/APC/hcJIow0g17bbNoJssgB1oAOn7YQGHBQqkNaOLMCx/jkGxKEFOIeI/jtw28aRpG2ea87gXgHq/fjP20nMNTOXYdjjukhMLRZCtDLmCtxXCVr5+6pyLhieEtDI1FFjaqSvV7FNSapWJUn6eh2Yjqmgl3o//vPODnu25zK1c1m4WBr5c4lmKH5fhyDZBD32ELEl+n9j/SBi1wvqIvGB/7lMHTWmRn9o61VsU5KqVUmSvF6DNZLUnyNJfg5Mx1TQ6xnfYcoUS1rjZeLrt9b22aMJE/TYun8QqH4uf7gPEap+rv/ly/+xt10Y8XQlXwzDHtdPEZqeS2QwnOC5bGOhW0svCBu+LBZonuGpQq+5twzDv+jMMXXUmBrp61VsU5KqVUmSvl4HpmMq6PWU6DAlgno//vP0h4Wb3SFcA5oLztRRY2qkj2KbklStSpL0cWA6phoA")
+size_override = Vector2(256, 256)
+
+[sub_resource type="Animation" id="Animation_bc1fb"]
+length = 0.6666667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.104166664, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 9, 10, 11, 12, 6]
+}
+
+[sub_resource type="Animation" id="Animation_l6mlc"]
+length = 0.7291667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.104166664, 0.20833333, 0.3125, 0.41666666, 0.5208333, 0.625),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vrawk"]
+_data = {
+&"Activate": SubResource("Animation_bc1fb"),
+&"Idle": SubResource("Animation_l6mlc")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ngkh6"]
+size = Vector2(32, 5)
+
+[node name="Exit" type="Node2D" unique_id=1524804408]
+script = ExtResource("1_6310n")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2114002169]
+texture_filter = 1
+position = Vector2(0, -30)
+texture = SubResource("PortableCompressedTexture2D_ngkh6")
+hframes = 4
+vframes = 4
+frame = 9
+metadata/_aseprite_wizard_interface_config_ = {
+"animation_section": true,
+"layer_section": true,
+"pending_changes": {},
+"slice_section": true
+}
+metadata/_aseprite_wizard_config_ = {
+"convert_fps_field": 60.0,
+"convert_ms_field": 16.0,
+"convert_to_fps": true,
+"embed_tex": true,
+"i_mode": 0,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "AnimationPlayer",
+"scale": "1.0",
+"slice": "",
+"source": "res://asssets/tilesets/Prototype Pack/Teleporter/Teleporter.aseprite",
+"source_uid": 224865277559914424
+}
+metadata/_aseprite_wizard_source_file_hash_ = "0cf7d7ab5d7f305bc0e261b3e5cf8829"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1258818854]
+root_node = NodePath("../Sprite2D")
+libraries/ = SubResource("AnimationLibrary_vrawk")
+autoplay = &"Idle"
+
+[node name="Area2D" type="Area2D" parent="." unique_id=673175935]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1906822313]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_ngkh6")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1093018923]

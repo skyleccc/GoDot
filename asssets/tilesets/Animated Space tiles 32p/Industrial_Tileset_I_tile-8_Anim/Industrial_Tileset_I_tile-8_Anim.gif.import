@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://crbniyvrgsilp"
+path="res://.godot/imported/Industrial_Tileset_I_tile-8_Anim.gif-7328e531e165f004cf2e5ad9816f7ca1.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Animated Space tiles 32p/Industrial_Tileset_I_tile-8_Anim/Industrial_Tileset_I_tile-8_Anim.gif"
+dest_files=["res://.godot/imported/Industrial_Tileset_I_tile-8_Anim.gif-7328e531e165f004cf2e5ad9816f7ca1.res"]
+
+[params]
+
+storage/compress=true

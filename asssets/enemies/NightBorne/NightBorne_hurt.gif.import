@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://dtxcrsuh4fdv3"
+path="res://.godot/imported/NightBorne_hurt.gif-9b536e614c66e51c572cb36b0a240daa.res"
+
+[deps]
+
+source_file="res://asssets/enemies/NightBorne/NightBorne_hurt.gif"
+dest_files=["res://.godot/imported/NightBorne_hurt.gif-9b536e614c66e51c572cb36b0a240daa.res"]
+
+[params]
+
+storage/compress=true

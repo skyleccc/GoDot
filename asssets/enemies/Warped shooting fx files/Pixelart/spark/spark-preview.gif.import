@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://c624nmsy1coq2"
+path="res://.godot/imported/spark-preview.gif-0847e97b3c36f815903c1e5ffa8b628f.res"
+
+[deps]
+
+source_file="res://asssets/enemies/Warped shooting fx files/Pixelart/spark/spark-preview.gif"
+dest_files=["res://.godot/imported/spark-preview.gif-0847e97b3c36f815903c1e5ffa8b628f.res"]
+
+[params]
+
+storage/compress=true

@@ -13,10 +13,12 @@ enum SpikeState { HIDDEN, ACTIVATING, ACTIVATED }
 @export var damage: int = 10
 @export var hidden_duration: float = 2.0
 @export var activated_duration: float = 1.5
+@export var applies_slow: bool = true
 
 var _state: SpikeState = SpikeState.HIDDEN
 var _timer: float = 0.0
 var _grouped: bool = false  ## Set true by SpikeGroup — disables self-managed timing.
+var _damaged_this_cycle: Dictionary = {}
 
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 @onready var collision_shape: CollisionShape2D = $HitBox
@@ -63,6 +65,7 @@ func group_enter_activating() -> void:
 func _enter_hidden() -> void:
 	_state = SpikeState.HIDDEN
 	_timer = hidden_duration
+	_damaged_this_cycle.clear()
 	collision_shape.disabled = true
 	anim_player.play("Hidden")
 
@@ -110,5 +113,12 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func _try_damage(body: Node2D) -> void:
-	if body.has_method("take_damage"):
-		body.take_damage(damage, global_position, false)
+	if not body.has_method("take_damage"):
+		return
+
+	var body_id := body.get_instance_id()
+	if _damaged_this_cycle.has(body_id):
+		return
+
+	_damaged_this_cycle[body_id] = true
+	body.take_damage(damage, global_position, false, applies_slow)

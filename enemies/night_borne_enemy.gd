@@ -6,6 +6,7 @@ enum State { IDLE, ROAM, CHASE, ATTACK, HURT, DEATH }
 @export_group("Attack")
 @export var attack_damage: int = 20
 @export var attack_cooldown: float = 1.5
+@export var attack_applies_slow: bool = true
 
 # ── Attack Window ──────────────────────────────────────────────────────────────
 @export_group("Attack Window")
@@ -275,7 +276,7 @@ func _deal_attack_damage() -> void:
 		if body == self or body.is_in_group("enemies"):
 			continue
 		if body.has_method("take_damage"):
-			body.take_damage(attack_damage, global_position)
+			body.take_damage(attack_damage, global_position, true, attack_applies_slow)
 			_has_dealt_damage = true
 			return
 
@@ -288,7 +289,7 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body == self or body.is_in_group("enemies"):
 		return
 	if body.has_method("take_damage"):
-		body.take_damage(attack_damage, global_position)
+		body.take_damage(attack_damage, global_position, true, attack_applies_slow)
 		_has_dealt_damage = true
 
 

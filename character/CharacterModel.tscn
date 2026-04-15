@@ -948,6 +948,7 @@ script = ExtResource("1_vg1c7")
 
 [node name="Player" type="Sprite2D" parent="." unique_id=1955289922]
 texture_filter = 1
+z_index = 20
 position = Vector2(0, -44)
 texture = SubResource("PortableCompressedTexture2D_vg1c7")
 offset = Vector2(0, 22)

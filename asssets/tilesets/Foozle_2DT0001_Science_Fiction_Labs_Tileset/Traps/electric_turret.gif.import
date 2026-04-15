@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://deg7ovnyfkvox"
+path="res://.godot/imported/electric_turret.gif-44ea5c563358360d78c76aeabdae649f.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Foozle_2DT0001_Science_Fiction_Labs_Tileset/Traps/electric_turret.gif"
+dest_files=["res://.godot/imported/electric_turret.gif-44ea5c563358360d78c76aeabdae649f.res"]
+
+[params]
+
+storage/compress=true

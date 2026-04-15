@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://djjavnv4ehjh"
+path="res://.godot/imported/crossed-preview-big.gif-4147d3e99a894829804e8cefe7e23090.res"
+
+[deps]
+
+source_file="res://asssets/enemies/Warped shooting fx files/Pixelart/crossed/crossed-preview-big.gif"
+dest_files=["res://.godot/imported/crossed-preview-big.gif-4147d3e99a894829804e8cefe7e23090.res"]
+
+[params]
+
+storage/compress=true

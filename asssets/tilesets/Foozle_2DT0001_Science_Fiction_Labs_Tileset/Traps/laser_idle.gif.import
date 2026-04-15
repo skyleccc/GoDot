@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://dikd81ubitqmk"
+path="res://.godot/imported/laser_idle.gif-7f92b0c6d71865f7f153758096939616.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Foozle_2DT0001_Science_Fiction_Labs_Tileset/Traps/laser_idle.gif"
+dest_files=["res://.godot/imported/laser_idle.gif-7f92b0c6d71865f7f153758096939616.res"]
+
+[params]
+
+storage/compress=true

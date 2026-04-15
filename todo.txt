@@ -6,4 +6,4 @@
 
 3. Slow down when damaged on spikes or any no knockback hazards
 
-4. 
+4. Interactions like plates?

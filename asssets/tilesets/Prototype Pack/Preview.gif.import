@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://b3pf3mgdt4rkw"
+path="res://.godot/imported/Preview.gif-b66c585b42025b1d91ea4855d2ab9e92.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Prototype Pack/Preview.gif"
+dest_files=["res://.godot/imported/Preview.gif-b66c585b42025b1d91ea4855d2ab9e92.res"]
+
+[params]
+
+storage/compress=true

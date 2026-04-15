@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://bl768pjnulhta"
+path="res://.godot/imported/Industrial_Tileset_B_Tile-8_Anim.gif-4a5b54db77f01efea1e2e58b786892e9.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Animated Dieselpunk orange tiles 32p/Industrial_Tileset_B_Tile-8_Anim/Industrial_Tileset_B_Tile-8_Anim.gif"
+dest_files=["res://.godot/imported/Industrial_Tileset_B_Tile-8_Anim.gif-4a5b54db77f01efea1e2e58b786892e9.res"]
+
+[params]
+
+storage/compress=true

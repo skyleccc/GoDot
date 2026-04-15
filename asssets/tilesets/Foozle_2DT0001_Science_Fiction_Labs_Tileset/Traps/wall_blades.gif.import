@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://26o0uya3y635"
+path="res://.godot/imported/wall_blades.gif-1de40bfe97bd777458fe03f6d925f6fe.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Foozle_2DT0001_Science_Fiction_Labs_Tileset/Traps/wall_blades.gif"
+dest_files=["res://.godot/imported/wall_blades.gif-1de40bfe97bd777458fe03f6d925f6fe.res"]
+
+[params]
+
+storage/compress=true

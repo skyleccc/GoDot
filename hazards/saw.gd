@@ -11,6 +11,7 @@ extends Node2D
 @export var move_speed: float = 80.0          ## pixels per second
 @export var pause_at_ends: float = 0.3        ## brief pause at each endpoint
 @export var stationary_threshold: float = 4.0 ## distance below which saw stays still
+@export var applies_slow: bool = true
 
 var _start_pos: Vector2
 var _end_pos: Vector2
@@ -68,4 +69,4 @@ func _on_reached_end() -> void:
 ## Damage + knockback any player that touches the saw.
 func _on_body_entered(body: Node2D) -> void:
 	if body.has_method("take_damage"):
-		body.take_damage(damage, global_position)
+		body.take_damage(damage, global_position, true, applies_slow)

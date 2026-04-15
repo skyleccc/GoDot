@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://d0e4ja7j81h4l"
+path="res://.godot/imported/NightBorne_death..gif-f76bceaf360485a36c74eea0e1404e72.res"
+
+[deps]
+
+source_file="res://asssets/enemies/NightBorne/NightBorne_death..gif"
+dest_files=["res://.godot/imported/NightBorne_death..gif-f76bceaf360485a36c74eea0e1404e72.res"]
+
+[params]
+
+storage/compress=true

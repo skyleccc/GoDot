@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://c6xqx1bdactbb"
+path="res://.godot/imported/Industrial_Tileset_E_Tile-8_Anim.gif-8aed9478a0205205f2d571785da77ba9.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Animated Sci-fi yellow Tiles 32p/Industrial_Tileset_E_Tile-8_Anim/Industrial_Tileset_E_Tile-8_Anim.gif"
+dest_files=["res://.godot/imported/Industrial_Tileset_E_Tile-8_Anim.gif-8aed9478a0205205f2d571785da77ba9.res"]
+
+[params]
+
+storage/compress=true

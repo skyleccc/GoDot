@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://bgt4haofnx50q"
+path="res://.godot/imported/Industrial_Tileset_H_tile-20_Anim.gif-b817b90d333917baee596f9636d5b8b6.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Animated Military green tiles 32p/Industrial_Tileset_H_tile-20_Anim/Industrial_Tileset_H_tile-20_Anim.gif"
+dest_files=["res://.godot/imported/Industrial_Tileset_H_tile-20_Anim.gif-b817b90d333917baee596f9636d5b8b6.res"]
+
+[params]
+
+storage/compress=true

@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://clvg8677uwhgu"
+path="res://.godot/imported/titlescreen_dusk_animated.gif-9c42543ceb73c5564573d70b48e87e14.res"
+
+[deps]
+
+source_file="res://huds/components/titlescreen_dusk_animated.gif"
+dest_files=["res://.godot/imported/titlescreen_dusk_animated.gif-9c42543ceb73c5564573d70b48e87e14.res"]
+
+[params]
+
+storage/compress=true

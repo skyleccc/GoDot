@@ -1,0 +1,114 @@
+[gd_scene format=4 uid="uid://dqta1qxd6epnr"]
+
+[ext_resource type="Script" uid="uid://b5sba55qs66xr" path="res://interactables/spawn.gd" id="1_7sqgi"]
+
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_u4xba"]
+_data = PackedByteArray("AAADAAUAAAABAAAAoAAAAAABAAASAwAAUklGRgoDAABXRUJQVlA4TP0CAAAvn8A/EE+gKLYN6lX50H/UsBJBBmtBFLRt5ORw7PX8IT6ZtE1gPvbNv8Ed8x8A4P9biYGChtPKN6yCHNm261TSs/jERC+lPAJXeQi+5P3RnQfZhYzQIamnK6l1pOuL6X9F9B+C2zaSJHm60jV7KemteYT7ay/drybnfnNxm0enTd939lh709WgmSVGROx4PBN3keNmeVwl5vN0+lDzOPd5Ouxlb1l/DvYX/Tm87PKYY26WPJbsXJnwQGMSseIhhRyNeMwpb9XjmhROKW59D3tzNcj/feLd5mZYk4l22EO75RFpEAXsocw4ejCGkWjf5OHOfddax3IZKMLAA5a+71FbfY/xZQjinAvEXPbuwJVEyhcqbiJm3gMYA+7KN53LGM9lAoCIuGkDlxy0YUYegZW/Bf3gJd2XPSjwftVf9IWZsQc6mZ1TTqzYw8pH20ZniREROx7PxF3kuD0e8GB35WMbmA/6Hr8sy2OOuVnyWLJzZcIDjUnEiocUcjTiMae8VY9rUjiluPU97M3VIP8PykQ7fc96jyG9TxT0PF3uSW0e00i0r/DCpsCzOIiBaIRtRRiMIfPEJsAzlJ1GPIYyqc+k6ZE38pygB4UamrwzPPZs8gis2ydVPJfA+zKBKzzBT1Q8lwDhIu4SmPd1nj73mKD3JY2hCKPLfeFYy57JC3nXeDZ5OKBNFKJ0g+eQe1Z4N6TZ07utja8xWZnBvV6WGBGx4/FM3EWO2+MBPoaYD+t7/LIsjznmZsljyc6VCQ80JhErHlLI0YjHnPJWPa5J4ZTi1vewN1eD/C8hvoLBu5XzEq+VmWhnbAhEwVZf00i0h33V/Leo1gjDvnzFnFShCO4LzkmdwLgv/Bz0UZiT14VZYU6auRDzvrkvXb4wM+orVPWlmlgr+gIEZXxzX5eQRJqj/xxsJdV3kiVGRNo99Hgm7iLHdo+XZSDKDsqh3eOXbXnMMbdIo4cmyw/n7tjuob0XaffQQgo5tnsoMafktHi8Fa5J8ZSi4LGBm78f4wAA")
+size_override = Vector2(160, 256)
+
+[sub_resource type="Animation" id="Animation_tmkmx"]
+length = 0.5104167
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.072916664, 0.14583333, 0.21875, 0.29166666, 0.36458334, 0.4375),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_fyngr"]
+length = 0.7291667
+loop_mode = 1
+step = 0.016666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.072916664, 0.14583333, 0.21875, 0.29166666, 0.36458334, 0.4375, 0.5104167, 0.5833333, 0.65625),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+}
+
+[sub_resource type="Animation" id="Animation_4yh3j"]
+length = 0.5208333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hfhpl"]
+_data = {
+&"Activate": SubResource("Animation_tmkmx"),
+&"Activated": SubResource("Animation_fyngr"),
+&"Deactivated": SubResource("Animation_4yh3j")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8h8p5"]
+size = Vector2(24, 48)
+
+[node name="Spawn" type="Node2D" unique_id=1975179952]
+script = ExtResource("1_7sqgi")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2111706095]
+texture_filter = 1
+position = Vector2(0, 8)
+texture = SubResource("PortableCompressedTexture2D_u4xba")
+hframes = 5
+vframes = 4
+frame = 1
+metadata/_aseprite_wizard_interface_config_ = {
+"animation_section": true,
+"layer_section": false,
+"output_section": true,
+"pending_changes": {},
+"slice_section": true
+}
+metadata/_aseprite_wizard_config_ = {
+"convert_fps_field": 60.0,
+"convert_ms_field": 16.0,
+"convert_to_fps": true,
+"embed_tex": true,
+"i_mode": 0,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "AnimationPlayer",
+"scale": "1.0",
+"slice": "",
+"source": "res://asssets/tilesets/Prototype Pack/Checkpoint/Checkpoint.aseprite",
+"source_uid": 1396444297288055342
+}
+metadata/_aseprite_wizard_source_file_hash_ = "88f76667e44453ffd5e866f01a947f17"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1037362228]
+libraries/ = SubResource("AnimationLibrary_hfhpl")
+autoplay = &"Activated"
+
+[node name="Area2D" type="Area2D" parent="." unique_id=954908495]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=123009185]
+shape = SubResource("RectangleShape2D_8h8p5")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1866407880]
