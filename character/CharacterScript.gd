@@ -434,6 +434,7 @@ func _respawn() -> void:
 	current_hp = max_hp
 	global_position = start_position
 	velocity = Vector2.ZERO
+	_play_spawn_activation_at(global_position)
 	launched_by_portal = false
 	_is_dying = false
 	_awaiting_respawn = false
@@ -456,6 +457,22 @@ func set_spawn_point(spawn_global_position: Vector2, move_player: bool = false) 
 	if move_player:
 		global_position = spawn_global_position
 		velocity = Vector2.ZERO
+		_play_spawn_activation_at(global_position)
+
+func _play_spawn_activation_at(spawn_position: Vector2) -> void:
+	var closest_spawn: Node2D = null
+	var closest_distance_sq: float = INF
+
+	for node in get_tree().get_nodes_in_group("spawn_points"):
+		if node is Node2D:
+			var spawn := node as Node2D
+			var distance_sq := spawn.global_position.distance_squared_to(spawn_position)
+			if distance_sq < closest_distance_sq:
+				closest_distance_sq = distance_sq
+				closest_spawn = spawn
+
+	if closest_spawn and closest_spawn.has_method("activate"):
+		closest_spawn.activate(true)
 
 ## Activate invincibility for the given duration.
 func _start_invincibility(duration: float) -> void:

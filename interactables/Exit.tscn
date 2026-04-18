@@ -1,13 +1,14 @@
 [gd_scene format=4 uid="uid://dd43j4ktu3mp1"]
 
 [ext_resource type="Script" uid="uid://jqn4qn73cm6" path="res://interactables/exit.gd" id="1_6310n"]
+[ext_resource type="AudioStream" uid="uid://clvyaccu6w1kf" path="res://interactables/sounds/Retro Charge 07.wav" id="2_l6mlc"]
 
 [sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_ngkh6"]
 _data = PackedByteArray("AAADAAUAAAABAAAAAAEAAAABAACMAQAAUklGRoQBAABXRUJQVlA4THgBAAAv/8A/ED9AqIFxZfSfvxAKyKIGmTDE5HDrHxGZtE2U9Jt/iZv/APC/hcJIow0g17bbNoJssgB1oAOn7YQGHBQqkNaOLMCx/jkGxKEFOIeI/jtw28aRpG2ea87gXgHq/fjP20nMNTOXYdjjukhMLRZCtDLmCtxXCVr5+6pyLhieEtDI1FFjaqSvV7FNSapWJUn6eh2Yjqmgl3o//vPODnu25zK1c1m4WBr5c4lmKH5fhyDZBD32ELEl+n9j/SBi1wvqIvGB/7lMHTWmRn9o61VsU5KqVUmSvF6DNZLUnyNJfg5Mx1TQ6xnfYcoUS1rjZeLrt9b22aMJE/TYun8QqH4uf7gPEap+rv/ly/+xt10Y8XQlXwzDHtdPEZqeS2QwnOC5bGOhW0svCBu+LBZonuGpQq+5twzDv+jMMXXUmBrp61VsU5KqVUmSvl4HpmMq6PWU6DAlgno//vP0h4Wb3SFcA5oLztRRY2qkj2KbklStSpL0cWA6phoA")
 size_override = Vector2(256, 256)
 
 [sub_resource type="Animation" id="Animation_bc1fb"]
-length = 0.6666667
+length = 0.93333334
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -21,6 +22,21 @@ tracks/0/keys = {
 "update": 1,
 "values": [7, 8, 9, 10, 11, 12, 6]
 }
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../AudioStreamPlayer2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("2_l6mlc")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
 
 [sub_resource type="Animation" id="Animation_l6mlc"]
 length = 0.7291667
@@ -56,7 +72,7 @@ position = Vector2(0, -30)
 texture = SubResource("PortableCompressedTexture2D_ngkh6")
 hframes = 4
 vframes = 4
-frame = 9
+frame = 6
 metadata/_aseprite_wizard_interface_config_ = {
 "animation_section": true,
 "layer_section": true,

@@ -4,8 +4,8 @@
 
 2. Since audios for aggro is broken and still thinking of queue system, death vo is delayed.
 
-3. Audio for Spawn and Exit
+3. Coop?
 
 4. Interactions like plates?
 
-5. Level Building
+5. Level Building (background, tilesets, boxes, etc,)

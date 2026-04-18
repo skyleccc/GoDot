@@ -5,7 +5,7 @@ signal level_completed
 @onready var area: Area2D = $Area2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-@export var proximity_delay_seconds: float = 3
+@export var proximity_delay_seconds: float = 1.5
 
 var _is_completed: bool = false
 var _is_processing: bool = false
