@@ -30,6 +30,10 @@ extends PortalEntity
 @export var invincibility_grace: float = 0.3
 @export var knockback_force: Vector2 = Vector2(60.0, -75.0)
 
+@export_group("Damage Slow")
+@export var damage_slow_multiplier: float = 0.6
+@export var damage_slow_duration: float = 1.2
+
 @export_group("Out of Bounds")
 ## How far past the screen edge (in pixels) before the player respawns
 @export var oob_fall_y: float = 3000.0        # respawn if player falls below this Y
@@ -84,6 +88,7 @@ var _is_dying: bool = false
 var _die_timer: float = 0.0
 var _respawn_delay_timer: float = 0.0
 var _awaiting_respawn: bool = false
+var _damage_slow_timer: float = 0.0
 var _is_landing: bool = false
 var _landing_timer: float = 0.0
 var _was_airborne: bool = false
@@ -107,9 +112,10 @@ var _vo_playback: AudioStreamPlaybackPolyphonic
 
 func _ready() -> void:
 	current_hp = max_hp
+	add_to_group("player")
 	animation_tree.active = true
 	_state_machine = animation_tree.get("parameters/playback")
-	start_position = position
+	start_position = global_position
 	print("Player spawned — HP: ", current_hp, " / ", max_hp)
 
 	# Grab polyphonic playback objects so we can fire one-shots freely
@@ -142,6 +148,9 @@ func _physics_process(delta: float) -> void:
 
 	if _vo_busy_timer > 0.0:
 		_vo_busy_timer -= delta
+
+	if _damage_slow_timer > 0.0:
+		_damage_slow_timer -= delta
 
 	# --- Waiting for respawn after die animation ---
 	if _awaiting_respawn:
@@ -220,7 +229,8 @@ func _physics_process(delta: float) -> void:
 	# --- Horizontal movement ---
 	var direction := Input.get_axis("Left", "Right")
 	var is_sprinting := Input.is_action_pressed("Sprint") and is_grounded
-	var target_speed := direction * SPEED * (SPRINT_MULTIPLIER if is_sprinting else 1.0)
+	var damage_slow := _get_damage_slow_multiplier()
+	var target_speed := direction * SPEED * (SPRINT_MULTIPLIER if is_sprinting else 1.0) * damage_slow
 
 	if is_grounded:
 		if direction != 0:
@@ -369,13 +379,18 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	var damage: int = default_hazard_damage
 	if area.get("damage") != null:
 		damage = area.get("damage")
-	take_damage(damage, area.global_position)
+	var applies_slow: bool = false
+	if area.get("applies_slow") != null:
+		applies_slow = area.get("applies_slow")
+	take_damage(damage, area.global_position, true, applies_slow)
 
 ## Apply damage to the character, play hit animation, and start invincibility.
-func take_damage(amount: int, hit_source_pos: Vector2 = global_position, knockback: bool = true) -> void:
+func take_damage(amount: int, hit_source_pos: Vector2 = global_position, knockback: bool = true, apply_slow: bool = false) -> void:
 	if _is_invincible or _is_dying:
 		return
 	current_hp -= amount
+	if apply_slow:
+		_trigger_damage_slow()
 	print("Player hit! -", amount, " HP  →  HP: ", current_hp, " / ", max_hp)
 	_play_damage_vo()          # ← damage voiceover
 	if current_hp <= 0:
@@ -417,8 +432,9 @@ func _finish_die() -> void:
 ## Shared respawn logic.
 func _respawn() -> void:
 	current_hp = max_hp
-	position = start_position
+	global_position = start_position
 	velocity = Vector2.ZERO
+	_play_spawn_activation_at(global_position)
 	launched_by_portal = false
 	_is_dying = false
 	_awaiting_respawn = false
@@ -426,6 +442,7 @@ func _respawn() -> void:
 	_is_landing = false
 	_footstep_timer = 0.0
 	_footstep_first_hit = false
+	_damage_slow_timer = 0.0
 	_low_health_cooldown_timer = 0.0
 	_aggro_count = 0
 	sprite.modulate.a = 1.0
@@ -434,10 +451,45 @@ func _respawn() -> void:
 		_state_machine.travel("Move")
 	print("HP restored: ", current_hp, " / ", max_hp)
 
+## Updates the checkpoint used for all future respawns.
+func set_spawn_point(spawn_global_position: Vector2, move_player: bool = false) -> void:
+	start_position = spawn_global_position
+	if move_player:
+		global_position = spawn_global_position
+		velocity = Vector2.ZERO
+		_play_spawn_activation_at(global_position)
+
+func _play_spawn_activation_at(spawn_position: Vector2) -> void:
+	var closest_spawn: Node2D = null
+	var closest_distance_sq: float = INF
+
+	for node in get_tree().get_nodes_in_group("spawn_points"):
+		if node is Node2D:
+			var spawn := node as Node2D
+			var distance_sq := spawn.global_position.distance_squared_to(spawn_position)
+			if distance_sq < closest_distance_sq:
+				closest_distance_sq = distance_sq
+				closest_spawn = spawn
+
+	if closest_spawn and closest_spawn.has_method("activate"):
+		closest_spawn.activate(true)
+
 ## Activate invincibility for the given duration.
 func _start_invincibility(duration: float) -> void:
 	_is_invincible = true
 	_invincibility_timer = duration
+
+func _trigger_damage_slow() -> void:
+	if damage_slow_duration <= 0.0:
+		return
+	_damage_slow_timer = damage_slow_duration
+
+func _get_damage_slow_multiplier() -> float:
+	if damage_slow_duration <= 0.0 or _damage_slow_timer <= 0.0:
+		return 1.0
+	var min_slow := clampf(damage_slow_multiplier, 0.0, 1.0)
+	var progress := 1.0 - clampf(_damage_slow_timer / damage_slow_duration, 0.0, 1.0)
+	return lerpf(min_slow, 1.0, progress)
 
 ## Travel to a state only if not already in it.
 func _travel_if_not(state_name: String) -> void:

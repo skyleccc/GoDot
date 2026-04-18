@@ -7,6 +7,7 @@ extends PortalEntity
 @export var lifetime: float = 2.0
 @export var damage: int = 10
 @export var allow_friendly_fire: bool = false  ## If true, bullet can damage enemies too
+@export var applies_slow: bool = true
 
 var hit_scene: PackedScene = preload("res://enemies/StrikerBulletHit.tscn")
 var direction: float = 1.0  # -1 = left, 1 = right
@@ -55,7 +56,7 @@ func _physics_process(delta: float) -> void:
 			if collider.has_method("take_bullet_damage"):
 				collider.take_bullet_damage(damage, global_position)
 			elif collider.has_method("take_damage"):
-				collider.take_damage(damage, global_position)
+				collider.take_damage(damage, global_position, true, applies_slow)
 		_spawn_hit(collision.get_position())
 		queue_free()
 		return

@@ -6,6 +6,7 @@ extends PortalEntity
 @export var speed: float = 200.0
 @export var lifetime: float = 5.0
 @export var damage: int = 10
+@export var applies_slow: bool = true
 
 var hit_scene: PackedScene = preload("res://hazards/TurretBulletHit.tscn")
 var direction: float = 1.0  # -1 = left, 1 = right
@@ -56,7 +57,7 @@ func _physics_process(delta: float) -> void:
 			queue_free()
 			return
 		if collider.has_method("take_damage"):
-			collider.take_damage(damage, global_position)
+			collider.take_damage(damage, global_position, true, applies_slow)
 			_spawn_hit(collision.get_position())
 			queue_free()
 			return

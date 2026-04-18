@@ -4,6 +4,8 @@
 
 2. Since audios for aggro is broken and still thinking of queue system, death vo is delayed.
 
-3. Slow down when damaged on spikes or any no knockback hazards
+3. Coop?
 
-4. 
+4. Interactions like plates?
+
+5. Level Building (background, tilesets, boxes, etc,)

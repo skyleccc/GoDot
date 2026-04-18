@@ -11,6 +11,7 @@ enum State { IDLE, ROAM, CHASE, ATTACK, HURT, DEATH, DASH }
 @export var attack_damage: int = 20
 @export var attack_range: float = 45.0
 @export var attack_cooldown: float = 1.5
+@export var attack_applies_slow: bool = true
 @export var bullet_speed: float = 200.0
 @export var bullet_lifetime: float = 2.0
 @export var bullet_damage: int = 10
@@ -321,7 +322,7 @@ func _deal_attack_damage() -> void:
 		if body == self or body.is_in_group("enemies"):
 			continue
 		if body.has_method("take_damage"):
-			body.take_damage(attack_damage, global_position)
+			body.take_damage(attack_damage, global_position, true, attack_applies_slow)
 			_has_dealt_damage = true
 			return
 
@@ -335,7 +336,7 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body == self or body.is_in_group("enemies"):
 		return
 	if body.has_method("take_damage"):
-		body.take_damage(attack_damage, global_position)
+		body.take_damage(attack_damage, global_position, true, attack_applies_slow)
 		_has_dealt_damage = true
 
 

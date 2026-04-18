@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://03hinax7wdoa"
+path="res://.godot/imported/saw_deactivate.gif-478eb03691a081e2d149516c1b73910d.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Foozle_2DT0001_Science_Fiction_Labs_Tileset/Traps/saw_deactivate.gif"
+dest_files=["res://.godot/imported/saw_deactivate.gif-478eb03691a081e2d149516c1b73910d.res"]
+
+[params]
+
+storage/compress=true

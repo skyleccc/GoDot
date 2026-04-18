@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://pusnioy1juqg"
+path="res://.godot/imported/bolt-preview-big.gif-0d7b54e55cd1b95eb5113cdf8a509dcc.res"
+
+[deps]
+
+source_file="res://asssets/enemies/Warped shooting fx files/Pixelart/Bolt/bolt-preview-big.gif"
+dest_files=["res://.godot/imported/bolt-preview-big.gif-0d7b54e55cd1b95eb5113cdf8a509dcc.res"]
+
+[params]
+
+storage/compress=true

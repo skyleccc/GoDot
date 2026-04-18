@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dpdty7llnnrs7"
+path="res://.godot/imported/Retro Charge StereoUP 12.wav-8ae1f9a0d48fd68f4eae65d6a3fb48bf.sample"
+
+[deps]
+
+source_file="res://interactables/sounds/Retro Charge StereoUP 12.wav"
+dest_files=["res://.godot/imported/Retro Charge StereoUP 12.wav-8ae1f9a0d48fd68f4eae65d6a3fb48bf.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

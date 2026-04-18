@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://by6fe7pwsxgek"
+path="res://.godot/imported/SpikesSmall.gif-bf56042d0a323b43579b22a8e50cd772.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Prototype Pack/Spikes/SpikesSmall.gif"
+dest_files=["res://.godot/imported/SpikesSmall.gif-bf56042d0a323b43579b22a8e50cd772.res"]
+
+[params]
+
+storage/compress=true

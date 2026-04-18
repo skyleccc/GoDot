@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://day5hfcll5iw4"
+path="res://.godot/imported/laser_deactivate.gif-71e6a8dc1d577da4e7f348bae1fae337.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Foozle_2DT0001_Science_Fiction_Labs_Tileset/Traps/laser_deactivate.gif"
+dest_files=["res://.godot/imported/laser_deactivate.gif-71e6a8dc1d577da4e7f348bae1fae337.res"]
+
+[params]
+
+storage/compress=true

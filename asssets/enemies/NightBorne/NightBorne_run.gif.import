@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://ct1dgnwbyxfcg"
+path="res://.godot/imported/NightBorne_run.gif-7f8cff111d4cd73e7a7a57d6ba7fcf2e.res"
+
+[deps]
+
+source_file="res://asssets/enemies/NightBorne/NightBorne_run.gif"
+dest_files=["res://.godot/imported/NightBorne_run.gif-7f8cff111d4cd73e7a7a57d6ba7fcf2e.res"]
+
+[params]
+
+storage/compress=true

@@ -21,7 +21,7 @@ aseprite_executable_path="C:/asperite/build/bin/aseprite.exe"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/FastSpriteAnimation/plugin.cfg", "res://addons/GitGodot/plugin.cfg", "res://addons/github_copilot/plugin.cfg", "res://addons/godot_doctor/plugin.cfg", "res://addons/nklbdev.aseprite_importers/plugin.cfg")
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/FastSpriteAnimation/plugin.cfg", "res://addons/GitGodot/plugin.cfg", "res://addons/github_copilot/plugin.cfg", "res://addons/godot_doctor/plugin.cfg", "res://addons/godot_gif/plugin.cfg", "res://addons/nklbdev.aseprite_importers/plugin.cfg")
 
 [input]
 
