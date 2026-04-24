@@ -1,5 +1,7 @@
 extends Node2D
 
+signal portal_state_changed(has_blue: bool, has_orange: bool)
+
 ## Portal gun that fires portals onto surfaces using raycasts.
 ## Left-click places the blue portal, right-click places the orange portal.
 ## Press R to clear both portals.
@@ -53,6 +55,9 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ResetPortals"):
 		_clear_portals()
 		_play_sound(RESET_PORTAL_SOUND)
+
+func _ready() -> void:
+	_emit_portal_state_changed()
 
 func _update_gun_direction() -> void:
 	var mouse_pos: Vector2 = get_global_mouse_position()
@@ -113,6 +118,7 @@ func _spawn_portal(type: String) -> bool:
 
 	# Link portals together if both exist
 	_link_portals()
+	_emit_portal_state_changed()
 	return true
 
 func _raycast_to_surface() -> Dictionary:
@@ -164,3 +170,7 @@ func _clear_portals() -> void:
 	if active_orange_portal:
 		active_orange_portal.queue_free()
 		active_orange_portal = null
+	_emit_portal_state_changed()
+
+func _emit_portal_state_changed() -> void:
+	portal_state_changed.emit(active_blue_portal != null, active_orange_portal != null)

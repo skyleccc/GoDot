@@ -16,55 +16,55 @@
 [ext_resource type="AudioStream" uid="uid://n15sl5miux5l" path="res://bgms/Terraria-Calamity-Mod-Music-Infestation-Theme-of-Crabulon-DM-DOKURO-_128k_.ogg" id="10_5vvyt"]
 [ext_resource type="AudioStream" uid="uid://c5lj1roumlvh6" path="res://bgms/Portal-2-OST-Volume-3-Machiavellian-Bach-KniL-_128k_.ogg" id="10_c2ibq"]
 [ext_resource type="PackedScene" uid="uid://dxlp0dxl4u5jd" path="res://huds/LevelSelectionHUD.tscn" id="11_3q4wl"]
-
-[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_j4qnp"]
-stream_count = 7
-stream_0 = ExtResource("8_20pc6")
-stream_1 = ExtResource("7_wkp8b")
-stream_2 = ExtResource("6_03owx")
-stream_3 = ExtResource("10_c2ibq")
-stream_4 = ExtResource("8_wkp8b")
-stream_5 = ExtResource("9_20pc6")
-stream_6 = ExtResource("10_5vvyt")
+[ext_resource type="Script" uid="uid://cwcssuc8ud5d7" path="res://bgms/background_music_manager.gd" id="12_h8wqj"]
 
 [node name="Main" type="Node2D" unique_id=2077183016]
 texture_filter = 1
 script = ExtResource("1_cm0pq")
 
-[node name="Character" parent="." unique_id=1391196329 instance=ExtResource("1_glv2v")]
-position = Vector2(-20, 34)
+[node name="PlayingArea" type="Node" parent="." unique_id=134609157]
 
-[node name="LevelLayout" parent="." unique_id=795836976 instance=ExtResource("2_uu6xs")]
+[node name="LevelLayout" parent="PlayingArea" unique_id=795836976 instance=ExtResource("2_uu6xs")]
+visible = false
 position = Vector2(60, 78)
 
-[node name="MultiplayerUI" type="CanvasLayer" parent="." unique_id=591334217]
+[node name="Character" parent="PlayingArea" unique_id=1391196329 instance=ExtResource("1_glv2v")]
+visible = false
+position = Vector2(-20, 34)
 
-[node name="HealthHUD" parent="MultiplayerUI" unique_id=46030112 instance=ExtResource("4_wn3n2")]
-layout_mode = 3
-anchors_preset = 0
+[node name="PlayingUI" type="CanvasLayer" parent="PlayingArea" unique_id=482696250]
+
+[node name="HealthHUD" parent="PlayingArea/PlayingUI" unique_id=46030112 instance=ExtResource("4_wn3n2")]
 offset_left = 12.0
 offset_top = 12.0
 offset_right = 252.0
 offset_bottom = 108.0
 
-[node name="MultiplayerClient" parent="MultiplayerUI" unique_id=355230823 instance=ExtResource("3_7u5lb")]
+[node name="NonPlayingUiComponents" type="Node" parent="." unique_id=1682780372]
 
-[node name="MainMenuUI" type="CanvasLayer" parent="." unique_id=111930011]
-
-[node name="MainMenuHUD" parent="MainMenuUI" unique_id=2035698116 instance=ExtResource("5_rn0md")]
-
-[node name="LevelSelectionUI" type="CanvasLayer" parent="." unique_id=1619449339]
+[node name="MainMenuUI" type="CanvasLayer" parent="NonPlayingUiComponents" unique_id=111930011]
 visible = false
 
-[node name="LevelSelectionHUD" parent="LevelSelectionUI" unique_id=1427109248 instance=ExtResource("11_3q4wl")]
+[node name="MainMenuHUD" parent="NonPlayingUiComponents/MainMenuUI" unique_id=2035698116 instance=ExtResource("5_rn0md")]
 
-[node name="DebugHUD" type="CanvasLayer" parent="." unique_id=1608262915]
+[node name="LevelSelectionUI" type="CanvasLayer" parent="NonPlayingUiComponents" unique_id=1619449339]
+visible = false
+
+[node name="LevelSelectionHUD" parent="NonPlayingUiComponents/LevelSelectionUI" unique_id=1427109248 instance=ExtResource("11_3q4wl")]
+
+[node name="MultiplayerUI" type="CanvasLayer" parent="NonPlayingUiComponents" unique_id=591334217]
+visible = false
+
+[node name="MultiplayerClient" parent="NonPlayingUiComponents/MultiplayerUI" unique_id=355230823 instance=ExtResource("3_7u5lb")]
+
+[node name="DebugHUD" type="CanvasLayer" parent="NonPlayingUiComponents" unique_id=1608262915]
 visible = false
 script = ExtResource("4_cm0pq")
 
-[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=1983318440]
-stream = SubResource("AudioStreamPlaylist_j4qnp")
+[node name="BackgroundMusicManager" type="AudioStreamPlayer" parent="." unique_id=1983318440]
 volume_db = -20.0
+script = ExtResource("12_h8wqj")
+tracks = Array[AudioStream]([ExtResource("8_20pc6"), ExtResource("7_wkp8b"), ExtResource("6_03owx"), ExtResource("10_c2ibq"), ExtResource("8_wkp8b"), ExtResource("9_20pc6"), ExtResource("10_5vvyt")])
 
 [node name="LevelManager" type="Node" parent="." unique_id=193199363]
 script = ExtResource("5_k2n6w")

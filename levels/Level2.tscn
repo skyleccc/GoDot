@@ -949,4 +949,4 @@ tile_set = SubResource("TileSet_v0cbu")
 position = Vector2(-39, -120)
 
 [node name="Exit" parent="." unique_id=1524804408 instance=ExtResource("6_pixff")]
-position = Vector2(120, 80)
+position = Vector2(114, 79)
