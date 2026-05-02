@@ -130,10 +130,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_knorx"]
-size = Vector2(3.125, 15)
+size = Vector2(7.5625, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e8s81"]
-size = Vector2(2, 36)
+size = Vector2(12, 48)
 
 [node name="Portal3" type="Area2D" unique_id=1186338649]
 collision_layer = 0
@@ -147,7 +147,7 @@ animation = &"BluePortal"
 autoplay = "BluePortal"
 
 [node name="TeleportBox" type="CollisionShape2D" parent="." unique_id=410635502]
-position = Vector2(4.5625, 2.5)
+position = Vector2(7.78125, 1)
 shape = SubResource("RectangleShape2D_knorx")
 
 [node name="PortalWallSurface" type="Area2D" parent="." unique_id=439708487]
