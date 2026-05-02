@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cuusxmb1qwf86"
+path="res://.godot/imported/hits-4.aseprite-c03890edf10d0d5142d935a7c1bce1a0.res"
+
+[deps]
+
+source_file="res://asssets/enemies/Warped shooting fx files/Pixelart/hits/hits-4/hits-4.aseprite"
+dest_files=["res://.godot/imported/hits-4.aseprite-c03890edf10d0d5142d935a7c1bce1a0.res"]
+
+[params]
+

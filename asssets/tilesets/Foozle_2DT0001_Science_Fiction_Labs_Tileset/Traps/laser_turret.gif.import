@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://csmxvl5jocnka"
+path="res://.godot/imported/laser_turret.gif-5c4a011bdaa248320a73ecd3ad20e212.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Foozle_2DT0001_Science_Fiction_Labs_Tileset/Traps/laser_turret.gif"
+dest_files=["res://.godot/imported/laser_turret.gif-5c4a011bdaa248320a73ecd3ad20e212.res"]
+
+[params]
+
+storage/compress=true

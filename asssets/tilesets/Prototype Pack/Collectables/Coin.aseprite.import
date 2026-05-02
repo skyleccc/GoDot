@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cmy7dhy45tcgj"
+path="res://.godot/imported/Coin.aseprite-de7fcdd328ea495d1f87dee66a76dbe8.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Prototype Pack/Collectables/Coin.aseprite"
+dest_files=["res://.godot/imported/Coin.aseprite-de7fcdd328ea495d1f87dee66a76dbe8.res"]
+
+[params]
+

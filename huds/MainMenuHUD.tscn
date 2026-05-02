@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://bq3k78aol4i6h"]
+
+[ext_resource type="Texture2D" uid="uid://dtklru6p348l6" path="res://huds/components/MainMenuBG.png" id="1_4igeq"]
+[ext_resource type="Texture2D" uid="uid://862l483hulg5" path="res://huds/components/RIFTGATE.png" id="2_c830a"]
+[ext_resource type="Script" path="res://huds/main_menu_hud.gd" id="3_gfxm5"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lr6r7"]
+texture = ExtResource("1_4igeq")
+modulate_color = Color(0.40069774, 0.40069774, 0.40069768, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xwwto"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0, 0, 0, 0.20392157)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4igeq"]
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c830a"]
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="MainMenuHud" type="Control" unique_id=1298402384]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_gfxm5")
+
+[node name="BackgroundImage" type="Panel" parent="." unique_id=1425819610]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_lr6r7")
+
+[node name="GameName" type="TextureRect" parent="." unique_id=38259225]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 1.0
+offset_top = -321.0
+offset_right = 1025.0
+offset_bottom = -25.0
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_c830a")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=535238588]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 39.0
+offset_top = -131.0
+offset_right = 430.0
+offset_bottom = 126.0
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="PlayGameButton" type="Button" parent="VBoxContainer" unique_id=521482694]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_xwwto")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4igeq")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_c830a")
+text = "Play Game"
+
+[node name="LevelSelectButton" type="Button" parent="VBoxContainer" unique_id=1028801266]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_xwwto")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4igeq")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_c830a")
+text = "Level Select"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=2106864854]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_xwwto")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4igeq")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_c830a")
+text = "Quit
+"

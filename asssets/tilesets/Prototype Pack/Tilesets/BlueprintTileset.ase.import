@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://brumypjf8ia1t"
+path="res://.godot/imported/BlueprintTileset.ase-a1a8a46bedf9e7411f293a7677872523.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Prototype Pack/Tilesets/BlueprintTileset.ase"
+dest_files=["res://.godot/imported/BlueprintTileset.ase-a1a8a46bedf9e7411f293a7677872523.res"]
+
+[params]
+

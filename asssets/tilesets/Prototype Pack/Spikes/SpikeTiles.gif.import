@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://ckd0ghuqmvt3j"
+path="res://.godot/imported/SpikeTiles.gif-f2038e7822ed7da1ea539eafd8eceb65.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Prototype Pack/Spikes/SpikeTiles.gif"
+dest_files=["res://.godot/imported/SpikeTiles.gif-f2038e7822ed7da1ea539eafd8eceb65.res"]
+
+[params]
+
+storage/compress=true

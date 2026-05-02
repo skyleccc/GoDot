@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bv7iseecqjlfq"
+path="res://.godot/imported/greeting_4_alex.wav-6bf41d1c2e9c9afd0c5a7b4b828dfe21.sample"
+
+[deps]
+
+source_file="res://asssets/sounds/Super Dialogue Audio Pack v1/Step 2 - Audio Files/3 - Greeting/Male/Alex Brodie/greeting_4_alex.wav"
+dest_files=["res://.godot/imported/greeting_4_alex.wav-6bf41d1c2e9c9afd0c5a7b4b828dfe21.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://gv7ypkhw1jpr"
+path="res://.godot/imported/Industrial_Tileset_C_tile-13_Anim.gif-a4f3090b39b97deb8a997a3a957b8782.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Animated Steampunk brown tiles 32p/Industrial_Tileset_C_tile-13_Anim/Industrial_Tileset_C_tile-13_Anim.gif"
+dest_files=["res://.godot/imported/Industrial_Tileset_C_tile-13_Anim.gif-a4f3090b39b97deb8a997a3a957b8782.res"]
+
+[params]
+
+storage/compress=true

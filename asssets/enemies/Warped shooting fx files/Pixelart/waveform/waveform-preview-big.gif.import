@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://xlapnlefxf0r"
+path="res://.godot/imported/waveform-preview-big.gif-a8cea9e32b45c3592a75eaf553b46bf4.res"
+
+[deps]
+
+source_file="res://asssets/enemies/Warped shooting fx files/Pixelart/waveform/waveform-preview-big.gif"
+dest_files=["res://.godot/imported/waveform-preview-big.gif-a8cea9e32b45c3592a75eaf553b46bf4.res"]
+
+[params]
+
+storage/compress=true

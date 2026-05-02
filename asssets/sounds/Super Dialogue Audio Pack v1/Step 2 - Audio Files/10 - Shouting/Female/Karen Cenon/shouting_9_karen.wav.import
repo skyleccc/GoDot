@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d1miy2h2kg4de"
+path="res://.godot/imported/shouting_9_karen.wav-83a920502c47b75db57ddb31d7cb25cf.sample"
+
+[deps]
+
+source_file="res://asssets/sounds/Super Dialogue Audio Pack v1/Step 2 - Audio Files/10 - Shouting/Female/Karen Cenon/shouting_9_karen.wav"
+dest_files=["res://.godot/imported/shouting_9_karen.wav-83a920502c47b75db57ddb31d7cb25cf.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

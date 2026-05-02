@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dmonkvk7cgpfp"
+path="res://.godot/imported/greeting_6_ian.wav-6d8b209867aad0a86f5c72a56f8a7781.sample"
+
+[deps]
+
+source_file="res://asssets/sounds/Super Dialogue Audio Pack v1/Step 2 - Audio Files/3 - Greeting/Male/Ian Lampert/greeting_6_ian.wav"
+dest_files=["res://.godot/imported/greeting_6_ian.wav-6d8b209867aad0a86f5c72a56f8a7781.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

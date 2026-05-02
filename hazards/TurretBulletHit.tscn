@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://b5arhjiw68xgo"]
+
+[ext_resource type="Texture2D" uid="uid://dgxysw0umheyj" path="res://asssets/enemies/Warped shooting fx files/Pixelart/hits/Hits-5/frames/hits-5-1.png" id="1_0eusb"]
+[ext_resource type="Texture2D" uid="uid://bh0jx1e6ds5od" path="res://asssets/enemies/Warped shooting fx files/Pixelart/hits/Hits-5/frames/hits-5-2.png" id="2_8gerk"]
+[ext_resource type="Texture2D" uid="uid://nfj35pkkm5jj" path="res://asssets/enemies/Warped shooting fx files/Pixelart/hits/Hits-5/frames/hits-5-3.png" id="3_25ycc"]
+[ext_resource type="Texture2D" uid="uid://jtr2rhaxxesc" path="res://asssets/enemies/Warped shooting fx files/Pixelart/hits/Hits-5/frames/hits-5-4.png" id="4_a0j4b"]
+[ext_resource type="Texture2D" uid="uid://ctv42vdyko7k8" path="res://asssets/enemies/Warped shooting fx files/Pixelart/hits/Hits-5/frames/hits-5-5.png" id="5_bqawd"]
+[ext_resource type="Texture2D" uid="uid://nymbc2e81bs5" path="res://asssets/enemies/Warped shooting fx files/Pixelart/hits/Hits-5/frames/hits-5-6.png" id="6_1gcux"]
+[ext_resource type="Texture2D" uid="uid://cc7fm86a7j4h" path="res://asssets/enemies/Warped shooting fx files/Pixelart/hits/Hits-5/frames/hits-5-7.png" id="7_lah86"]
+[ext_resource type="Script" uid="uid://doln2b43wn1vp" path="res://hazards/turret_bullet_hit.gd" id="8_hit_script"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_erofm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_0eusb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_8gerk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_25ycc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_a0j4b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_bqawd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_1gcux")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_lah86")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="TurretBulletHit" type="Node2D" unique_id=1669923403]
+scale = Vector2(0.6, 0.6)
+script = ExtResource("8_hit_script")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=582490825]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_erofm")
+frame = 6
+frame_progress = 1.0

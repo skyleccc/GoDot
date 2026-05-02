@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://cisg2l7ubgf6s"
+path="res://.godot/imported/Industrial_Tileset_A_tile-15_Anim.gif-4ca75583116f721e5a20f13e9bc03e62.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Animated Factory white tiles 32p/Industrial_Tileset_A_tile-15_Anim/Industrial_Tileset_A_tile-15_Anim.gif"
+dest_files=["res://.godot/imported/Industrial_Tileset_A_tile-15_Anim.gif-4ca75583116f721e5a20f13e9bc03e62.res"]
+
+[params]
+
+storage/compress=true

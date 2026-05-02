@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c3kcef6jgqjal"
+path="res://.godot/imported/Pickup.aseprite-c1618778017394f02c651a69af49b1e5.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Prototype Pack/Collectables/Pickup.aseprite"
+dest_files=["res://.godot/imported/Pickup.aseprite-c1618778017394f02c651a69af49b1e5.res"]
+
+[params]
+

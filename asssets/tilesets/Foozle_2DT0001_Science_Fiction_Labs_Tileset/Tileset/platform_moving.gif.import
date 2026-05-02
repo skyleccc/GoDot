@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://dyfqe4fvmohsy"
+path="res://.godot/imported/platform_moving.gif-6f998a7efb3a1995d92a6f8c360d80cf.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Foozle_2DT0001_Science_Fiction_Labs_Tileset/Tileset/platform_moving.gif"
+dest_files=["res://.godot/imported/platform_moving.gif-6f998a7efb3a1995d92a6f8c360d80cf.res"]
+
+[params]
+
+storage/compress=true

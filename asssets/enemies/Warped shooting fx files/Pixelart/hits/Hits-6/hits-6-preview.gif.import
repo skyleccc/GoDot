@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://do1rbvddhc6qi"
+path="res://.godot/imported/hits-6-preview.gif-81c41094034ce117fbc5fab607ca2253.res"
+
+[deps]
+
+source_file="res://asssets/enemies/Warped shooting fx files/Pixelart/hits/Hits-6/hits-6-preview.gif"
+dest_files=["res://.godot/imported/hits-6-preview.gif-81c41094034ce117fbc5fab607ca2253.res"]
+
+[params]
+
+storage/compress=true

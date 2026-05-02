@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://bjjed3ipobbte"
+path="res://.godot/imported/pulse-preview.gif-8523ddb01aa18d5b41355747cfc290e9.res"
+
+[deps]
+
+source_file="res://asssets/enemies/Warped shooting fx files/Pixelart/Pulse/pulse-preview.gif"
+dest_files=["res://.godot/imported/pulse-preview.gif-8523ddb01aa18d5b41355747cfc290e9.res"]
+
+[params]
+
+storage/compress=true

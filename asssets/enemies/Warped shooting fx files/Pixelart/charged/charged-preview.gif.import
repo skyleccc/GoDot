@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://bh5r6aq5mvtxh"
+path="res://.godot/imported/charged-preview.gif-1caa9f7b8b3c065142c3319824938763.res"
+
+[deps]
+
+source_file="res://asssets/enemies/Warped shooting fx files/Pixelart/charged/charged-preview.gif"
+dest_files=["res://.godot/imported/charged-preview.gif-1caa9f7b8b3c065142c3319824938763.res"]
+
+[params]
+
+storage/compress=true

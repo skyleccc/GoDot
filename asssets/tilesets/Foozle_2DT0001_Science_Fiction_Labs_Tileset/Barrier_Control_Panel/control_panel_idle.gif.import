@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://dcokhdq6qka8i"
+path="res://.godot/imported/control_panel_idle.gif-fbe40e08905ad25dbbb147fe23f7c9fe.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Foozle_2DT0001_Science_Fiction_Labs_Tileset/Barrier_Control_Panel/control_panel_idle.gif"
+dest_files=["res://.godot/imported/control_panel_idle.gif-fbe40e08905ad25dbbb147fe23f7c9fe.res"]
+
+[params]
+
+storage/compress=true

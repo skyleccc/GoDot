@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bgjlbdpodr0fm"
+path="res://.godot/imported/completion_8_sean.wav-3a5b89c04620ce4ddb38f0991eb8e6bc.sample"
+
+[deps]
+
+source_file="res://asssets/sounds/Super Dialogue Audio Pack v1/Step 2 - Audio Files/1 - Completion/Male/Sean Lenhart/completion_8_sean.wav"
+dest_files=["res://.godot/imported/completion_8_sean.wav-3a5b89c04620ce4ddb38f0991eb8e6bc.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

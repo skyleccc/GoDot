@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cf4lot1vrysyl"
+path="res://.godot/imported/miscellaneous_18_karen.wav-d34ae4bf247b572384a4f97dd3fdf78f.sample"
+
+[deps]
+
+source_file="res://asssets/sounds/Super Dialogue Audio Pack v1/Step 2 - Audio Files/6 - Miscellaneous/Female/Karen Cenon/miscellaneous_18_karen.wav"
+dest_files=["res://.godot/imported/miscellaneous_18_karen.wav-d34ae4bf247b572384a4f97dd3fdf78f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

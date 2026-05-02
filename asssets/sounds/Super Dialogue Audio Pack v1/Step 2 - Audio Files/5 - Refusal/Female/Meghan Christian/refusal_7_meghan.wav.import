@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://vr5uhqs6vgp4"
+path="res://.godot/imported/refusal_7_meghan.wav-b9aab532ddc328cc28f0e73ecc68f1cc.sample"
+
+[deps]
+
+source_file="res://asssets/sounds/Super Dialogue Audio Pack v1/Step 2 - Audio Files/5 - Refusal/Female/Meghan Christian/refusal_7_meghan.wav"
+dest_files=["res://.godot/imported/refusal_7_meghan.wav-b9aab532ddc328cc28f0e73ecc68f1cc.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

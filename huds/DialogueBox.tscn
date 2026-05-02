@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://dx5bucm21mrl0"]
+
+[node name="DialogueBox" type="CanvasLayer" unique_id=32197800]
+
+[node name="Panel" type="Control" parent="." unique_id=222292970]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 442.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="DialogueText" type="RichTextLabel" parent="Panel" unique_id=375914066]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.1388889
+anchor_top = -0.0776699
+anchor_right = 0.6458333
+anchor_bottom = 0.5776699
+offset_left = 361.0
+offset_top = 60.0
+offset_right = 397.0
+offset_bottom = 66.0
+metadata/_edit_use_anchors_ = true
+
+[node name="ContinueButton" type="Button" parent="Panel" unique_id=378037938]
+layout_mode = 0
+offset_left = 1054.0
+offset_top = 158.0
+offset_right = 1133.0
+offset_bottom = 186.0
+metadata/_edit_use_anchors_ = true
+
+[node name="NameTag" type="Label" parent="Panel" unique_id=1736957013]
+layout_mode = 0
+offset_left = 201.0
+offset_top = 8.0
+offset_right = 401.0
+offset_bottom = 38.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Portrait" type="TextureRect" parent="Panel" unique_id=696956573]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 6.0
+offset_right = 186.0
+offset_bottom = 182.0
+metadata/_edit_use_anchors_ = true

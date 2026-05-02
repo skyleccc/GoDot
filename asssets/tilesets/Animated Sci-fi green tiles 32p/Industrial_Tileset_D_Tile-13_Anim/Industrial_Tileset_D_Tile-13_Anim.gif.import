@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://bie683bhn2m2e"
+path="res://.godot/imported/Industrial_Tileset_D_Tile-13_Anim.gif-90620c46314eefa958d0f35bc3910ff8.res"
+
+[deps]
+
+source_file="res://asssets/tilesets/Animated Sci-fi green tiles 32p/Industrial_Tileset_D_Tile-13_Anim/Industrial_Tileset_D_Tile-13_Anim.gif"
+dest_files=["res://.godot/imported/Industrial_Tileset_D_Tile-13_Anim.gif-90620c46314eefa958d0f35bc3910ff8.res"]
+
+[params]
+
+storage/compress=true

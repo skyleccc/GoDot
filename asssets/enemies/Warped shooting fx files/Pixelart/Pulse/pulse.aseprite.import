@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bi13nppxmli7"
+path="res://.godot/imported/pulse.aseprite-be555ff930f83154f07377a497c17571.res"
+
+[deps]
+
+source_file="res://asssets/enemies/Warped shooting fx files/Pixelart/Pulse/pulse.aseprite"
+dest_files=["res://.godot/imported/pulse.aseprite-be555ff930f83154f07377a497c17571.res"]
+
+[params]
+

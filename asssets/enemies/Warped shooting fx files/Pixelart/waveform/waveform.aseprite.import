@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dsk65t4vemicr"
+path="res://.godot/imported/waveform.aseprite-b7782324d21d0d823eb0468c45e56c79.res"
+
+[deps]
+
+source_file="res://asssets/enemies/Warped shooting fx files/Pixelart/waveform/waveform.aseprite"
+dest_files=["res://.godot/imported/waveform.aseprite-b7782324d21d0d823eb0468c45e56c79.res"]
+
+[params]
+
