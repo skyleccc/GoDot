@@ -1,0 +1,246 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://huds/settings_hud.gd" id="1_settings"]
+[ext_resource type="PackedScene" uid="uid://dkmbe2fd0ly0j" path="res://levels/parallaxsets/Level1Background.tscn" id="2_bg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.1, 0.1, 0.1, 0.9)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 8
+
+[node name="SettingsHud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_settings")
+
+[node name="SettingsBackground" parent="." instance=ExtResource("2_bg")]
+z_as_relative = false
+z_index = -200
+position = Vector2(0, 0)
+
+[node name="Dimmer" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+mouse_filter = 2
+
+[node name="SettingsPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -420.0
+offset_top = -300.0
+offset_right = 420.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_minimum_size = Vector2(840, 600)
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="TabContainer" type="TabContainer" parent="SettingsPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_horizontal = 3
+
+[node name="DisplayTab" type="Control" parent="SettingsPanel/VBoxContainer/TabContainer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DisplayVBox" type="VBoxContainer" parent="SettingsPanel/VBoxContainer/TabContainer/DisplayTab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="WindowModeRow" type="HBoxContainer" parent="SettingsPanel/VBoxContainer/TabContainer/DisplayTab/DisplayVBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="WindowModeLabel" type="Label" parent="SettingsPanel/VBoxContainer/TabContainer/DisplayTab/DisplayVBox/WindowModeRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(200, 0)
+text = "Window Mode"
+
+[node name="WindowModeOption" type="OptionButton" parent="SettingsPanel/VBoxContainer/TabContainer/DisplayTab/DisplayVBox/WindowModeRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ResolutionRow" type="HBoxContainer" parent="SettingsPanel/VBoxContainer/TabContainer/DisplayTab/DisplayVBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ResolutionLabel" type="Label" parent="SettingsPanel/VBoxContainer/TabContainer/DisplayTab/DisplayVBox/ResolutionRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(200, 0)
+text = "Resolution"
+
+[node name="ResolutionOption" type="OptionButton" parent="SettingsPanel/VBoxContainer/TabContainer/DisplayTab/DisplayVBox/ResolutionRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ApplyDisplayButton" type="Button" parent="SettingsPanel/VBoxContainer/TabContainer/DisplayTab/DisplayVBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(160, 48)
+text = "Apply"
+
+[node name="AudioTab" type="Control" parent="SettingsPanel/VBoxContainer/TabContainer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AudioVBox" type="VBoxContainer" parent="SettingsPanel/VBoxContainer/TabContainer/AudioTab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="MasterRow" type="HBoxContainer" parent="SettingsPanel/VBoxContainer/TabContainer/AudioTab/AudioVBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MasterLabel" type="Label" parent="SettingsPanel/VBoxContainer/TabContainer/AudioTab/AudioVBox/MasterRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(200, 0)
+text = "Overall Volume"
+
+[node name="MasterSlider" type="HSlider" parent="SettingsPanel/VBoxContainer/TabContainer/AudioTab/AudioVBox/MasterRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+value = 100.0
+
+[node name="EffectsRow" type="HBoxContainer" parent="SettingsPanel/VBoxContainer/TabContainer/AudioTab/AudioVBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EffectsLabel" type="Label" parent="SettingsPanel/VBoxContainer/TabContainer/AudioTab/AudioVBox/EffectsRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(200, 0)
+text = "Effects Volume"
+
+[node name="EffectsSlider" type="HSlider" parent="SettingsPanel/VBoxContainer/TabContainer/AudioTab/AudioVBox/EffectsRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+value = 100.0
+
+[node name="MusicRow" type="HBoxContainer" parent="SettingsPanel/VBoxContainer/TabContainer/AudioTab/AudioVBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MusicLabel" type="Label" parent="SettingsPanel/VBoxContainer/TabContainer/AudioTab/AudioVBox/MusicRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(200, 0)
+text = "Music Volume"
+
+[node name="MusicSlider" type="HSlider" parent="SettingsPanel/VBoxContainer/TabContainer/AudioTab/AudioVBox/MusicRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+value = 100.0
+
+[node name="DialogueRow" type="HBoxContainer" parent="SettingsPanel/VBoxContainer/TabContainer/AudioTab/AudioVBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DialogueLabel" type="Label" parent="SettingsPanel/VBoxContainer/TabContainer/AudioTab/AudioVBox/DialogueRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(200, 0)
+text = "Dialogue Volume"
+
+[node name="DialogueSlider" type="HSlider" parent="SettingsPanel/VBoxContainer/TabContainer/AudioTab/AudioVBox/DialogueRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+value = 100.0
+
+[node name="PlaylistTab" type="Control" parent="SettingsPanel/VBoxContainer/TabContainer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="SettingsPanel/VBoxContainer/TabContainer/PlaylistTab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlaylistContainer" type="VBoxContainer" parent="SettingsPanel/VBoxContainer/TabContainer/PlaylistTab/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ApplyButton" type="Button" parent="SettingsPanel/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(160, 48)
+text = "Apply"
+
+[node name="BackButton" type="Button" parent="SettingsPanel/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(160, 48)
+text = "Back"

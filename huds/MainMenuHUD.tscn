@@ -91,6 +91,16 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_4igeq")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_c830a")
 text = "Level Select"
 
+[node name="SettingsButton" type="Button" parent="VBoxContainer" unique_id=1806320041]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_xwwto")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4igeq")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_c830a")
+text = "Settings"
+
 [node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=2106864854]
 layout_mode = 2
 size_flags_vertical = 3

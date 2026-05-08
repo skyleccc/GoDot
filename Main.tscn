@@ -19,6 +19,8 @@
 [ext_resource type="Script" uid="uid://cwcssuc8ud5d7" path="res://bgms/background_music_manager.gd" id="12_h8wqj"]
 [ext_resource type="Script" uid="uid://bxd4b1otjwaiv" path="res://levels/parallaxsets/background_manager.gd" id="13_bg_mgr"]
 [ext_resource type="PackedScene" uid="uid://dkmbe2fd0ly0j" path="res://levels/parallaxsets/Level1Background.tscn" id="14_bg_scene"]
+[ext_resource type="PackedScene" uid="uid://cps5j4tuh6jso" path="res://huds/PauseMenuHUD.tscn" id="15_pause_hud"]
+[ext_resource type="PackedScene" path="res://huds/SettingsHUD.tscn" id="16_settings_hud"]
 
 [node name="Main" type="Node2D" unique_id=2077183016]
 texture_filter = 1
@@ -54,10 +56,21 @@ visible = false
 
 [node name="LevelSelectionHUD" parent="NonPlayingUiComponents/LevelSelectionUI" unique_id=1427109248 instance=ExtResource("11_3q4wl")]
 
+[node name="PauseMenuUI" type="CanvasLayer" parent="NonPlayingUiComponents" unique_id=1071953385]
+visible = false
+
+[node name="PauseMenuHUD" parent="NonPlayingUiComponents/PauseMenuUI" unique_id=2096721256 instance=ExtResource("15_pause_hud")]
+
+[node name="SettingsUI" type="CanvasLayer" parent="NonPlayingUiComponents" unique_id=1581720051]
+visible = false
+
+[node name="SettingsHUD" parent="NonPlayingUiComponents/SettingsUI" unique_id=1048662400 instance=ExtResource("16_settings_hud")]
+
 [node name="MultiplayerUI" type="CanvasLayer" parent="NonPlayingUiComponents" unique_id=591334217]
 visible = false
 
 [node name="MultiplayerClient" parent="NonPlayingUiComponents/MultiplayerUI" unique_id=355230823 instance=ExtResource("3_7u5lb")]
+visible = false
 
 [node name="DebugHUD" type="CanvasLayer" parent="NonPlayingUiComponents" unique_id=1608262915]
 visible = false

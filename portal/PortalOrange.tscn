@@ -130,7 +130,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e8s81"]
-size = Vector2(7.5625, 35)
+size = Vector2(9.78125, 36)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4pkl2"]
 size = Vector2(6, 42)
@@ -156,7 +156,7 @@ volume_db = -10.0
 max_distance = 500.0
 
 [node name="TeleportBox" type="CollisionShape2D" parent="." unique_id=939721198]
-position = Vector2(0, 1.5)
+position = Vector2(1.109375, 1)
 shape = SubResource("RectangleShape2D_e8s81")
 
 [node name="PortalWallSurface" type="Area2D" parent="." unique_id=1010386585]

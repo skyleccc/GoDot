@@ -1,0 +1,131 @@
+[gd_scene format=3 uid="uid://cps5j4tuh6jso"]
+
+[ext_resource type="Script" path="res://huds/pause_menu_hud.gd" id="1_pause"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.1, 0.1, 0.1, 0.9)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 8
+
+[node name="PauseMenuHud" type="Control" unique_id=1054893012]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pause")
+
+[node name="Dimmer" type="ColorRect" parent="." unique_id=156238974]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+mouse_filter = 2
+
+[node name="MenuPanel" type="Panel" parent="." unique_id=1880231449]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -170.0
+offset_right = 200.0
+offset_bottom = 170.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_minimum_size = Vector2(400, 340)
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuPanel" unique_id=1695726387]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="ResumeButton" type="Button" parent="MenuPanel/VBoxContainer" unique_id=1761657911]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 28
+text = "Resume"
+
+[node name="SettingsButton" type="Button" parent="MenuPanel/VBoxContainer" unique_id=1031732226]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 28
+text = "Settings"
+
+[node name="ExitButton" type="Button" parent="MenuPanel/VBoxContainer" unique_id=995407207]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 28
+text = "Exit"
+
+[node name="ConfirmPanel" type="Panel" parent="." unique_id=1019941934]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -120.0
+offset_right = 180.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_minimum_size = Vector2(360, 240)
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ConfirmPanel" unique_id=1473629487]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="ConfirmLabel" type="Label" parent="ConfirmPanel/VBoxContainer" unique_id=1910846578]
+layout_mode = 2
+text = "Exit to main menu?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ConfirmPanel/VBoxContainer" unique_id=1445276741]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 16
+
+[node name="ConfirmYesButton" type="Button" parent="ConfirmPanel/VBoxContainer/HBoxContainer" unique_id=1312741853]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+custom_minimum_size = Vector2(120, 48)
+text = "Yes"
+
+[node name="ConfirmNoButton" type="Button" parent="ConfirmPanel/VBoxContainer/HBoxContainer" unique_id=165990588]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+custom_minimum_size = Vector2(120, 48)
+text = "No"
