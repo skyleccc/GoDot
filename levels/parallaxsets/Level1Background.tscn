@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://dkmbe2fd0ly0j"]
+
+[ext_resource type="Texture2D" uid="uid://c8yq3ra6f53g5" path="res://asssets/background/parallax/1/blue-back.png" id="1_bg"]
+[ext_resource type="Texture2D" uid="uid://k4kuftxohsne" path="res://asssets/background/parallax/1/blue-stars.png" id="2_star"]
+[ext_resource type="Texture2D" uid="uid://d0wxgf3r24pv4" path="res://asssets/background/parallax/1/asteroid-1.png" id="3_pl1"]
+[ext_resource type="Texture2D" uid="uid://dfnvdg3yrqus8" path="res://asssets/background/parallax/1/prop-planet-big.png" id="4_pl2"]
+[ext_resource type="Texture2D" uid="uid://q0qmhbbpwbja" path="res://asssets/background/parallax/1/asteroid-2.png" id="5_b1"]
+[ext_resource type="Texture2D" uid="uid://b7vhy15rloiu2" path="res://asssets/background/parallax/1/prop-planet-small.png" id="6_b2"]
+
+[node name="Level1Background" type="Node2D" unique_id=364423703]
+texture_filter = 1
+
+[node name="Background" type="Sprite2D" parent="." unique_id=731520170]
+position = Vector2(3.0517578e-05, 1.5258789e-05)
+scale = Vector2(7.080882, 6.79375)
+texture = ExtResource("1_bg")
+centered = false
+
+[node name="BluePlanet1" type="Sprite2D" parent="Background" unique_id=736428790]
+position = Vector2(24.399988, 48.399994)
+scale = Vector2(1.1441859, 1.1441859)
+texture = ExtResource("4_pl2")
+centered = false
+
+[node name="BluePlanet2" type="Sprite2D" parent="Background" unique_id=960952376]
+position = Vector2(162.79997, 122.79999)
+scale = Vector2(0.7250002, 0.7250002)
+texture = ExtResource("6_b2")
+centered = false
+
+[node name="LayerStars" type="Parallax2D" parent="Background" unique_id=951713565]
+z_index = 1
+scale = Vector2(0.8, 0.8)
+scroll_scale = Vector2(0.3, 0.3)
+scroll_offset = Vector2(-150, 0)
+repeat_size = Vector2(160, 160)
+autoscroll = Vector2(5, 0)
+ignore_camera_scroll = true
+
+[node name="Star" type="Sprite2D" parent="Background/LayerStars" unique_id=1174980294]
+position = Vector2(1.9418484, 0)
+scale = Vector2(1.2436471, 1.2431003)
+texture = ExtResource("2_star")
+centered = false
+
+[node name="Asteroids" type="Parallax2D" parent="Background" unique_id=1146944810]
+scale = Vector2(0.39999998, 0.39999998)
+scroll_scale = Vector2(0.5, 0.5)
+scroll_offset = Vector2(19.489092, 23.109474)
+repeat_size = Vector2(720, 0)
+autoscroll = Vector2(10, 0)
+ignore_camera_scroll = true
+
+[node name="PinkAsteroid1" type="Sprite2D" parent="Background/Asteroids" unique_id=1843748495]
+position = Vector2(169.77777, 24)
+scale = Vector2(1.4444444, 1.4444444)
+texture = ExtResource("3_pl1")
+centered = false
+
+[node name="PinkAsteroid3" type="Sprite2D" parent="Background/Asteroids" unique_id=1709464042]
+position = Vector2(287, 302)
+scale = Vector2(2.9411764, 2.9411764)
+texture = ExtResource("5_b1")
+centered = false
+
+[node name="PinkAsteroid2" type="Sprite2D" parent="Background/Asteroids" unique_id=1285295866]
+position = Vector2(238.99998, 84.99999)
+scale = Vector2(2.6470587, 2.6470587)
+texture = ExtResource("5_b1")
+centered = false
+
+[node name="PinkAsteroid4" type="Sprite2D" parent="Background/Asteroids" unique_id=1984973127]
+position = Vector2(502, 194)
+scale = Vector2(1.925926, 1.925926)
+texture = ExtResource("3_pl1")
+centered = false
+
+[node name="PinkAsteroid5" type="Sprite2D" parent="Background/Asteroids" unique_id=36286871]
+position = Vector2(389, 87)
+scale = Vector2(1.0124999, 1.3333333)
+texture = ExtResource("3_pl1")
+centered = false
+
+[node name="PinkAsteroid6" type="Sprite2D" parent="Background/Asteroids" unique_id=1301824996]
+position = Vector2(513.00006, 69.99999)
+rotation = -1.001819
+scale = Vector2(1.0251561, 1.7777776)
+texture = ExtResource("3_pl1")
+centered = false
+
+[node name="PinkAsteroid7" type="Sprite2D" parent="Background/Asteroids" unique_id=1052721588]
+position = Vector2(575, 274)
+rotation = -1.1187022
+scale = Vector2(0.8797958, 0.78570545)
+skew = 0.24783945
+texture = ExtResource("3_pl1")
+centered = false

@@ -947,8 +947,8 @@ collision_mask = 10
 script = ExtResource("1_vg1c7")
 
 [node name="Player" type="Sprite2D" parent="." unique_id=1955289922]
-texture_filter = 1
 z_index = 20
+texture_filter = 1
 position = Vector2(0, -44)
 texture = SubResource("PortableCompressedTexture2D_vg1c7")
 offset = Vector2(0, 22)
@@ -1017,6 +1017,8 @@ position = Vector2(-17, -13)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1440459520]
 zoom = Vector2(2.3, 2.3)
+limit_enabled = false
 position_smoothing_enabled = true
+position_smoothing_speed = 100.0
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

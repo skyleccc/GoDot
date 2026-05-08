@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://bq7bdpi5dh7yd"]
 
 [ext_resource type="Script" uid="uid://cw6ixytua75yp" path="res://enemies/boss_projectile.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Shots/Shot1/shot1_1.png" id="2_shot1"]
-[ext_resource type="Texture2D" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Shots/Shot1/shot1_2.png" id="3_shot2"]
-[ext_resource type="Texture2D" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Shots/Shot1/shot1_3.png" id="4_shot3"]
-[ext_resource type="Texture2D" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Shots/Shot1/shot1_4.png" id="5_shot4"]
+[ext_resource type="Texture2D" uid="uid://crl0e67pq6nc7" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Shots/Shot1/shot1_1.png" id="2_shot1"]
+[ext_resource type="Texture2D" uid="uid://fb3t0g7ws2s2" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Shots/Shot1/shot1_2.png" id="3_shot2"]
+[ext_resource type="Texture2D" uid="uid://bbc2584gw2l5b" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Shots/Shot1/shot1_3.png" id="4_shot3"]
+[ext_resource type="Texture2D" uid="uid://bl6exp70kaqf5" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Shots/Shot1/shot1_4.png" id="5_shot4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_shot1"]
 animations = [{
@@ -26,8 +26,7 @@ animations = [{
 "speed": 14.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_projectile"]
-radius = 3.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0vv1d"]
 
 [node name="BossProjectile" type="CharacterBody2D" unique_id=1088519962]
 collision_layer = 8
@@ -37,7 +36,9 @@ script = ExtResource("1_script")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=636032160]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_shot1")
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1250933094]
-position = Vector2(5, 0)
-shape = SubResource("CircleShape2D_projectile")
+position = Vector2(-4, 1)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_0vv1d")
