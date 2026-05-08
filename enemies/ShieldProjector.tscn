@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cptfqlv7wl1il"]
+
+[ext_resource type="Script" uid="uid://bne8x6n0qqode" path="res://enemies/shield_projector.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://cgxp74ioic5vy" path="res://asssets/tilesets/Foozle_2DT0001_Science_Fiction_Labs_Tileset/Decor/Individual_PNGs/decor_3.png" id="2_decor3"]
+[ext_resource type="Texture2D" uid="uid://cqy8oxqauyh5l" path="res://asssets/tilesets/Foozle_2DT0001_Science_Fiction_Labs_Tileset/Decor/Individual_PNGs/decor_4.png" id="3_decor4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(114, 51)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_detection"]
+radius = 50.0
+
+[node name="ShieldProjector" type="StaticBody2D" unique_id=773128156]
+collision_layer = 16
+collision_mask = 11
+script = ExtResource("1_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1383808524]
+position = Vector2(24, 6.5)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="Decor3" type="Sprite2D" parent="." unique_id=368657785]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("2_decor3")
+
+[node name="Decor4" type="Sprite2D" parent="." unique_id=5789423]
+texture_filter = 1
+position = Vector2(54, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("3_decor4")
+
+

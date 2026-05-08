@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bmai0yyamch1k"]
+
+[ext_resource type="Script" uid="uid://cx87rfcyfwcl0" path="res://hazards/warden_mine.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://crl0e67pq6nc7" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Shots/Shot1/shot1_1.png" id="2_mine"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_body"]
+radius = 12.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_detection"]
+radius = 16.0
+
+[node name="WardenMine" type="CharacterBody2D" unique_id=4117928]
+collision_layer = 8
+collision_mask = 19
+script = ExtResource("1_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=27073763]
+shape = SubResource("CircleShape2D_body")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1626954517]
+texture_filter = 1
+position = Vector2(67.99999, -2.9999998)
+scale = Vector2(5, 5)
+texture = ExtResource("2_mine")
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=344068502]
+collision_layer = 0
+collision_mask = 17
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=1974717058]
+shape = SubResource("CircleShape2D_detection")
