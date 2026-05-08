@@ -129,11 +129,11 @@ animations = [{
 "speed": 20.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_knorx"]
-size = Vector2(7.5625, 48)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e8s81"]
-size = Vector2(12, 48)
+size = Vector2(9.78125, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4pkl2"]
+size = Vector2(6, 42)
 
 [node name="Portal2" type="Area2D" unique_id=1186338649]
 z_index = 10
@@ -147,16 +147,6 @@ sprite_frames = SubResource("SpriteFrames_2evpl")
 animation = &"OrangePortal"
 autoplay = "OrangePortal"
 
-[node name="TeleportBox" type="CollisionShape2D" parent="." unique_id=410635502]
-position = Vector2(7.78125, 1)
-shape = SubResource("RectangleShape2D_knorx")
-
-[node name="PortalWallSurface" type="Area2D" parent="." unique_id=439708487]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PortalWallSurface" unique_id=1228183478]
-position = Vector2(-2, 1)
-shape = SubResource("RectangleShape2D_e8s81")
-
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=778502048]
 max_distance = 500.0
 attenuation = 10.55604
@@ -164,3 +154,13 @@ attenuation = 10.55604
 [node name="AmbientLoopPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1839343032]
 volume_db = -10.0
 max_distance = 500.0
+
+[node name="TeleportBox" type="CollisionShape2D" parent="." unique_id=939721198]
+position = Vector2(1.109375, 1)
+shape = SubResource("RectangleShape2D_e8s81")
+
+[node name="PortalWallSurface" type="Area2D" parent="." unique_id=1010386585]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PortalWallSurface" unique_id=1543666950]
+position = Vector2(-6, 1)
+shape = SubResource("RectangleShape2D_4pkl2")

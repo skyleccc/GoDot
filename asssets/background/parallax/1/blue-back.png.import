@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3f6yb5pn0kgm"
-path="res://.godot/imported/WallTileset.aseprite-07c1cd958ff845fb83b0da3f54ee14bb.ctex"
+uid="uid://c8yq3ra6f53g5"
+path="res://.godot/imported/blue-back.png-b247837d4c12af143fb66f83da036685.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asssets/tilesets/Prototype Pack/Tilesets/WallTileset.aseprite"
-dest_files=["res://.godot/imported/WallTileset.aseprite-07c1cd958ff845fb83b0da3f54ee14bb.ctex"]
+source_file="res://asssets/background/parallax/1/blue-back.png"
+dest_files=["res://.godot/imported/blue-back.png-b247837d4c12af143fb66f83da036685.ctex"]
 
 [params]
 

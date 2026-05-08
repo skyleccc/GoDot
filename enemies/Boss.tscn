@@ -11,8 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://cs35jbec4732r" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Exhaust/Ship1/Turbo_flight/Ship1_turbol_flight_005.png" id="9_exhaust_t3"]
 [ext_resource type="Texture2D" uid="uid://bhbh0kbxebia6" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Exhaust/Ship1/Turbo_flight/Ship1_turbol_flight_007.png" id="10_exhaust_t4"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t2xoq"]
-size = Vector2(151, 96)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1pdda"]
+radius = 34.5
+height = 157.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ship1_exhaust"]
 animations = [{
@@ -55,10 +56,13 @@ animations = [{
 collision_layer = 16
 collision_mask = 11
 script = ExtResource("1_script")
+aoe_damage = 0
+railgun_length = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=817699787]
-position = Vector2(26.5, 24)
-shape = SubResource("RectangleShape2D_t2xoq")
+position = Vector2(24, 22)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_1pdda")
 
 [node name="Ship" type="Sprite2D" parent="." unique_id=785933610]
 texture_filter = 1
@@ -75,10 +79,10 @@ animation = &"normal"
 autoplay = "normal"
 
 [node name="ProjectileSpawn" type="Marker2D" parent="." unique_id=817869196]
-position = Vector2(29, 1)
+position = Vector2(98, 23)
 
 [node name="RailgunOrigin" type="Marker2D" parent="." unique_id=1087402953]
-position = Vector2(30, 1)
+position = Vector2(26, 22)
 
 [node name="AOEContainer" type="Node2D" parent="." unique_id=763024695]
 

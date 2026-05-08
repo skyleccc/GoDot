@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cd515tbpifyfi" path="res://main.gd" id="1_cm0pq"]
 [ext_resource type="PackedScene" uid="uid://d172y7fl2i3bu" path="res://character/CharacterModel.tscn" id="1_glv2v"]
-[ext_resource type="PackedScene" uid="uid://v3b2v6oq3uqk" path="res://levels/Level1.tscn" id="2_uu6xs"]
+[ext_resource type="PackedScene" uid="uid://b30k8psgct7an" path="res://levels/Level1.tscn" id="2_uu6xs"]
 [ext_resource type="PackedScene" uid="uid://bgvv1cewiw6g0" path="res://multiplayer-nakama/Client.tscn" id="3_7u5lb"]
 [ext_resource type="Script" uid="uid://cg5by3dekbmhp" path="res://debugs/debug_hud.gd" id="4_cm0pq"]
 [ext_resource type="PackedScene" uid="uid://cq7ehk2qfgixs" path="res://huds/HealthHUD.tscn" id="4_wn3n2"]
@@ -17,6 +17,10 @@
 [ext_resource type="AudioStream" uid="uid://c5lj1roumlvh6" path="res://bgms/Portal-2-OST-Volume-3-Machiavellian-Bach-KniL-_128k_.ogg" id="10_c2ibq"]
 [ext_resource type="PackedScene" uid="uid://dxlp0dxl4u5jd" path="res://huds/LevelSelectionHUD.tscn" id="11_3q4wl"]
 [ext_resource type="Script" uid="uid://cwcssuc8ud5d7" path="res://bgms/background_music_manager.gd" id="12_h8wqj"]
+[ext_resource type="Script" uid="uid://bxd4b1otjwaiv" path="res://levels/parallaxsets/background_manager.gd" id="13_bg_mgr"]
+[ext_resource type="PackedScene" uid="uid://dkmbe2fd0ly0j" path="res://levels/parallaxsets/Level1Background.tscn" id="14_bg_scene"]
+[ext_resource type="PackedScene" uid="uid://cps5j4tuh6jso" path="res://huds/PauseMenuHUD.tscn" id="15_pause_hud"]
+[ext_resource type="PackedScene" path="res://huds/SettingsHUD.tscn" id="16_settings_hud"]
 
 [node name="Main" type="Node2D" unique_id=2077183016]
 texture_filter = 1
@@ -52,14 +56,29 @@ visible = false
 
 [node name="LevelSelectionHUD" parent="NonPlayingUiComponents/LevelSelectionUI" unique_id=1427109248 instance=ExtResource("11_3q4wl")]
 
+[node name="PauseMenuUI" type="CanvasLayer" parent="NonPlayingUiComponents" unique_id=1071953385]
+visible = false
+
+[node name="PauseMenuHUD" parent="NonPlayingUiComponents/PauseMenuUI" unique_id=2096721256 instance=ExtResource("15_pause_hud")]
+
+[node name="SettingsUI" type="CanvasLayer" parent="NonPlayingUiComponents" unique_id=1581720051]
+visible = false
+
+[node name="SettingsHUD" parent="NonPlayingUiComponents/SettingsUI" unique_id=1048662400 instance=ExtResource("16_settings_hud")]
+
 [node name="MultiplayerUI" type="CanvasLayer" parent="NonPlayingUiComponents" unique_id=591334217]
 visible = false
 
 [node name="MultiplayerClient" parent="NonPlayingUiComponents/MultiplayerUI" unique_id=355230823 instance=ExtResource("3_7u5lb")]
+visible = false
 
 [node name="DebugHUD" type="CanvasLayer" parent="NonPlayingUiComponents" unique_id=1608262915]
 visible = false
 script = ExtResource("4_cm0pq")
+
+[node name="BackgroundManager" type="Node" parent="." unique_id=1883819730]
+script = ExtResource("13_bg_mgr")
+default_background = ExtResource("14_bg_scene")
 
 [node name="BackgroundMusicManager" type="AudioStreamPlayer" parent="." unique_id=1983318440]
 volume_db = -20.0
