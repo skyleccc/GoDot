@@ -136,6 +136,7 @@ size = Vector2(7.5625, 48)
 size = Vector2(12, 48)
 
 [node name="Portal2" type="Area2D" unique_id=1186338649]
+z_index = 10
 collision_layer = 0
 collision_mask = 9
 script = ExtResource("1_e8s81")

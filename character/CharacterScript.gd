@@ -1,5 +1,7 @@
 extends PortalEntity
 
+signal hp_changed(current_hp_value: int, max_hp_value: int)
+
 ## Portal-style 2D platformer character controller.
 ## Designed around the core Portal mechanic: momentum is preserved through portals.
 ## Air control is intentionally weak so portal flings carry the player properly.
@@ -124,6 +126,7 @@ func _ready() -> void:
 
 	_vo_player.play()
 	_vo_playback = _vo_player.get_stream_playback()
+	hp_changed.emit(current_hp, max_hp)
 
 ## Override: clear coyote time and jump buffer on portal exit so the player
 ## can't spam-jump out of a fling.
@@ -389,6 +392,8 @@ func take_damage(amount: int, hit_source_pos: Vector2 = global_position, knockba
 	if _is_invincible or _is_dying:
 		return
 	current_hp -= amount
+	current_hp = maxi(current_hp, 0)
+	hp_changed.emit(current_hp, max_hp)
 	if apply_slow:
 		_trigger_damage_slow()
 	print("Player hit! -", amount, " HP  →  HP: ", current_hp, " / ", max_hp)
@@ -432,6 +437,7 @@ func _finish_die() -> void:
 ## Shared respawn logic.
 func _respawn() -> void:
 	current_hp = max_hp
+	hp_changed.emit(current_hp, max_hp)
 	global_position = start_position
 	velocity = Vector2.ZERO
 	_play_spawn_activation_at(global_position)
@@ -450,6 +456,12 @@ func _respawn() -> void:
 	if _state_machine:
 		_state_machine.travel("Move")
 	print("HP restored: ", current_hp, " / ", max_hp)
+
+func reset_health() -> void:
+	current_hp = max_hp
+	hp_changed.emit(current_hp, max_hp)
+	_damage_slow_timer = 0.0
+	_low_health_cooldown_timer = 0.0
 
 ## Updates the checkpoint used for all future respawns.
 func set_spawn_point(spawn_global_position: Vector2, move_player: bool = false) -> void:

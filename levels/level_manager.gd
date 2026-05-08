@@ -1,14 +1,13 @@
 extends Node
 
+signal level_loaded(level_number: int)
+
 @export var first_level_number: int = 1
-@export var current_level_path: NodePath = NodePath("../LevelLayout")
-@export var player_path: NodePath = NodePath("../Character")
+@export var current_level_path: NodePath = NodePath("../PlayingArea/LevelLayout")
+@export var player_path: NodePath = NodePath("../PlayingArea/Character")
 @export var persistent_sibling_names: Array[StringName] = [
 	&"Character",
-	&"MultiplayerUI",
-	&"DebugHUD",
-	&"BackgroundMusic",
-	&"LevelManager"
+	&"PlayingUI"
 ]
 
 const DYNAMIC_GROUPS: Array[StringName] = [
@@ -24,6 +23,7 @@ var _level_mount_parent: Node = null
 var _level_mount_position: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
+	add_to_group("level_manager")
 	current_level = get_node_or_null(current_level_path) as Node2D
 	player = get_node_or_null(player_path)
 
@@ -37,6 +37,7 @@ func _ready() -> void:
 	_detect_current_level_number()
 	_register_level_interactables()
 	_place_player_on_first_spawn()
+	level_loaded.emit(current_level_number)
 
 func finish_current_level() -> void:
 	var next_level_number := current_level_number + 1
@@ -86,7 +87,9 @@ func _load_level(level_number: int) -> void:
 	current_level_number = level_number
 	_register_level_interactables()
 	_place_player_on_first_spawn()
+	_reset_player_health()
 	_set_player_visible(true)
+	level_loaded.emit(current_level_number)
 	print("Loaded %s" % level_path)
 
 func _cleanup_before_level_load() -> void:
@@ -163,6 +166,13 @@ func _find_first_spawn_in_level() -> Node2D:
 
 func _on_level_completed() -> void:
 	finish_current_level()
+
+func get_current_level_number() -> int:
+	return current_level_number
+
+func _reset_player_health() -> void:
+	if player and player.has_method("reset_health"):
+		player.reset_health()
 
 func _set_player_visible(is_visible: bool) -> void:
 	if player and player is CanvasItem:

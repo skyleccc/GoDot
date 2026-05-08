@@ -1,6 +1,6 @@
 1. Fix NightBorne and Striker states, especially with the deaggro timers, leads to broken notif_deaggro and notif_aggro functions, placed temporary placement on the enter_state functions
-    - Probably have to change variables too, some values are 0.0
-    - Leads to broken aggro_vo
+	- Probably have to change variables too, some values are 0.0
+	- Leads to broken aggro_vo
 
 2. Since audios for aggro is broken and still thinking of queue system, death vo is delayed.
 
@@ -9,3 +9,9 @@
 4. Interactions like plates?
 
 5. Level Building (background, tilesets, boxes, etc,)
+
+6. Custom crosshairs
+
+7. AudioManager (for audio settings)
+
+8. BackgroundMusicManager (playlists)

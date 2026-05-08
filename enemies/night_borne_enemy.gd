@@ -54,6 +54,7 @@ const AMBIENT_SOUND: AudioStream = preload("res://enemies/sounds/nightborne_ambi
 
 func _ready() -> void:
 	super._ready()
+	sprite.z_index = 20
 
 	deaggro_area.body_entered.connect(_on_deaggro_body_entered)
 	deaggro_area.body_exited.connect(_on_deaggro_body_exited)

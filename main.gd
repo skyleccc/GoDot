@@ -1,12 +1,14 @@
 extends Node2D
 
-@onready var debug_hud: CanvasLayer = $DebugHUD
-@onready var character: Node2D = $Character
-@onready var multiplayer_ui: CanvasLayer = $MultiplayerUI
-@onready var main_menu_ui: CanvasLayer = $MainMenuUI
-@onready var level_selection_ui: CanvasLayer = $LevelSelectionUI
-@onready var main_menu_hud: Control = $MainMenuUI/MainMenuHUD
-@onready var level_selection_hud: Control = $LevelSelectionUI/LevelSelectionHUD
+@onready var debug_hud: CanvasLayer = $NonPlayingUiComponents/DebugHUD
+@onready var playing_area: Node = $PlayingArea
+@onready var character: Node2D = $PlayingArea/Character
+@onready var playing_ui: CanvasLayer = $PlayingArea/PlayingUI
+@onready var multiplayer_ui: CanvasLayer = $NonPlayingUiComponents/MultiplayerUI
+@onready var main_menu_ui: CanvasLayer = $NonPlayingUiComponents/MainMenuUI
+@onready var level_selection_ui: CanvasLayer = $NonPlayingUiComponents/LevelSelectionUI
+@onready var main_menu_hud: Control = $NonPlayingUiComponents/MainMenuUI/MainMenuHUD
+@onready var level_selection_hud: Control = $NonPlayingUiComponents/LevelSelectionUI/LevelSelectionHUD
 @onready var level_manager: Node = $LevelManager
 
 const START_LEVEL_NUMBER := 1
@@ -49,8 +51,7 @@ func _start_game_at_level(level_number: int) -> void:
 	level_selection_ui.visible = false
 
 func _set_gameplay_visible(should_be_visible: bool) -> void:
-	_set_node_active(character, should_be_visible)
-	_set_node_active(_get_current_level_node(), should_be_visible)
+	_set_subtree_active(playing_area, should_be_visible)
 	_set_node_active(multiplayer_ui, should_be_visible)
 
 func _get_current_level_node() -> Node:
@@ -59,7 +60,7 @@ func _get_current_level_node() -> Node:
 		if current_level is Node and is_instance_valid(current_level):
 			return current_level as Node
 
-	return get_node_or_null("LevelLayout")
+	return get_node_or_null("PlayingArea/LevelLayout")
 
 func _set_node_active(node: Node, should_be_active: bool) -> void:
 	if node == null:
@@ -68,6 +69,17 @@ func _set_node_active(node: Node, should_be_active: bool) -> void:
 	node.process_mode = Node.PROCESS_MODE_INHERIT if should_be_active else Node.PROCESS_MODE_DISABLED
 	if node is CanvasItem:
 		(node as CanvasItem).visible = should_be_active
+	elif node is CanvasLayer:
+		(node as CanvasLayer).visible = should_be_active
+
+func _set_subtree_active(root: Node, should_be_active: bool) -> void:
+	if root == null:
+		return
+
+	_set_node_active(root, should_be_active)
+	for child in root.get_children():
+		if child is Node:
+			_set_subtree_active(child as Node, should_be_active)
 
 func check_for_debug_input() -> void:
 	if Input.is_action_just_pressed("ShowDebugHUD"):

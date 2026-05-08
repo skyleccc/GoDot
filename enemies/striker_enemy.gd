@@ -55,6 +55,7 @@ var _dash_direction: float = 1.0
 
 func _ready() -> void:
 	super._ready()
+	animated_sprite.z_index = 20
 
 	# Disable looping on one-shot animations
 	var sf := animated_sprite.sprite_frames
