@@ -130,11 +130,9 @@ func _shoot_projectile() -> void:
 
 func _cast_aoe_pattern() -> void:
 	if target == null or not is_instance_valid(target):
-		print("_cast_aoe_pattern called but no valid target")
 		return
 
 	var center := target.global_position
-	print("_cast_aoe_pattern: center=", center)
 	var offsets := [Vector2.ZERO, Vector2.LEFT * aoe_side_offset, Vector2.RIGHT * aoe_side_offset]
 
 	for offset in offsets:
@@ -142,7 +140,6 @@ func _cast_aoe_pattern() -> void:
 		# Spawn the AoE directly at the player's current position; it
 		# will stay in place after being spawned (no following).
 		aoe.global_position = target.global_position + offset
-		print("  spawning aoe at:", aoe.global_position)
 		aoe.radius = aoe_radius
 		aoe.telegraph_time = aoe_telegraph_time
 		aoe.damage = aoe_damage
@@ -197,11 +194,25 @@ func _apply_railgun_damage(start: Vector2, finish: Vector2) -> void:
 func take_bullet_damage(amount: int, _hit_source_pos: Vector2 = global_position) -> void:
 	if _is_dead:
 		return
+	
+	# Check if any crystals are still active
+	if _are_shields_active():
+		print("Boss is protected! Destroy all crystals first!")
+		return
+	
 	current_hp -= amount
 	print("Boss hit! -", amount, " HP  ->  ", current_hp, " / ", max_hp)
 	if current_hp <= 0:
 		current_hp = 0
 		_die()
+
+func _are_shields_active() -> bool:
+	"""Check if any active crystals remain."""
+	var crystals := get_tree().get_nodes_in_group("shield_projectors")
+	for crystal in crystals:
+		if crystal.is_alive():
+			return true
+	return false
 
 func _die() -> void:
 	if _is_dead:

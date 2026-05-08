@@ -36,6 +36,7 @@ const COOLDOWN_DURATION := 0.15
 var _cooldown: bool = false
 
 func _ready() -> void:
+	add_to_group("portals")
 	# Apply exported audio settings
 	if sound_player:
 		sound_player.max_distance = sfx_max_distance
