@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export_group("Boss Stats")
-@export var max_hp: int = 300
+@export var max_hp: int = 10
 @export var hover_amplitude: float = 18.0
 @export var hover_speed: float = 1.4
 @export var strafe_speed: float = 70.0
