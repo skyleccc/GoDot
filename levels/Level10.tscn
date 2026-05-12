@@ -958,6 +958,7 @@ position = Vector2(-71, 200)
 
 [node name="Exit" parent="." unique_id=1524804408 instance=ExtResource("6_8ln3t")]
 position = Vector2(329, 221)
+visible = false
 
 [node name="WardenBoss" parent="." unique_id=1904503373 instance=ExtResource("7_boss")]
 position = Vector2(891, -346)
