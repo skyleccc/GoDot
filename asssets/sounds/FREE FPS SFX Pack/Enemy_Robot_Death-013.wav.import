@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bm2swg2n1loe7"
+path="res://.godot/imported/Enemy_Robot_Death-013.wav-0803177767f68c99b553b1956f923129.sample"
+
+[deps]
+
+source_file="res://asssets/sounds/FREE FPS SFX Pack/Enemy_Robot_Death-013.wav"
+dest_files=["res://.godot/imported/Enemy_Robot_Death-013.wav-0803177767f68c99b553b1956f923129.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dnbcybowngeh6"
+path="res://.godot/imported/Footstep_Boot_Concrete-006.wav-2082d469b91d78a24793bc265b3ca2bd.sample"
+
+[deps]
+
+source_file="res://asssets/sounds/FREE FPS SFX Pack/Footstep_Boot_Concrete-006.wav"
+dest_files=["res://.godot/imported/Footstep_Boot_Concrete-006.wav-2082d469b91d78a24793bc265b3ca2bd.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

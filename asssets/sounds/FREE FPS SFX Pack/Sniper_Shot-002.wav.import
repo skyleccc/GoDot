@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bp5uvr5ert0ab"
+path="res://.godot/imported/Sniper_Shot-002.wav-e35a1cc5142c9a06f55a817be86a5109.sample"
+
+[deps]
+
+source_file="res://asssets/sounds/FREE FPS SFX Pack/Sniper_Shot-002.wav"
+dest_files=["res://.godot/imported/Sniper_Shot-002.wav-e35a1cc5142c9a06f55a817be86a5109.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

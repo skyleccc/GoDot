@@ -321,4 +321,14 @@ func _die() -> void:
 
 func _play_death_explosion() -> void:
 	death_explosion.play()
+	
+	# Play explosion sound
+	var explosion_sound := AudioStreamPlayer2D.new()
+	explosion_sound.stream = preload("res://asssets/sounds/FREE FPS SFX Pack/Rocket_Explosion-004.wav")
+	explosion_sound.global_position = death_explosion.global_position
+	explosion_sound.bus = &"Master"
+	get_tree().current_scene.add_child(explosion_sound)
+	explosion_sound.play()
+	
 	await death_explosion.animation_finished
+	explosion_sound.queue_free()

@@ -80,9 +80,18 @@ func _destroy() -> void:
 	
 	print("Crystal destroyed at ", collision_shape.global_position)
 	
+	# Play explosion sound
+	var explosion_sound := AudioStreamPlayer2D.new()
+	explosion_sound.stream = preload("res://asssets/sounds/FREE FPS SFX Pack/Rocket_Explosion-001.wav")
+	explosion_sound.global_position = collision_shape.global_position
+	explosion_sound.bus = &"Master"
+	get_tree().current_scene.add_child(explosion_sound)
+	explosion_sound.play()
+	
 	# Wait for explosion animation to finish before removing
 	await explosion.animation_finished
 	explosion.queue_free()
+	explosion_sound.queue_free()
 	queue_free()
 
 func _update_visual() -> void:
