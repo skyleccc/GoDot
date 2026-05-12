@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://fb3t0g7ws2s2" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Shots/Shot1/shot1_2.png" id="3_shot2"]
 [ext_resource type="Texture2D" uid="uid://bbc2584gw2l5b" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Shots/Shot1/shot1_3.png" id="4_shot3"]
 [ext_resource type="Texture2D" uid="uid://bl6exp70kaqf5" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Shots/Shot1/shot1_4.png" id="5_shot4"]
+[ext_resource type="Texture2D" uid="uid://d2masgeub6c2d" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Shots/Shot1/shot1_asset.png" id="6_6ep8k"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_shot1"]
 animations = [{
@@ -20,8 +21,11 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("5_shot4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_6ep8k")
 }],
-"loop": true,
+"loop": false,
 "name": &"default",
 "speed": 14.0
 }]
@@ -36,7 +40,8 @@ script = ExtResource("1_script")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=636032160]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_shot1")
-frame = 2
+frame = 4
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1250933094]
 position = Vector2(-4, 1)

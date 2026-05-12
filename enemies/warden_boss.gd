@@ -407,7 +407,7 @@ func take_bullet_damage(amount: int, hit_source_pos: Vector2 = Vector2.ZERO) -> 
 	_apply_hit(amount, hit_source_pos, true)
 
 
-func take_damage(amount: int, hit_source_pos: Vector2 = Vector2.ZERO, knockback: bool = true, apply_slow: bool = false) -> void:
+func take_damage(amount: int, hit_source_pos: Vector2 = Vector2.ZERO, _knockback: bool = true, _apply_slow: bool = false) -> void:
 	_apply_hit(amount, hit_source_pos, false)
 
 
@@ -419,4 +419,12 @@ func _die() -> void:
 	sweep_beam.visible = false
 	railgun_telegraph.visible = false
 	railgun_beam.visible = false
+	
+	# Enable the level exit when boss dies
+	var exits := get_tree().get_nodes_in_group("level_exits")
+	for exit_node in exits:
+		if exit_node.has_node("Area2D"):
+			exit_node.get_node("Area2D").monitoring = true
+			exit_node.visible = true
+	
 	queue_free()

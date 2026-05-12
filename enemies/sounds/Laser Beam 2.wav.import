@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dm4t5i4psdlf5"
+path="res://.godot/imported/Laser Beam 2.wav-c8b00b5926a8d766d013e94c2cc88026.sample"
+
+[deps]
+
+source_file="res://enemies/sounds/Laser Beam 2.wav"
+dest_files=["res://.godot/imported/Laser Beam 2.wav-c8b00b5926a8d766d013e94c2cc88026.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

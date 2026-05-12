@@ -11,6 +11,8 @@ var _shooter: CollisionObject2D = null
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
+var hit_scene: PackedScene = preload("res://enemies/boss_projectile_hit.tscn")
+
 func _ready() -> void:
 	add_to_group("hazards")
 	animated_sprite.play("default")
@@ -26,6 +28,12 @@ func set_shooter(shooter_body: CollisionObject2D) -> void:
 	_shooter = shooter_body
 	if _shooter != null:
 		add_collision_exception_with(_shooter)
+
+func play_hit_effect() -> void:
+	var hit_instance: Node2D = hit_scene.instantiate() as Node2D
+	hit_instance.global_position = global_position
+	hit_instance.rotation = rotation
+	get_tree().current_scene.add_child(hit_instance)
 
 func notify_portal_launch() -> void:
 	super.notify_portal_launch()
@@ -61,21 +69,25 @@ func _physics_process(delta: float) -> void:
 
 		var collider := collision.get_collider()
 		if collider == null:
+			play_hit_effect()
 			queue_free()
 			return
 
 		# Boss projectile always hurts non-enemy targets (player).
 		if collider.has_method("take_damage") and not collider.is_in_group("enemies"):
 			collider.take_damage(damage, global_position, true, false)
+			play_hit_effect()
 			queue_free()
 			return
 
-		# Projectile can hurt enemies only when redirected through a portal.
-		if launched_by_portal and collider.has_method("take_bullet_damage") and collider.is_in_group("enemies"):
+		# Projectile can hurt enemies (including bosses) if they have take_bullet_damage method.
+		if collider.has_method("take_bullet_damage") and collider.is_in_group("enemies"):
 			collider.take_bullet_damage(damage, global_position)
+			play_hit_effect()
 			queue_free()
 			return
 
+		play_hit_effect()
 		queue_free()
 		return
 

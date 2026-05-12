@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://bg0ajnuxhju81"]
+
+[ext_resource type="Texture2D" uid="uid://fwchbjaql0ho" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Shots/Shot1/shot1_exp0.png" id="1_gvw72"]
+[ext_resource type="Script" uid="uid://dc1voen0s8m0c" path="res://enemies/boss_projectile_hit.gd" id="1_ysj1i"]
+[ext_resource type="Texture2D" uid="uid://dk5gqr4noycow" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Shots/Shot1/shot1_exp1.png" id="2_ysj1i"]
+[ext_resource type="Texture2D" uid="uid://c0vhisdnknjgq" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Shots/Shot1/shot1_exp2.png" id="3_grcr2"]
+[ext_resource type="Texture2D" uid="uid://b5kcbrj3pjnx6" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Shots/Shot1/shot1_exp3.png" id="4_e51k1"]
+[ext_resource type="Texture2D" uid="uid://snsmjllcqbul" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Shots/Shot1/shot1_exp4.png" id="5_f5k55"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c3efd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_gvw72")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ysj1i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_grcr2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_e51k1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_f5k55")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="BossProjectileHit" type="Node2D" unique_id=433420681]
+script = ExtResource("1_ysj1i")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1580678892]
+sprite_frames = SubResource("SpriteFrames_c3efd")
+autoplay = "default"
+frame = 4
+frame_progress = 1.0
