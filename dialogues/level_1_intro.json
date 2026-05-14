@@ -1,0 +1,25 @@
+{
+  "id": "level_1_intro",
+  "lines": [
+    {
+      "speaker": "SABLE",
+      "text": "Ah. You're awake. Test Subject 1412. I've been waiting... actually no, I forgot you were here."
+    },
+    {
+      "speaker": "SABLE",
+      "text": "The station is on fire. I've been busy."
+    },
+    {
+      "speaker": "SABLE",
+      "text": "Left click -- blue portal. Right click -- orange. They link automatically."
+    },
+    {
+      "speaker": "SABLE",
+      "text": "You cannot place a portal somewhere you cannot see. That is physics. Or engineering."
+    },
+    {
+      "speaker": "SABLE",
+      "text": "The exit leads down, not out. Go through the gate, 1412."
+    }
+  ]
+}

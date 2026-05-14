@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dxlp0dxl4u5jd"]
 
 [ext_resource type="Texture2D" uid="uid://clvg8677uwhgu" path="res://huds/components/titlescreen_dusk_animated.gif" id="1_t4mvd"]
-[ext_resource type="Script" path="res://huds/level_selection_hud.gd" id="2_2v63t"]
+[ext_resource type="Script" uid="uid://ddc5adgmvhmkh" path="res://huds/level_selection_hud.gd" id="2_2v63t"]
 
 [sub_resource type="FontVariation" id="FontVariation_t4mvd"]
 
@@ -56,8 +56,7 @@ offset_bottom = -76.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/h_separation = 10
-theme_override_constants/v_separation = 10
-columns = 8
+columns = 10
 
 [node name="Button" type="Button" parent="LevelList" unique_id=2046651243]
 custom_minimum_size = Vector2(50, 50)
@@ -108,16 +107,6 @@ text = "9"
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 text = "10"
-
-[node name="Button11" type="Button" parent="LevelList" unique_id=565966189]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-text = "11"
-
-[node name="Button12" type="Button" parent="LevelList" unique_id=785734533]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-text = "12"
 
 [node name="Label" type="Label" parent="." unique_id=1780069772]
 layout_mode = 1
