@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://5sknhdj7q3w1"
+path="res://.godot/imported/Preview.gif-d226028fb35b89e9a7395a442316da5d.res"
+
+[deps]
+
+source_file="res://asssets/Explosions/explosion pack 1/Explosions pack/explosion-1-f/Preview.gif"
+dest_files=["res://.godot/imported/Preview.gif-d226028fb35b89e9a7395a442316da5d.res"]
+
+[params]
+
+storage/compress=true

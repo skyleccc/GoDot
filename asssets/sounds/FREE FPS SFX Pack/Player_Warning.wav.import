@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cu3sg0gs23t34"
+path="res://.godot/imported/Player_Warning.wav-e9b967a22a975def13f99c0d0d7b1d09.sample"
+
+[deps]
+
+source_file="res://asssets/sounds/FREE FPS SFX Pack/Player_Warning.wav"
+dest_files=["res://.godot/imported/Player_Warning.wav-e9b967a22a975def13f99c0d0d7b1d09.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

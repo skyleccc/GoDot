@@ -6,6 +6,17 @@ extends Area2D
 @export var linger_time: float = 0.15
 @export var damage: int = 25
 
+var detonation_explosion_frames: Array[Texture2D] = [
+	preload("res://asssets/Explosions/explosion pack 1/Explosions pack/explosion-1-f/Sprites/explosion-f1.png"),
+	preload("res://asssets/Explosions/explosion pack 1/Explosions pack/explosion-1-f/Sprites/explosion-f2.png"),
+	preload("res://asssets/Explosions/explosion pack 1/Explosions pack/explosion-1-f/Sprites/explosion-f3.png"),
+	preload("res://asssets/Explosions/explosion pack 1/Explosions pack/explosion-1-f/Sprites/explosion-f4.png"),
+	preload("res://asssets/Explosions/explosion pack 1/Explosions pack/explosion-1-f/Sprites/explosion-f5.png"),
+	preload("res://asssets/Explosions/explosion pack 1/Explosions pack/explosion-1-f/Sprites/explosion-f6.png"),
+	preload("res://asssets/Explosions/explosion pack 1/Explosions pack/explosion-1-f/Sprites/explosion-f7.png"),
+	preload("res://asssets/Explosions/explosion pack 1/Explosions pack/explosion-1-f/Sprites/explosion-f8.png")
+]
+
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var fill: Polygon2D = $Fill
 @onready var outline: Line2D = $Outline
@@ -58,11 +69,13 @@ func _build_circle_visuals() -> void:
 
 func _detonate_after_delay() -> void:
 	await get_tree().create_timer(telegraph_time).timeout
-	fill.color = Color(1.0, 0.2, 0.2, 0.45)
-	outline.default_color = Color(1.0, 0.3, 0.3, 1.0)
+	fill.visible = false
+	outline.visible = false
 	collision_layer = 8
 	monitoring = true
 	await get_tree().process_frame
+
+	_spawn_detonation_explosion(global_position)
 
 	await get_tree().create_timer(warning_after_telegraph).timeout
 
@@ -72,3 +85,31 @@ func _detonate_after_delay() -> void:
 
 	await get_tree().create_timer(linger_time).timeout
 	queue_free()
+
+func _spawn_detonation_explosion(spawn_position: Vector2) -> void:
+	var sprite_frames := SpriteFrames.new()
+	sprite_frames.add_animation("explosion")
+	for texture in detonation_explosion_frames:
+		sprite_frames.add_frame("explosion", texture, 1.0)
+	sprite_frames.set_animation_loop("explosion", false)
+
+	var explosion := AnimatedSprite2D.new()
+	explosion.sprite_frames = sprite_frames
+	explosion.animation = "explosion"
+	explosion.centered = true
+	explosion.scale = Vector2(2.0, 2.0)
+	explosion.global_position = spawn_position
+	explosion.z_index = 100
+	get_tree().current_scene.add_child(explosion)
+	explosion.animation_finished.connect(explosion.queue_free)
+	explosion.play()
+	
+	# Play explosion sound
+	var explosion_sound := AudioStreamPlayer2D.new()
+	explosion_sound.stream = preload("res://asssets/sounds/FREE FPS SFX Pack/Rocket_Explosion-002.wav")
+	explosion_sound.global_position = spawn_position
+	explosion_sound.bus = &"Master"
+	get_tree().current_scene.add_child(explosion_sound)
+	explosion_sound.play()
+	await explosion_sound.finished
+	explosion_sound.queue_free()

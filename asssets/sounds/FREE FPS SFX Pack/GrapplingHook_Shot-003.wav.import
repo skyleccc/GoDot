@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c6we50r0y81p5"
+path="res://.godot/imported/GrapplingHook_Shot-003.wav-1e8d79d16b71347ca45d6894e3e0392c.sample"
+
+[deps]
+
+source_file="res://asssets/sounds/FREE FPS SFX Pack/GrapplingHook_Shot-003.wav"
+dest_files=["res://.godot/imported/GrapplingHook_Shot-003.wav-1e8d79d16b71347ca45d6894e3e0392c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

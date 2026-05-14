@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c2lk1m10mb6b2"
+path="res://.godot/imported/Player_Jump.wav-df55e288edbb4d6593f978010027e9e3.sample"
+
+[deps]
+
+source_file="res://asssets/sounds/FREE FPS SFX Pack/Player_Jump.wav"
+dest_files=["res://.godot/imported/Player_Jump.wav-df55e288edbb4d6593f978010027e9e3.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

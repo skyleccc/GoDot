@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bhto1t31kl6sx"
+path="res://.godot/imported/Rocket_Explosion-003.wav-2c4ef91f9b5cf58b261fdc8389b38f72.sample"
+
+[deps]
+
+source_file="res://asssets/sounds/FREE FPS SFX Pack/Rocket_Explosion-003.wav"
+dest_files=["res://.godot/imported/Rocket_Explosion-003.wav-2c4ef91f9b5cf58b261fdc8389b38f72.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

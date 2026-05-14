@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b5grv7sscdbw"
+path="res://.godot/imported/Computer Crashing.wav-450a4f532d74d6ab933f63ac4ff7edcb.sample"
+
+[deps]
+
+source_file="res://asssets/sounds/FREE FPS SFX Pack/Computer Crashing.wav"
+dest_files=["res://.godot/imported/Computer Crashing.wav-450a4f532d74d6ab933f63ac4ff7edcb.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

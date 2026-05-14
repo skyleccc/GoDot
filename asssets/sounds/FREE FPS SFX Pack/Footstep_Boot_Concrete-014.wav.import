@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bbb5pv5ix47lk"
+path="res://.godot/imported/Footstep_Boot_Concrete-014.wav-4d159c82c7eb53424e87fa0edd5e8efd.sample"
+
+[deps]
+
+source_file="res://asssets/sounds/FREE FPS SFX Pack/Footstep_Boot_Concrete-014.wav"
+dest_files=["res://.godot/imported/Footstep_Boot_Concrete-014.wav-4d159c82c7eb53424e87fa0edd5e8efd.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
