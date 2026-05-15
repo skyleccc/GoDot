@@ -12,11 +12,13 @@ var _game_over_menu: Node = null
 var _just_died: bool = false
 var _has_seen_alive_hp: bool = false
 var _game_over_token: int = 0
+var _startup_grace_timer: float = 1.5  # Ignore deaths briefly after spawn/level load
 
 func _ready() -> void:
 	add_to_group("lives_hud")
 	print("=== LIVES_HUD: _ready() called ===")
 	_current_lives = 3
+	_startup_grace_timer = 1.5
 	_update_hearts_display()
 	_bind_player()
 	_bind_level_manager()
@@ -27,6 +29,8 @@ func _ready() -> void:
 	print("=== LIVES_HUD: _ready() finished ===")
 
 func _process(_delta: float) -> void:
+	if _startup_grace_timer > 0.0:
+		_startup_grace_timer -= _delta
 	if _player == null or not is_instance_valid(_player):
 		_bind_player()
 	if _level_manager == null or not is_instance_valid(_level_manager):
@@ -92,6 +96,10 @@ func _on_player_hp_changed(current_hp: int, _max_hp: int) -> void:
 		# Ignore invalid startup/deferred signals until we have seen a healthy HP state.
 		return
 
+	# Ignore deaths during the startup grace period to avoid false game overs.
+	if _startup_grace_timer > 0.0:
+		return
+
 	if current_hp <= 0 and not _just_died:
 		_just_died = true
 		print("Player died! Current lives: ", _current_lives)
@@ -102,6 +110,7 @@ func _on_level_loaded(_level_number: int) -> void:
 	_current_lives = 3
 	_just_died = false
 	_has_seen_alive_hp = false
+	_startup_grace_timer = 1.5  # Reset grace period on level load
 	_game_over_token += 1
 	_update_hearts_display()
 	if _game_over_menu != null and _game_over_menu.has_method("hide_game_over"):

@@ -6,6 +6,8 @@ signal menu_requested
 @onready var retry_button: Button = $MenuPanel/VBoxContainer/RetryButton
 @onready var menu_button: Button = $MenuPanel/VBoxContainer/MenuButton
 
+var _game_over_active: bool = false
+
 func _enter_tree() -> void:
 	hide()
 
@@ -16,24 +18,27 @@ func _ready() -> void:
 	retry_button.pressed.connect(_on_retry_button_pressed)
 	menu_button.pressed.connect(_on_menu_button_pressed)
 
+# Prevent external code (e.g. _set_subtree_active) from forcing this visible.
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_VISIBILITY_CHANGED:
+		if visible and not _game_over_active:
+			visible = false
+
 func _on_retry_button_pressed() -> void:
-	retry_requested.emit()
-	await get_tree().process_frame
-	if visible:
-		_fallback_retry()
+	_fallback_retry()
 
 func _on_menu_button_pressed() -> void:
-	menu_requested.emit()
-	await get_tree().process_frame
-	if visible:
-		_fallback_return_to_menu()
+	_fallback_return_to_menu()
 
 func show_game_over() -> void:
+	_game_over_active = true
+	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 	visible = true
 	get_tree().paused = true
 	retry_button.grab_focus()
 
 func hide_game_over() -> void:
+	_game_over_active = false
 	visible = false
 	get_tree().paused = false
 
