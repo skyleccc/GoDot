@@ -417,7 +417,10 @@ func _make_instance_from_placeholder(original_node: Node) -> Object:
 func _copy_properties(from_node: Node, to_node: Node) -> void:
 	for prop in from_node.get_property_list():
 		if prop.usage & PROPERTY_USAGE_EDITOR:
-			to_node.set(prop.name, from_node.get(prop.name))
+			var prop_value: Variant = from_node.get(prop.name)
+			if prop_value is Node:
+				continue
+			to_node.set(prop.name, prop_value)
 
 
 # ============================================================================

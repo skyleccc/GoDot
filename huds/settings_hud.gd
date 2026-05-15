@@ -57,9 +57,7 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not visible:
 		return
-	if event.is_action_pressed("Pause") or event.is_action_pressed("ui_cancel"):
-		back_requested.emit()
-		get_viewport().set_input_as_handled()
+	# Escape/Pause input is intentionally ignored while settings is open.
 
 func set_music_manager(manager: AudioStreamPlayer) -> void:
 	_music_manager = manager
@@ -83,6 +81,7 @@ func _on_apply_button_pressed() -> void:
 	_apply_playlist_selection()
 	_suppress_save = was_suppress
 	_save_settings()
+	back_requested.emit()
 
 func _on_visibility_changed() -> void:
 	if visible:

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://mt1ocmq0mbun"]
+
+[ext_resource type="Texture2D" uid="uid://dqivvr555bxqd" path="res://asssets/Hearts/PNG/basic/background.png" id="1_li0y2"]
+[ext_resource type="Texture2D" uid="uid://dg7fg8alvnqpe" path="res://asssets/Hearts/PNG/basic/heart.png" id="2_q27dy"]
+[ext_resource type="Texture2D" uid="uid://2vn2lnsrrc6s" path="res://asssets/Hearts/PNG/basic/border.png" id="3_6sc5t"]
+
+[node name="Heart" type="Control" unique_id=235811570]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Sprite2D" parent="." unique_id=56890097]
+texture = ExtResource("1_li0y2")
+
+[node name="Fill" type="Sprite2D" parent="." unique_id=1578023871]
+texture = ExtResource("2_q27dy")
+
+[node name="Border" type="Sprite2D" parent="." unique_id=1194752834]
+texture_filter = 1
+texture = ExtResource("3_6sc5t")

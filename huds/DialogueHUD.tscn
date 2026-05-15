@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dq67u6ww3sebg"]
 
-[ext_resource type="Texture2D" uid="uid://dlye3b7w7hu7f" path="res://huds/components/Bars/Purple/Bar 1/1x/Asset 2.png" id="1_header"]
-[ext_resource type="Texture2D" uid="uid://bc8hk5g1tmkev" path="res://huds/components/Bars/Purple/Bar 1/1x/Asset 4.png" id="2_frame"]
+[ext_resource type="Texture2D" uid="uid://5bmfnj0ogdhj" path="res://huds/components/Bars/Green/x1/Asset 4 - Copy.png" id="2_iit52"]
 [ext_resource type="Script" uid="uid://by3mf8h3fb8os" path="res://huds/dialogue_hud.gd" id="3_dialogue_script"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dialogue"]
@@ -54,9 +53,9 @@ theme_override_constants/separation = 10
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("1_header")
+texture = ExtResource("2_iit52")
 expand_mode = 3
-stretch_mode = 1
+flip_h = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="DialoguePanel/VBoxContainer" unique_id=300639211]
 layout_mode = 2
@@ -64,10 +63,19 @@ size_flags_vertical = 3
 theme_override_constants/separation = 16
 
 [node name="SpeakerFrame" type="TextureRect" parent="DialoguePanel/VBoxContainer/HBoxContainer" unique_id=589187466]
-custom_minimum_size = Vector2(72, 72)
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_vertical = 0
-texture = ExtResource("2_frame")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SpeakerPortrait" type="TextureRect" parent="DialoguePanel/VBoxContainer/HBoxContainer/SpeakerFrame" unique_id=-2135491689]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
 

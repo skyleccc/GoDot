@@ -10,16 +10,23 @@ signal dialogue_finished(dialogue_id: String)
 @export var continue_hint_text: String = "Click or Space to continue"
 @export var pause_gameplay_while_active: bool = true
 @export var speaker_name_colors: Dictionary = {
-	"ARIA": Color(0.45, 0.85, 1.0),
-	"ECHO": Color(1.0, 0.6, 0.6),
+	"ARIA": Color(1.0, 0.6, 0.6),
+	"ECHO": Color(0.45, 0.85, 1.0),
 	"NARRATOR": Color(0.9, 0.9, 0.9),
 	"SABLE": Color(0.85, 0.75, 1.0)
 }
+@export var speaker_portraits: Dictionary = {
+	"ARIA": preload("res://asssets/character/ARIA.png"),
+	"ECHO": preload("res://asssets/character/ECHO.png")
+}
+@export var narrator_name: String = "NARRATOR"
 @export var default_speaker_color: Color = Color(1.0, 1.0, 1.0)
 
 @onready var speaker_label: Label = $DialoguePanel/VBoxContainer/HBoxContainer/SpeakerVBox/SpeakerLabel
 @onready var dialogue_text: RichTextLabel = $DialoguePanel/VBoxContainer/HBoxContainer/SpeakerVBox/DialogueText
 @onready var continue_label: Label = $DialoguePanel/VBoxContainer/ContinueLabel
+@onready var speaker_frame: TextureRect = $DialoguePanel/VBoxContainer/HBoxContainer/SpeakerFrame
+@onready var speaker_portrait: TextureRect = $DialoguePanel/VBoxContainer/HBoxContainer/SpeakerFrame/SpeakerPortrait
 
 var _lines: Array = []
 var _line_index := 0
@@ -152,10 +159,17 @@ func _show_current_line() -> void:
 	elif line_data is String:
 		text = line_data
 
-	speaker_label.visible = not speaker.is_empty()
-	speaker_label.text = speaker
-	speaker_label.add_theme_color_override("font_color", _get_speaker_color(speaker))
-	dialogue_text.text = text
+	var is_narrator := _is_narrator(speaker)
+	if is_narrator:
+		speaker_label.visible = false
+		speaker_label.text = ""
+	else:
+		speaker_label.visible = not speaker.is_empty()
+		speaker_label.text = speaker
+		speaker_label.add_theme_color_override("font_color", _get_speaker_color(speaker))
+
+	_apply_speaker_portrait(speaker, is_narrator)
+	_set_dialogue_text(text, is_narrator)
 	_update_continue_hint_for_line()
 
 func _advance_dialogue() -> void:
@@ -277,5 +291,44 @@ func _get_playing_area() -> Node:
 func _get_speaker_color(speaker: String) -> Color:
 	if speaker.is_empty():
 		return default_speaker_color
-	var color_value: Variant = speaker_name_colors.get(speaker, default_speaker_color)
+	var color_key := _normalize_speaker(speaker)
+	var color_value: Variant = speaker_name_colors.get(color_key, default_speaker_color)
 	return color_value if color_value is Color else default_speaker_color
+
+func _get_speaker_portrait(speaker: String) -> Texture2D:
+	if speaker.is_empty():
+		return null
+	var portrait_key := _normalize_speaker(speaker)
+	var portrait_value: Variant = speaker_portraits.get(portrait_key, null)
+	return portrait_value if portrait_value is Texture2D else null
+
+func _apply_speaker_portrait(speaker: String, is_narrator: bool) -> void:
+	if is_narrator:
+		speaker_frame.visible = false
+		speaker_portrait.texture = null
+		speaker_portrait.visible = false
+		return
+
+	speaker_frame.visible = true
+	var portrait := _get_speaker_portrait(speaker)
+	if portrait == null:
+		speaker_portrait.texture = null
+		speaker_portrait.visible = false
+		return
+
+	speaker_portrait.texture = portrait
+	speaker_portrait.visible = true
+
+func _set_dialogue_text(text: String, italicize: bool) -> void:
+	dialogue_text.clear()
+	if italicize:
+		dialogue_text.push_italics()
+	dialogue_text.add_text(text)
+	if italicize:
+		dialogue_text.pop()
+
+func _normalize_speaker(speaker: String) -> String:
+	return speaker.strip_edges().to_upper()
+
+func _is_narrator(speaker: String) -> bool:
+	return _normalize_speaker(speaker) == narrator_name.strip_edges().to_upper()

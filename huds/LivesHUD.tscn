@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://bg54u7l01pam6"]
+
+[ext_resource type="PackedScene" uid="uid://mt1ocmq0mbun" path="res://huds/components/Bars/Heart.tscn" id="1_k83r7"]
+
+[node name="LivesHud" type="Control" unique_id=869905535]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Heart" parent="." unique_id=235811570 instance=ExtResource("1_k83r7")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_bottom = 40.0
+
+[node name="Heart2" parent="." unique_id=1081915939 instance=ExtResource("1_k83r7")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 21.0
+offset_right = 21.0
+offset_bottom = 40.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Heart3" parent="." unique_id=1227179141 instance=ExtResource("1_k83r7")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 42.0
+offset_right = 42.0
+offset_bottom = 40.0
+grow_horizontal = 1
+grow_vertical = 1

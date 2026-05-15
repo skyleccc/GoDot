@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cbmel5iqj2i3s" path="res://asssets/character/Prototype Pack/Sprites/Idle/Idle07.png" id="9_n0qc0"]
 [ext_resource type="Texture2D" uid="uid://bfrubn2q114ws" path="res://asssets/portals/PORTAL BLUE-Sheet.png" id="11_aycwu"]
 [ext_resource type="Texture2D" uid="uid://b5xoyg64dm35q" path="res://asssets/portals/PORTAL ORANGE-Sheet.png" id="12_nuvdx"]
+[ext_resource type="PackedScene" uid="uid://bg54u7l01pam6" path="res://huds/LivesHUD.tscn" id="14_vrorq"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5aw66"]
 
@@ -387,3 +388,13 @@ scale = Vector2(4.328125, 4.328125)
 sprite_frames = SubResource("SpriteFrames_oajjr")
 animation = &"BluePortal"
 autoplay = "BluePortal"
+
+[node name="LivesHud" parent="." unique_id=869905535 instance=ExtResource("14_vrorq")]
+layout_mode = 1
+anchors_preset = 9
+anchor_right = 0.0
+offset_left = 850.0
+offset_top = 244.99998
+offset_right = 1255.0
+offset_bottom = 210.0
+grow_horizontal = 1

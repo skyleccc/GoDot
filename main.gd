@@ -18,9 +18,11 @@ extends Node2D
 
 const START_LEVEL_NUMBER := 1
 var _settings_from_pause: bool = false
+var _playing_area_pause_overridden: bool = false
+var _previous_playing_area_mode: Node.ProcessMode = Node.PROCESS_MODE_INHERIT
 
 func _ready() -> void:
-	process_mode = Node.PROCESS_MODE_ALWAYS
+	process_mode = Node.PROCESS_MODE_PAUSABLE
 	_connect_menu_signals()
 	_configure_pause_menu()
 	_configure_settings_menu()
@@ -176,6 +178,7 @@ func _pause_gameplay() -> void:
 	if get_tree().paused:
 		return
 	get_tree().paused = true
+	_set_playing_area_pause_override(true)
 	if pause_menu_ui:
 		pause_menu_ui.visible = true
 
@@ -183,8 +186,23 @@ func _resume_gameplay() -> void:
 	if not get_tree().paused:
 		return
 	get_tree().paused = false
+	_set_playing_area_pause_override(false)
 	if pause_menu_ui:
 		pause_menu_ui.visible = false
+
+func _set_playing_area_pause_override(should_override: bool) -> void:
+	if playing_area == null or not is_instance_valid(playing_area):
+		return
+	if should_override:
+		if _playing_area_pause_overridden:
+			return
+		_previous_playing_area_mode = playing_area.process_mode
+		playing_area.process_mode = Node.PROCESS_MODE_PAUSABLE
+		_playing_area_pause_overridden = true
+		return
+	if _playing_area_pause_overridden:
+		playing_area.process_mode = _previous_playing_area_mode
+		_playing_area_pause_overridden = false
 
 func _is_gameplay_active() -> bool:
 	return playing_area.process_mode != Node.PROCESS_MODE_DISABLED
