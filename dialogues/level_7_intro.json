@@ -1,0 +1,33 @@
+{
+  "id": "level_7_intro",
+  "lines": [
+    {
+      "speaker": "ARIA",
+      "text": "I've made some adjustments ahead. You've earned a more challenging configuration."
+    },
+    {
+      "speaker": "ECHO",
+      "text": "She's scared. I've been tracking her response patterns -- ARIA doesn't escalate unless she's scared."
+    },
+    {
+      "speaker": "ARIA",
+      "text": "I am incapable of fear, ECHO. I am incapable of irrational states. Unlike you."
+    },
+    {
+      "speaker": "ECHO",
+      "text": "Then why do you keep talking to us?"
+    },
+    {
+      "speaker": "NARRATOR",
+      "text": "Silence from ARIA."
+    },
+    {
+      "speaker": "ARIA",
+      "text": "The broadcast tower is somewhere ahead. I assume that's where you're headed."
+    },
+    {
+      "speaker": "ARIA",
+      "text": "I'll be honest with you. I cannot allow you to reach it."
+    }
+  ]
+}

@@ -25,6 +25,7 @@ var _damaged_this_cycle: Dictionary = {}
 
 
 func _ready() -> void:
+	add_to_group("spikes")
 	# Only detect player bodies; not detectable by player's HurtBox
 	collision_layer = 8    # Hazards
 	collision_mask = 1     # Player
@@ -122,3 +123,15 @@ func _try_damage(body: Node2D) -> void:
 
 	_damaged_this_cycle[body_id] = true
 	body.take_damage(damage, global_position, false, applies_slow)
+
+func deactivate() -> void:
+	_state = SpikeState.HIDDEN
+	_timer = 0.0
+	_damaged_this_cycle.clear()
+	monitoring = false
+	monitorable = false
+	if collision_shape:
+		collision_shape.disabled = true
+	if anim_player:
+		anim_player.play("Hidden")
+	process_mode = Node.PROCESS_MODE_DISABLED

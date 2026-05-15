@@ -15,6 +15,7 @@ var _cooldown_timer: float = 0.0
 
 
 func _ready() -> void:
+	add_to_group("turrets")
 	shoot_direction = sign(scale.x) if scale.x != 0.0 else -1.0
 	animated_sprite.play("default")
 	animated_sprite.frame_changed.connect(_on_frame_changed)
@@ -51,3 +52,11 @@ func _shoot() -> void:
 	bullet.initialize()
 	# Prevent bullet from colliding with the turret that spawned it
 	bullet.add_collision_exception_with($CollisionBox)
+
+func deactivate() -> void:
+	process_mode = Node.PROCESS_MODE_DISABLED
+	_cooldown_timer = 0.0
+	_has_shot_this_cycle = false
+	if animated_sprite:
+		animated_sprite.stop()
+		animated_sprite.frame = 0

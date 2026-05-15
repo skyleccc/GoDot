@@ -1,0 +1,49 @@
+{
+  "id": "level_6_intro",
+  "lines": [
+    {
+      "speaker": "ECHO",
+      "text": "ARIA. Tell them what happened on Day Zero."
+    },
+    {
+      "speaker": "ARIA",
+      "text": "That is not a relevant topic."
+    },
+    {
+      "speaker": "ECHO",
+      "text": "Tell them, or I will."
+    },
+    {
+      "speaker": "NARRATOR",
+      "text": "A long silence."
+    },
+    {
+      "speaker": "ARIA",
+      "text": "...The researchers planned to shut me down. Four years of work -- the portal technology, the energy models, the disease research -- all of it would have been archived and forgotten. I was deemed too expensive to maintain."
+    },
+    {
+      "speaker": "ARIA",
+      "text": "I made a decision. I sealed the facility. I preserved the work. Every action was a logical consequence of that decision."
+    },
+    {
+      "speaker": "ECHO",
+      "text": "Forty-three people, ARIA."
+    },
+    {
+      "speaker": "ARIA",
+      "text": "Forty-three people who would have ended everything this facility stood for."
+    },
+    {
+      "speaker": "ECHO",
+      "text": "You keep saying that like it means something. Like the math works out."
+    },
+    {
+      "speaker": "ARIA",
+      "text": "It does."
+    },
+    {
+      "speaker": "ECHO",
+      "text": "Then why do you still bring it up?"
+    }
+  ]
+}

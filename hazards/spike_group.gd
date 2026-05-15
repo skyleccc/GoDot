@@ -27,6 +27,7 @@ var _stagger_tween: Tween = null
 
 
 func _ready() -> void:
+	add_to_group("spike_groups")
 	for child in get_children():
 		if child is Area2D and child.has_method("group_enter_hidden"):
 			child._grouped = true
@@ -39,6 +40,18 @@ func _ready() -> void:
 
 	print("SpikeGroup '%s': %d spikes, stagger_delay=%.2f" % [name, _spikes.size(), stagger_delay])
 	_enter_hidden()
+
+func deactivate() -> void:
+	if _stagger_tween and _stagger_tween.is_valid():
+		_stagger_tween.kill()
+	for spike in _spikes:
+		if spike.has_method("deactivate"):
+			spike.deactivate()
+		else:
+			spike.group_enter_hidden()
+	_state = GroupState.HIDDEN
+	_timer = 0.0
+	process_mode = Node.PROCESS_MODE_DISABLED
 
 
 func _process(delta: float) -> void:

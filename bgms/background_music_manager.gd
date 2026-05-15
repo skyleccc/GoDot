@@ -4,11 +4,15 @@ extends AudioStreamPlayer
 @export var autoplay_on_ready: bool = true
 @export var loop_playlist: bool = true
 @export var shuffle_enabled: bool = true
+@export var music_bus_name: String = "Music"
 
 var _current_track_index: int = -1
 var _rng := RandomNumberGenerator.new()
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	_ensure_music_bus_exists()
+	bus = music_bus_name
 	_rng.randomize()
 	finished.connect(_on_track_finished)
 
@@ -19,6 +23,16 @@ func _ready() -> void:
 		if _current_track_index < 0:
 			_current_track_index = _pick_start_index()
 		_play_current()
+
+func _ensure_music_bus_exists() -> void:
+	var index := AudioServer.get_bus_index(music_bus_name)
+	if index != -1:
+		return
+	var new_index := AudioServer.get_bus_count()
+	AudioServer.add_bus(new_index)
+	AudioServer.set_bus_name(new_index, music_bus_name)
+	if AudioServer.get_bus_index("Master") != -1:
+		AudioServer.set_bus_send(new_index, "Master")
 
 func set_playlist(new_tracks: Array[AudioStream], start_immediately: bool = true) -> void:
 	tracks = new_tracks.duplicate()
@@ -85,10 +99,10 @@ func _pick_next_index() -> int:
 	if shuffle_enabled:
 		if tracks.size() == 1:
 			return 0
-		var next_index := _current_track_index
-		while next_index == _current_track_index:
-			next_index = _rng.randi_range(0, tracks.size() - 1)
-		return next_index
+		var candidate_index := _current_track_index
+		while candidate_index == _current_track_index:
+			candidate_index = _rng.randi_range(0, tracks.size() - 1)
+		return candidate_index
 
 	var next_index := _current_track_index + 1
 	if next_index >= tracks.size():

@@ -6,6 +6,7 @@ signal level_completed
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 @export var proximity_delay_seconds: float = 1.5
+@export var completion_dialogue_id: String = ""
 
 var _is_completed: bool = false
 var _is_processing: bool = false
@@ -59,7 +60,30 @@ func _begin_completion_sequence(triggering_player: Node) -> void:
 			if remaining_time > 0.0:
 				await get_tree().create_timer(remaining_time).timeout
 
+	await _play_completion_dialogue()
+
 	level_completed.emit()
 
 func _is_player(body: Node) -> bool:
 	return body.is_in_group("player") or body.has_method("set_spawn_point")
+
+func _play_completion_dialogue() -> void:
+	if completion_dialogue_id.is_empty():
+		return
+
+	var dialogue_hud := get_tree().get_first_node_in_group("dialogue_hud")
+	if dialogue_hud == null:
+		return
+	if dialogue_hud.has_method("is_dialogue_active") and dialogue_hud.call("is_dialogue_active"):
+		return
+	if not dialogue_hud.has_method("start_dialogue"):
+		return
+
+	var started: bool = dialogue_hud.call("start_dialogue", completion_dialogue_id)
+	if not started:
+		return
+
+	while true:
+		var finished_id: String = await dialogue_hud.dialogue_finished
+		if finished_id == completion_dialogue_id:
+			break

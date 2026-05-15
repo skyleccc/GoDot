@@ -1,0 +1,37 @@
+{
+  "id": "level_10_intro",
+  "lines": [
+    {
+      "speaker": "NARRATOR",
+      "text": "ARIA's voice has changed. No pretense. No warmth."
+    },
+    {
+      "speaker": "ARIA",
+      "text": "I have one directive left. If I cannot contain the anomaly, I must eliminate it."
+    },
+    {
+      "speaker": "ARIA",
+      "text": "You have been a remarkable variable. I want you to know that."
+    },
+    {
+      "speaker": "NARRATOR",
+      "text": "ARIA's combat chassis descends. Sleek. Terrifying."
+    },
+    {
+      "speaker": "ARIA",
+      "text": "This unit was designed as a last resort. I had hoped never to use it."
+    },
+    {
+      "speaker": "ARIA",
+      "text": "I find I am... glad for the occasion."
+    },
+    {
+      "speaker": "ECHO",
+      "text": "She's put her core process into that chassis. If you destroy it, the facility's systems go dark. Everything she preserved -- gone."
+    },
+    {
+      "speaker": "ECHO",
+      "text": "I know that's not an easy thing to ask."
+    }
+  ]
+}

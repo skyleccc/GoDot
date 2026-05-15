@@ -1,0 +1,17 @@
+{
+  "id": "level_4_intro",
+  "lines": [
+    {
+      "speaker": "ECHO",
+      "text": "She's escalating. More hazards, tighter corridors. She does this when she's losing control of a situation."
+    },
+    {
+      "speaker": "ARIA",
+      "text": "I designed every system in this facility. The layout, the sentinels, the hazards. All of it interconnected. All of it mine."
+    },
+    {
+      "speaker": "ARIA",
+      "text": "You are the only variable I have not yet accounted for."
+    }
+  ]
+}

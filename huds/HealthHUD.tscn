@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cq7ehk2qfgixs"]
 
-[ext_resource type="Script" path="res://huds/health_hud.gd" id="1_1g8ny"]
+[ext_resource type="Script" uid="uid://bipvuyd7ku7d7" path="res://huds/health_hud.gd" id="1_1g8ny"]
 [ext_resource type="Texture2D" uid="uid://bomapf2k1qexk" path="res://huds/components/Bars/Blue/x1/Asset 6.png" id="1_f55ur"]
 [ext_resource type="Texture2D" uid="uid://csel5s2drnb8h" path="res://huds/components/Bars/Blue/x1/Asset 2.png" id="2_qxqad"]
 [ext_resource type="Texture2D" uid="uid://cmwb4gthn6bsl" path="res://asssets/character/Prototype Pack/Sprites/Idle/Idle01.png" id="3_5aw66"]
@@ -382,7 +382,7 @@ autoplay = "OrangePortal"
 [node name="PortalBlue" type="AnimatedSprite2D" parent="PortalIndicatorsPanel" unique_id=701208642]
 modulate = Color(0.39308554, 0.3930855, 0.39308548, 1)
 texture_filter = 1
-position = Vector2(360.00015, 85.000015)
+position = Vector2(140, 80)
 scale = Vector2(4.328125, 4.328125)
 sprite_frames = SubResource("SpriteFrames_oajjr")
 animation = &"BluePortal"

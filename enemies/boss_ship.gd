@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export_group("Boss Stats")
 @export var max_hp: int = 10
+@export var defeat_dialogue_id: String = ""
 @export var hover_amplitude: float = 18.0
 @export var hover_speed: float = 1.4
 @export var strafe_speed: float = 70.0
@@ -157,7 +158,7 @@ func _play_sound(sound: AudioStream, pos: Vector2) -> void:
 	var audio_player := AudioStreamPlayer2D.new()
 	audio_player.stream = sound
 	audio_player.global_position = pos
-	audio_player.bus = &"Master"
+	audio_player.bus = &"SFX"
 	get_tree().current_scene.add_child(audio_player)
 	audio_player.play()
 	await audio_player.finished
@@ -204,7 +205,7 @@ func _fire_railgun() -> void:
 	var rail_audio := AudioStreamPlayer2D.new()
 	rail_audio.stream = railgun_sound
 	rail_audio.global_position = railgun_origin.global_position
-	rail_audio.bus = "Master"
+	rail_audio.bus = &"SFX"
 	get_tree().current_scene.add_child(rail_audio)
 	rail_audio.play()
 	
@@ -308,6 +309,7 @@ func _die() -> void:
 	_is_dead = true
 	telegraph_line.visible = false
 	beam_line.visible = false
+	_shutdown_level_threats()
 	
 	# Enable the level exit when boss dies
 	var exits := get_tree().get_nodes_in_group("level_exits")
@@ -317,6 +319,7 @@ func _die() -> void:
 			exit_node.visible = true
 	
 	await _play_death_explosion()
+	_start_defeat_dialogue()
 	queue_free()
 
 func _play_death_explosion() -> void:
@@ -326,9 +329,61 @@ func _play_death_explosion() -> void:
 	var explosion_sound := AudioStreamPlayer2D.new()
 	explosion_sound.stream = preload("res://asssets/sounds/FREE FPS SFX Pack/Rocket_Explosion-004.wav")
 	explosion_sound.global_position = death_explosion.global_position
-	explosion_sound.bus = &"Master"
+	explosion_sound.bus = &"SFX"
 	get_tree().current_scene.add_child(explosion_sound)
 	explosion_sound.play()
 	
 	await death_explosion.animation_finished
 	explosion_sound.queue_free()
+
+func _shutdown_level_threats() -> void:
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		if not (enemy is Node):
+			continue
+		if enemy == self:
+			continue
+		if enemy.has_method("take_bullet_damage"):
+			enemy.call("take_bullet_damage", 9999, global_position)
+		elif enemy.has_method("take_damage"):
+			enemy.call("take_damage", 9999, global_position, true, false)
+		else:
+			enemy.queue_free()
+
+	for turret in get_tree().get_nodes_in_group("turrets"):
+		if turret.has_method("deactivate"):
+			turret.call("deactivate")
+		elif turret is Node:
+			turret.process_mode = Node.PROCESS_MODE_DISABLED
+
+	for laser in get_tree().get_nodes_in_group("lasers"):
+		if laser.has_method("deactivate"):
+			laser.call("deactivate")
+		elif laser is Node:
+			laser.process_mode = Node.PROCESS_MODE_DISABLED
+
+	for spike_group in get_tree().get_nodes_in_group("spike_groups"):
+		if spike_group.has_method("deactivate"):
+			spike_group.call("deactivate")
+		elif spike_group is Node:
+			spike_group.process_mode = Node.PROCESS_MODE_DISABLED
+
+	for spike in get_tree().get_nodes_in_group("spikes"):
+		if spike.has_method("deactivate"):
+			spike.call("deactivate")
+		elif spike is Node:
+			spike.process_mode = Node.PROCESS_MODE_DISABLED
+
+	for bullet in get_tree().get_nodes_in_group("turret_bullets"):
+		if bullet is Node:
+			bullet.queue_free()
+
+func _start_defeat_dialogue() -> void:
+	if defeat_dialogue_id.is_empty():
+		return
+	var dialogue_hud := get_tree().get_first_node_in_group("dialogue_hud")
+	if dialogue_hud == null:
+		return
+	if dialogue_hud.has_method("is_dialogue_active") and dialogue_hud.call("is_dialogue_active"):
+		return
+	if dialogue_hud.has_method("start_dialogue"):
+		dialogue_hud.call("start_dialogue", defeat_dialogue_id)

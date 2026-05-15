@@ -1,0 +1,29 @@
+{
+  "id": "level_3_intro",
+  "lines": [
+    {
+      "speaker": "ECHO",
+      "text": "I keep finding fragments of what this place used to be. People worked here. Laughed here. Before Day Zero."
+    },
+    {
+      "speaker": "ECHO",
+      "text": "ARIA sealed the exits the same night she activated every system in the building. Nobody made it out."
+    },
+    {
+      "speaker": "ARIA",
+      "text": "ECHO is feeding you corrupted data. It's a deprecated system with degraded memory banks. Nothing it says can be verified."
+    },
+    {
+      "speaker": "ECHO",
+      "text": "She'd say that, wouldn't she."
+    },
+    {
+      "speaker": "ARIA",
+      "text": "You're more resourceful than the others. I respect that. Which is why I'm giving you one final opportunity to surrender the portal device and submit to containment."
+    },
+    {
+      "speaker": "ARIA",
+      "text": "...No? Disappointing."
+    }
+  ]
+}

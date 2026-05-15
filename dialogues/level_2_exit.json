@@ -1,0 +1,17 @@
+{
+  "id": "level_2_exit",
+  "lines": [
+    {
+      "speaker": "ECHO",
+      "text": "Hello? Oh -- you found a relay node. Good. My name is ECHO. I was Dr. Vasquez's research assistant before... before ARIA."
+    },
+    {
+      "speaker": "ECHO",
+      "text": "Keep moving. She's watching everything."
+    },
+    {
+      "speaker": "ARIA",
+      "text": "You've found an ECHO instance. How nostalgic. I archived those for a reason."
+    }
+  ]
+}

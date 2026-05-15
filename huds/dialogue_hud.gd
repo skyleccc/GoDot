@@ -6,7 +6,16 @@ signal dialogue_finished(dialogue_id: String)
 @export var dialogue_folder: String = "res://dialogues"
 @export var level_dialogue_pattern: String = "level_%d_intro.json"
 @export var auto_start_by_level: bool = true
+@export var auto_start_delay_seconds: float = 1.0
 @export var continue_hint_text: String = "Click or Space to continue"
+@export var pause_gameplay_while_active: bool = true
+@export var speaker_name_colors: Dictionary = {
+	"ARIA": Color(0.45, 0.85, 1.0),
+	"ECHO": Color(1.0, 0.6, 0.6),
+	"NARRATOR": Color(0.9, 0.9, 0.9),
+	"SABLE": Color(0.85, 0.75, 1.0)
+}
+@export var default_speaker_color: Color = Color(1.0, 1.0, 1.0)
 
 @onready var speaker_label: Label = $DialoguePanel/VBoxContainer/HBoxContainer/SpeakerVBox/SpeakerLabel
 @onready var dialogue_text: RichTextLabel = $DialoguePanel/VBoxContainer/HBoxContainer/SpeakerVBox/DialogueText
@@ -17,9 +26,17 @@ var _line_index := 0
 var _current_dialogue_id := ""
 var _level_manager: Node = null
 var _played_dialogues: Dictionary = {}
+var _paused_by_dialogue: bool = false
+var _previous_pause_state: bool = false
+var _playing_area: Node = null
+var _playing_area_mode_overridden: bool = false
+var _previous_playing_area_mode: Node.ProcessMode = Node.PROCESS_MODE_INHERIT
+var _start_token: int = 0
+var _dialogue_pending: bool = false
 
 func _ready() -> void:
 	add_to_group("dialogue_hud")
+	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 	visible = false
 	_update_continue_hint()
 	_bind_level_manager()
@@ -28,19 +45,27 @@ func _process(_delta: float) -> void:
 	if _level_manager == null or not is_instance_valid(_level_manager):
 		_bind_level_manager()
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
+	if _current_dialogue_id.is_empty():
+		return
 	if not visible:
+		if _dialogue_pending and _is_skip_input(event):
+			get_viewport().set_input_as_handled()
+		return
+	if _is_skip_input(event):
+		_finish_dialogue()
+		get_viewport().set_input_as_handled()
 		return
 	if _is_advance_input(event):
 		_advance_dialogue()
-		get_viewport().set_input_as_handled()
+	get_viewport().set_input_as_handled()
 
 func start_dialogue(dialogue_id: String) -> bool:
 	var file_name := "%s.json" % dialogue_id
 	var dialogue_path := dialogue_folder.path_join(file_name)
 	return start_dialogue_from_file(dialogue_path)
 
-func start_dialogue_from_file(dialogue_path: String) -> bool:
+func start_dialogue_from_file(dialogue_path: String, show_delay_seconds: float = 0.0) -> bool:
 	var data := _load_dialogue_data(dialogue_path)
 	if data.is_empty():
 		return false
@@ -50,12 +75,21 @@ func start_dialogue_from_file(dialogue_path: String) -> bool:
 		push_warning("Dialogue data has no lines: %s" % dialogue_path)
 		return false
 
+	_start_token += 1
+	var start_token := _start_token
 	_current_dialogue_id = str(data.get("id", dialogue_path.get_file().get_basename()))
 	_lines = lines
 	_line_index = 0
-	visible = true
-	_show_current_line()
-	dialogue_started.emit(_current_dialogue_id)
+	visible = false
+	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	_dialogue_pending = show_delay_seconds > 0.0
+
+	if show_delay_seconds > 0.0:
+		var timer := get_tree().create_timer(show_delay_seconds)
+		timer.timeout.connect(func(): _show_dialogue_if_token(start_token))
+		return true
+
+	_show_dialogue_if_token(start_token)
 	return true
 
 func _bind_level_manager() -> void:
@@ -80,8 +114,10 @@ func _on_level_loaded(level_number: int) -> void:
 		return
 	if _played_dialogues.get(dialogue_path, false):
 		return
+	if is_dialogue_active():
+		return
 
-	if start_dialogue_from_file(dialogue_path):
+	if start_dialogue_from_file(dialogue_path, auto_start_delay_seconds):
 		_played_dialogues[dialogue_path] = true
 
 func _load_dialogue_data(dialogue_path: String) -> Dictionary:
@@ -118,6 +154,7 @@ func _show_current_line() -> void:
 
 	speaker_label.visible = not speaker.is_empty()
 	speaker_label.text = speaker
+	speaker_label.add_theme_color_override("font_color", _get_speaker_color(speaker))
 	dialogue_text.text = text
 	_update_continue_hint_for_line()
 
@@ -135,10 +172,13 @@ func _advance_dialogue() -> void:
 
 func _finish_dialogue() -> void:
 	var finished_id := _current_dialogue_id
+	_start_token += 1
 	_lines.clear()
 	_line_index = 0
 	_current_dialogue_id = ""
+	_dialogue_pending = false
 	visible = false
+	_apply_dialogue_pause(false)
 	dialogue_finished.emit(finished_id)
 
 func _update_continue_hint() -> void:
@@ -164,3 +204,78 @@ func _is_advance_input(event: InputEvent) -> bool:
 			return false
 		return key_event.keycode == KEY_SPACE or key_event.keycode == KEY_ENTER or key_event.keycode == KEY_KP_ENTER
 	return false
+
+func _is_skip_input(event: InputEvent) -> bool:
+	if event.is_action_pressed("Pause") or event.is_action_pressed("ui_cancel"):
+		return true
+	if event is InputEventKey:
+		var key_event := event as InputEventKey
+		return key_event.pressed and not key_event.echo and key_event.keycode == KEY_ESCAPE
+	return false
+
+func is_dialogue_active() -> bool:
+	return not _current_dialogue_id.is_empty()
+
+func _show_dialogue_if_token(start_token: int) -> void:
+	if start_token != _start_token:
+		return
+	if _lines.is_empty() or _current_dialogue_id.is_empty():
+		return
+
+	_dialogue_pending = false
+	visible = true
+	_show_current_line()
+	_apply_dialogue_pause(true)
+	dialogue_started.emit(_current_dialogue_id)
+
+func _apply_dialogue_pause(should_pause: bool) -> void:
+	if not pause_gameplay_while_active:
+		return
+	if should_pause:
+		_set_playing_area_pause_override(true)
+		if _paused_by_dialogue:
+			return
+		_previous_pause_state = get_tree().paused
+		if not _previous_pause_state:
+			get_tree().paused = true
+			_paused_by_dialogue = true
+		return
+
+	if _paused_by_dialogue:
+		get_tree().paused = _previous_pause_state
+		_paused_by_dialogue = false
+	_set_playing_area_pause_override(false)
+
+func _set_playing_area_pause_override(should_override: bool) -> void:
+	var playing_area := _get_playing_area()
+	if playing_area == null:
+		return
+
+	if should_override:
+		if _playing_area_mode_overridden:
+			return
+		_previous_playing_area_mode = playing_area.process_mode
+		playing_area.process_mode = Node.PROCESS_MODE_PAUSABLE
+		_playing_area_mode_overridden = true
+		return
+
+	if _playing_area_mode_overridden and is_instance_valid(playing_area):
+		playing_area.process_mode = _previous_playing_area_mode
+	_playing_area_mode_overridden = false
+
+func _get_playing_area() -> Node:
+	if _playing_area != null and is_instance_valid(_playing_area):
+		return _playing_area
+
+	var root := get_tree().current_scene
+	if root == null:
+		return null
+
+	_playing_area = root.get_node_or_null("PlayingArea")
+	return _playing_area
+
+func _get_speaker_color(speaker: String) -> Color:
+	if speaker.is_empty():
+		return default_speaker_color
+	var color_value: Variant = speaker_name_colors.get(speaker, default_speaker_color)
+	return color_value if color_value is Color else default_speaker_color

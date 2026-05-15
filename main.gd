@@ -31,6 +31,13 @@ func _process(_delta: float) -> void:
 	check_for_debug_input()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if _is_dialogue_active():
+		get_viewport().set_input_as_handled()
+		return
+	if pause_menu_ui and pause_menu_ui.visible:
+		if event.is_action_pressed("Pause") or event.is_action_pressed("ui_cancel"):
+			get_viewport().set_input_as_handled()
+		return
 	if not event.is_action_pressed("Pause"):
 		return
 	if settings_ui and settings_ui.visible:
@@ -42,6 +49,14 @@ func _unhandled_input(event: InputEvent) -> void:
 	if _is_gameplay_active():
 		_pause_gameplay()
 		get_viewport().set_input_as_handled()
+
+func _is_dialogue_active() -> bool:
+	var dialogue_hud := get_tree().get_first_node_in_group("dialogue_hud")
+	if dialogue_hud == null:
+		return false
+	if dialogue_hud.has_method("is_dialogue_active"):
+		return dialogue_hud.call("is_dialogue_active")
+	return false
 
 func _connect_menu_signals() -> void:
 	if main_menu_hud.has_signal("play_game_requested"):

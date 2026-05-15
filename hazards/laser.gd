@@ -13,6 +13,7 @@ var _targets_in_area: Array[Node2D] = []
 
 
 func _ready() -> void:
+	add_to_group("lasers")
 	area.body_entered.connect(_on_body_entered)
 	area.body_exited.connect(_on_body_exited)
 
@@ -38,3 +39,10 @@ func _on_body_entered(body: Node2D) -> void:
 
 func _on_body_exited(body: Node2D) -> void:
 	_targets_in_area.erase(body)
+
+func deactivate() -> void:
+	process_mode = Node.PROCESS_MODE_DISABLED
+	_targets_in_area.clear()
+	if area:
+		area.monitoring = false
+		area.monitorable = false

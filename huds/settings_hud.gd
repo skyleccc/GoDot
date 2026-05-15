@@ -57,7 +57,7 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not visible:
 		return
-	if event.is_action_pressed("Pause"):
+	if event.is_action_pressed("Pause") or event.is_action_pressed("ui_cancel"):
 		back_requested.emit()
 		get_viewport().set_input_as_handled()
 
@@ -131,10 +131,10 @@ func _sync_display_ui() -> void:
 	var current_size: Vector2i = DisplayServer.window_get_size()
 	_select_resolution_for_size(current_size)
 
-func _select_resolution_for_size(size: Vector2i) -> void:
-	if not _resolution_values.has(size):
-		_add_resolution_option(size, "%dx%d (Saved)" % [size.x, size.y])
-	var index := _resolution_values.find(size)
+func _select_resolution_for_size(window_size: Vector2i) -> void:
+	if not _resolution_values.has(window_size):
+		_add_resolution_option(window_size, "%dx%d (Saved)" % [window_size.x, window_size.y])
+	var index := _resolution_values.find(window_size)
 	if index >= 0:
 		resolution_option.select(index)
 	else:
@@ -367,8 +367,13 @@ func _apply_playlist_selection() -> void:
 
 	if _music_manager.has_method("set_playlist"):
 		if selected_tracks.is_empty():
-			_music_manager.call("set_playlist", [], false)
-			_music_manager.stop()
+			if _all_tracks.is_empty():
+				_music_manager.call("set_playlist", [], false)
+				_music_manager.stop()
+			else:
+				selected_tracks = _all_tracks.duplicate()
+				_music_manager.call("set_playlist", selected_tracks, true)
+				_set_checkboxes_from_tracks(selected_tracks)
 		else:
 			_music_manager.call("set_playlist", selected_tracks, true)
 	_maybe_save_settings()

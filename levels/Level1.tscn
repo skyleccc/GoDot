@@ -1002,6 +1002,7 @@ position = Vector2(1582, 440)
 
 [node name="Exit" parent="." unique_id=1524804408 instance=ExtResource("13_jq2cn")]
 position = Vector2(1728, 430)
+completion_dialogue_id = "level_1_exit"
 
 [editable path="Saw"]
 [editable path="Saw2"]

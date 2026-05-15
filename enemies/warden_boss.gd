@@ -6,6 +6,7 @@ enum AttackType { BURST, SWEEP, MINE, SCRAMBLE, RAILGUN }
 
 @export_group("Boss Stats")
 @export var max_hp: int = 420
+@export var defeat_dialogue_id: String = ""
 @export var hover_amplitude: float = 18.0
 @export var hover_speed: float = 1.15
 @export var phase_two_threshold: float = 0.5
@@ -427,4 +428,16 @@ func _die() -> void:
 			exit_node.get_node("Area2D").monitoring = true
 			exit_node.visible = true
 	
+	_start_defeat_dialogue()
 	queue_free()
+
+func _start_defeat_dialogue() -> void:
+	if defeat_dialogue_id.is_empty():
+		return
+	var dialogue_hud := get_tree().get_first_node_in_group("dialogue_hud")
+	if dialogue_hud == null:
+		return
+	if dialogue_hud.has_method("is_dialogue_active") and dialogue_hud.call("is_dialogue_active"):
+		return
+	if dialogue_hud.has_method("start_dialogue"):
+		dialogue_hud.call("start_dialogue", defeat_dialogue_id)
