@@ -960,8 +960,8 @@ visible = false
 position = Vector2(329, 221)
 
 [node name="WardenBoss" parent="." unique_id=1904503373 instance=ExtResource("7_boss")]
-defeat_dialogue_id = "level_10_boss_defeated"
 position = Vector2(891, -346)
+defeat_dialogue_id = "level_10_boss_defeated"
 
 [node name="Turret" parent="." unique_id=1947750520 instance=ExtResource("8_ouh6h")]
 position = Vector2(-55, 93)
