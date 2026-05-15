@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://dug227im6kcut"
+path="res://.godot/imported/96x96 - LargeBombMoving.gif-db13f4e631c049b84c634d0af7fa8f7c.res"
+
+[deps]
+
+source_file="res://asssets/enemies/96x96 - Large Bomb/96x96 - LargeBombMoving.gif"
+dest_files=["res://.godot/imported/96x96 - LargeBombMoving.gif-db13f4e631c049b84c634d0af7fa8f7c.res"]
+
+[params]
+
+storage/compress=true

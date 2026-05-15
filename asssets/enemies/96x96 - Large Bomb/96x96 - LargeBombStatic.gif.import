@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://bfsjs8287w7mu"
+path="res://.godot/imported/96x96 - LargeBombStatic.gif-097cd9f42ec4bf5ed6f73907c0c52446.res"
+
+[deps]
+
+source_file="res://asssets/enemies/96x96 - Large Bomb/96x96 - LargeBombStatic.gif"
+dest_files=["res://.godot/imported/96x96 - LargeBombStatic.gif-097cd9f42ec4bf5ed6f73907c0c52446.res"]
+
+[params]
+
+storage/compress=true

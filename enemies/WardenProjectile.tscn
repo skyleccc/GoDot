@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://bvin3d3o65pjd"]
 
 [ext_resource type="Texture2D" uid="uid://bl4k3fw573m2n" path="res://asssets/enemies/Boss(Ships)/PNG_Parts&Spriter_Animation/Shots/Shot2/shot2_1.png" id="1_3x5pu"]
+[ext_resource type="Script" uid="uid://ca1yww1fcwja1" path="res://enemies/warden_projectile.gd" id="1_kwr3i"]
 [ext_resource type="Texture2D" uid="uid://detqy2fcu42wk" path="res://asssets/enemies/Boss(Ships)/PNG_Parts&Spriter_Animation/Shots/Shot2/shot2_2.png" id="2_vm05k"]
 [ext_resource type="Texture2D" uid="uid://bqijoew7l6f2q" path="res://asssets/enemies/Boss(Ships)/PNG_Parts&Spriter_Animation/Shots/Shot2/shot2_3.png" id="3_208qf"]
 [ext_resource type="Texture2D" uid="uid://cfpqf833cu7lm" path="res://asssets/enemies/Boss(Ships)/PNG_Parts&Spriter_Animation/Shots/Shot2/shot2_4.png" id="4_pf3ir"]
 [ext_resource type="Texture2D" uid="uid://cndie0fibpaie" path="res://asssets/enemies/Boss(Ships)/PNG_Parts&Spriter_Animation/Shots/Shot2/shot2_5.png" id="5_f75bm"]
-[ext_resource type="Texture2D" uid="uid://bn1gl8guwa087" path="res://asssets/enemies/Boss(Ships)/PNG_Parts&Spriter_Animation/Shots/Shot2/shot2_6.png" id="6_u5vb1"]
+[ext_resource type="Texture2D" uid="uid://b60dhkqtjxv6w" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Shots/Shot2/shot2_asset.png" id="6_fe32r"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4fckn"]
 animations = [{
@@ -26,16 +27,29 @@ animations = [{
 "texture": ExtResource("5_f75bm")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_u5vb1")
+"texture": ExtResource("6_fe32r")
 }],
-"loop": true,
+"loop": false,
 "name": &"default",
 "speed": 14.0
 }]
 
-[node name="WardenProjectile" type="Node2D" unique_id=1128311345]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fe32r"]
+radius = 8.0
+height = 16.0
+
+[node name="WardenProjectile" type="CharacterBody2D" unique_id=730770876]
+collision_layer = 8
+collision_mask = 65563
+script = ExtResource("1_kwr3i")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1913670821]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_4fckn")
-frame_progress = 0.5394623
+frame = 5
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1889477897]
+position = Vector2(-4, 1)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_fe32r")
