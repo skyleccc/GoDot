@@ -9,7 +9,7 @@ extends CharacterBody2D
 @export var stop_distance_x: float = 240.0
 
 @export_group("Projectile Attack")
-@export var projectile_cooldown: float = 2
+@export var projectile_cooldown: float = 1
 @export var projectile_damage: int = 20
 
 @export_group("AoE Attack")
@@ -100,9 +100,9 @@ func _physics_process(delta: float) -> void:
 			_cast_aoe_pattern()
 			_aoe_timer = aoe_cooldown
 
-		if _railgun_timer <= 0.0:
-			_railgun_timer = railgun_cooldown
-			_fire_railgun()
+	if _railgun_timer <= 0.0:
+		_railgun_timer = railgun_cooldown
+		_fire_railgun()
 
 func _ensure_target() -> void:
 	if target != null and is_instance_valid(target):
@@ -168,7 +168,7 @@ func _cast_aoe_pattern() -> void:
 		return
 
 	var _center := target.global_position
-	var offsets := [Vector2.ZERO, Vector2.LEFT * aoe_side_offset, Vector2.RIGHT * aoe_side_offset]
+	var offsets := [Vector2.ZERO]
 
 	for offset in offsets:
 		var aoe := aoe_scene.instantiate()

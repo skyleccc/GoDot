@@ -31,10 +31,12 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0vv1d"]
+radius = 8.0
+height = 16.0
 
 [node name="BossProjectile" type="CharacterBody2D" unique_id=1088519962]
 collision_layer = 8
-collision_mask = 27
+collision_mask = 65563
 script = ExtResource("1_script")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=636032160]
