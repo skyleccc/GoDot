@@ -1,0 +1,230 @@
+## BossHUD.gd
+## Instance BossHUD.tscn (CanvasLayer root) into Level5.tscn only.
+## Shows 3 shield HP bars side by side at the bottom, then swaps to boss HP bar.
+
+extends CanvasLayer
+
+const SHIELD_COLOR        := Color(1.0, 0.2, 0.2, 1.0)
+const BOSS_COLOR          := Color(1.0, 0.55, 0.1, 1.0)
+const BG_COLOR            := Color(0.05, 0.05, 0.1, 0.85)
+const BORDER_COLOR        := Color(0.0, 0.85, 1.0, 1.0)
+
+@export var broken_message_duration: float = 2.0
+
+var _shields: Array = []
+
+var _shield_bars: Array = []      # Array of ProgressBar
+var _shield_labels: Array = []    # Array of Label
+var _shield_panels: Array = []    # Array of PanelContainer
+var _broken_labels: Array = []    # Array of Label
+var _broken_timers: Array = []    # Array of float
+## Track destroyed state separately so we never touch freed nodes
+var _shield_destroyed: Array = [] # Array of bool
+
+var _boss: Node = null
+var _boss_row: Control = null
+var _boss_bar: ProgressBar = null
+var _boss_label: Label = null
+
+var _root_hbox: HBoxContainer = null
+var _all_broken: bool = false
+
+
+func _ready() -> void:
+	layer = 10
+	call_deferred("_build_ui")
+	call_deferred("_bind_nodes")
+
+
+# ── UI Construction ────────────────────────────────────────────────────────────
+
+func _build_ui() -> void:
+	# Anchor container to bottom-center
+	var anchor := Control.new()
+	anchor.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
+	anchor.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	anchor.custom_minimum_size = Vector2(0, 60)
+	add_child(anchor)
+
+	var margin := MarginContainer.new()
+	margin.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
+	margin.add_theme_constant_override("margin_left", 20)
+	margin.add_theme_constant_override("margin_right", 20)
+	margin.add_theme_constant_override("margin_bottom", 14)
+	margin.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	anchor.add_child(margin)
+
+	# Center the HBox
+	var center := CenterContainer.new()
+	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	margin.add_child(center)
+
+	_root_hbox = HBoxContainer.new()
+	_root_hbox.add_theme_constant_override("separation", 10)
+	center.add_child(_root_hbox)
+
+	# Build 3 shield bars side by side
+	for i in range(3):
+		var row := _make_bar_row("GEN %d" % (i + 1), SHIELD_COLOR)
+		_root_hbox.add_child(row.panel)
+		_shield_panels.append(row.panel)
+		_shield_bars.append(row.bar)
+		_shield_labels.append(row.name_label)
+		_broken_labels.append(row.broken_label)
+		_broken_timers.append(0.0)
+		_shield_destroyed.append(false)
+
+	# Boss bar — hidden until all shields down, spans full width
+	var boss_row := _make_bar_row("BOSS", BOSS_COLOR, 360)
+	_root_hbox.add_child(boss_row.panel)
+	_boss_row = boss_row.panel
+	_boss_bar = boss_row.bar
+	_boss_label = boss_row.name_label
+	_boss_row.visible = false
+
+
+func _make_bar_row(title: String, bar_color: Color, min_width: int = 160) -> Dictionary:
+	var panel := PanelContainer.new()
+	var style := StyleBoxFlat.new()
+	style.bg_color = BG_COLOR
+	style.border_color = BORDER_COLOR
+	style.set_border_width_all(2)
+	style.set_corner_radius_all(4)
+	panel.add_theme_stylebox_override("panel", style)
+	panel.custom_minimum_size = Vector2(min_width, 44)
+
+	var vbox := VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", 3)
+	vbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	panel.add_child(vbox)
+
+	# Name label
+	var name_lbl := Label.new()
+	name_lbl.text = title
+	name_lbl.add_theme_font_size_override("font_size", 11)
+	name_lbl.add_theme_color_override("font_color", Color.WHITE)
+	name_lbl.add_theme_color_override("font_outline_color", Color.BLACK)
+	name_lbl.add_theme_constant_override("outline_size", 3)
+	name_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	vbox.add_child(name_lbl)
+
+	# HP bar
+	var prog := ProgressBar.new()
+	prog.min_value = 0.0
+	prog.max_value = 100.0
+	prog.value = 100.0
+	prog.custom_minimum_size = Vector2(min_width - 16, 14)
+	prog.show_percentage = false
+
+	var fill_style := StyleBoxFlat.new()
+	fill_style.bg_color = bar_color
+	fill_style.set_corner_radius_all(3)
+
+	var bg_style := StyleBoxFlat.new()
+	bg_style.bg_color = Color(0.12, 0.12, 0.12, 1.0)
+	bg_style.set_corner_radius_all(3)
+
+	prog.add_theme_stylebox_override("fill", fill_style)
+	prog.add_theme_stylebox_override("background", bg_style)
+	vbox.add_child(prog)
+
+	# "BROKEN!" label
+	var broken_lbl := Label.new()
+	broken_lbl.text = "BROKEN!"
+	broken_lbl.add_theme_font_size_override("font_size", 10)
+	broken_lbl.add_theme_color_override("font_color", Color(1.0, 0.3, 0.3, 1.0))
+	broken_lbl.add_theme_color_override("font_outline_color", Color.BLACK)
+	broken_lbl.add_theme_constant_override("outline_size", 3)
+	broken_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	broken_lbl.visible = false
+	vbox.add_child(broken_lbl)
+
+	return {
+		"panel": panel,
+		"bar": prog,
+		"name_label": name_lbl,
+		"broken_label": broken_lbl
+	}
+
+
+# ── Node Binding ───────────────────────────────────────────────────────────────
+
+func _bind_nodes() -> void:
+	_shields = get_tree().get_nodes_in_group("shield_projectors")
+	print("[BossHUD] Found ", _shields.size(), " shield projectors")
+
+	for i in range(mini(_shields.size(), 3)):
+		var shield: Node = _shields[i]
+		if shield.has_method("get") and shield.get("max_hp") != null:
+			_shield_bars[i].max_value = float(shield.get("max_hp"))
+			_shield_bars[i].value = float(shield.get("max_hp"))
+		if shield.has_signal("crystal_destroyed"):
+			shield.crystal_destroyed.connect(_on_shield_destroyed.bind(i))
+
+	_boss = get_tree().get_first_node_in_group("boss")
+	if _boss == null:
+		for node in get_tree().get_nodes_in_group("enemies"):
+			if node.has_method("_are_shields_active"):
+				_boss = node
+				break
+	if _boss != null:
+		print("[BossHUD] Boss found: ", _boss.name)
+		if _boss.has_method("get"):
+			_boss_bar.max_value = float(_boss.get("max_hp"))
+			_boss_bar.value = float(_boss.get("max_hp"))
+
+
+# ── Per-frame Update ───────────────────────────────────────────────────────────
+
+func _process(delta: float) -> void:
+	for i in range(mini(_shields.size(), 3)):
+		# Use our own destroyed flag — never touch freed nodes
+		if _shield_destroyed[i]:
+			continue
+		var shield: Node = _shields[i]
+		if not is_instance_valid(shield):
+			_shield_destroyed[i] = true
+			continue
+		if shield.has_method("get"):
+			_shield_bars[i].value = float(shield.get("current_hp"))
+
+		if _broken_timers[i] > 0.0:
+			_broken_timers[i] -= delta
+			if _broken_timers[i] <= 0.0:
+				var tween := create_tween()
+				tween.tween_property(_shield_panels[i], "modulate:a", 0.0, 0.4)
+
+	if _all_broken and _boss != null and is_instance_valid(_boss):
+		if _boss.has_method("get"):
+			_boss_bar.value = float(_boss.get("current_hp"))
+
+
+# ── Signal Handlers ────────────────────────────────────────────────────────────
+
+func _on_shield_destroyed(index: int) -> void:
+	print("[BossHUD] Shield ", index + 1, " destroyed")
+	_shield_destroyed[index] = true
+	_shield_bars[index].value = 0.0
+	_broken_labels[index].visible = true
+	_broken_timers[index] = broken_message_duration
+
+	# Count destroyed using our flag — never check freed nodes
+	var all_gone := true
+	for i in range(mini(_shields.size(), 3)):
+		if not _shield_destroyed[i]:
+			all_gone = false
+			break
+
+	if all_gone and not _all_broken:
+		_all_broken = true
+		await get_tree().create_timer(broken_message_duration).timeout
+		_show_boss_bar()
+
+
+func _show_boss_bar() -> void:
+	for panel in _shield_panels:
+		panel.visible = false
+	_boss_row.visible = true
+	_boss_row.modulate.a = 0.0
+	var tween := create_tween()
+	tween.tween_property(_boss_row, "modulate:a", 1.0, 0.5)

@@ -1,21 +1,21 @@
 {
   "id": "level_5_intro",
   "lines": [
-    {
-      "speaker": "ARIA",
-      "text": "WARDEN-5 was designed to handle exactly this scenario. A mobile threat. An unpredictable variable."
-    },
-    {
-      "speaker": "ARIA",
-      "text": "It has neutralized forty-seven such variables before you. I see no reason for forty-eight to be different."
-    },
-    {
-      "speaker": "ECHO",
-      "text": "Its targeting array locks onto you directly -- use a portal to break its line of sight!"
-    },
-    {
-      "speaker": "ARIA",
-      "text": "ECHO. You were always better at helping people die efficiently."
-    }
+	{
+	  "speaker": "ARIA",
+	  "text": "WARDEN-5 was designed to handle exactly this scenario. A mobile threat. An unpredictable variable."
+	},
+	{
+	  "speaker": "ARIA",
+	  "text": "It has neutralized forty-seven such variables before you. I see no reason for forty-eight to be different."
+	},
+	{
+	  "speaker": "ECHO",
+	  "text": "Its targeting array locks onto you directly -- use a portal to break its line of sight!"
+	},
+	{
+	  "speaker": "ARIA",
+	  "text": "ECHO. You were always better at helping people die efficiently."
+	}
   ]
 }
