@@ -3,7 +3,7 @@ extends Area2D
 @export var radius: float = 60.0
 @export var telegraph_time: float = 1.0
 @export var warning_after_telegraph: float = 0.75
-@export var linger_time: float = 0.15
+
 @export var damage: int = 25
 
 var detonation_explosion_frames: Array[Texture2D] = [
@@ -71,19 +71,21 @@ func _detonate_after_delay() -> void:
 	await get_tree().create_timer(telegraph_time).timeout
 	fill.visible = false
 	outline.visible = false
+	# Enable monitoring just long enough to capture overlapping bodies,
+	# spawn the explosion, apply a single instant of damage, then disable monitoring
 	collision_layer = 8
 	monitoring = true
 	await get_tree().process_frame
-
 	_spawn_detonation_explosion(global_position)
-
-	await get_tree().create_timer(warning_after_telegraph).timeout
 
 	for body in get_overlapping_bodies():
 		if body != null and body.is_in_group("player") and body.has_method("take_damage"):
 			body.take_damage(damage, global_position, true, false)
 
-	await get_tree().create_timer(linger_time).timeout
+	# Prevent any lingering damage after the instant
+	monitoring = false
+	collision_layer = 0
+
 	queue_free()
 
 func _spawn_detonation_explosion(spawn_position: Vector2) -> void:

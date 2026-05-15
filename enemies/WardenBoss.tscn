@@ -2,11 +2,26 @@
 
 [ext_resource type="Script" uid="uid://cwqv32bot4eti" path="res://enemies/warden_boss.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://8c3odhf30b1f" path="res://asssets/enemies/Boss(Ships)/PNG_Parts&Spriter_Animation/Ship2/Ship2.png" id="2_o5wvu"]
-[ext_resource type="Texture2D" uid="uid://2a2xs220l2e6" path="res://asssets/enemies/Boss(Ships)/PNG_Parts&Spriter_Animation/Ship1/Ship1.png" id="2_ship"]
-[ext_resource type="Texture2D" uid="uid://c521x8e5iiiab" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Exhaust/Ship1/Normal_flight/Ship1_normal_flight_001.png" id="3_exhaust_n1"]
-[ext_resource type="Texture2D" uid="uid://db4r3bj8odr17" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Exhaust/Ship1/Normal_flight/Ship1_normal_flight_003.png" id="4_exhaust_n2"]
-[ext_resource type="Texture2D" uid="uid://du7dy88m5gecs" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Exhaust/Ship1/Normal_flight/Ship1_normal_flight_005.png" id="5_exhaust_n3"]
-[ext_resource type="Texture2D" uid="uid://n45wtl6ny6aa" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Exhaust/Ship1/Normal_flight/Ship1_normal_flight_007.png" id="6_exhaust_n4"]
+[ext_resource type="Texture2D" uid="uid://dcb3xvhu5i524" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Exhaust/Ship2/Normal_flight/Ship2_normal_flight_001.png" id="3_rroe2"]
+[ext_resource type="Texture2D" uid="uid://dnasnu4wpedyr" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Exhaust/Ship2/Normal_flight/Ship2_normal_flight_003.png" id="4_u6bwg"]
+[ext_resource type="Texture2D" uid="uid://coqs8u0lw747s" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Exhaust/Ship2/Normal_flight/Ship2_normal_flight_005.png" id="5_3clt1"]
+[ext_resource type="Texture2D" uid="uid://ca2rrsemhmpmx" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Exhaust/Ship2/Normal_flight/Ship2_normal_flight_007.png" id="6_31mdj"]
+[ext_resource type="Texture2D" uid="uid://db1v0wqbi2rc8" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Explosions/Ship2_Explosion/Ship2_Explosion_000.png" id="7_tdipg"]
+[ext_resource type="Texture2D" uid="uid://bosyroojk22vi" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Explosions/Ship2_Explosion/Ship2_Explosion_004.png" id="8_sh2gs"]
+[ext_resource type="Texture2D" uid="uid://bhfjp58p5vrf8" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Explosions/Ship2_Explosion/Ship2_Explosion_005.png" id="9_hjr4i"]
+[ext_resource type="Texture2D" uid="uid://bv3mqjbvvdj6l" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Explosions/Ship2_Explosion/Ship2_Explosion_008.png" id="10_xwkrs"]
+[ext_resource type="Texture2D" uid="uid://boxt35dvehsx3" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Explosions/Ship2_Explosion/Ship2_Explosion_009.png" id="11_5k6m7"]
+[ext_resource type="Texture2D" uid="uid://bhsb58fp4ol3b" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Explosions/Ship2_Explosion/Ship2_Explosion_010.png" id="12_ei6cy"]
+[ext_resource type="Texture2D" uid="uid://cb3abgxhb0jqd" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Explosions/Ship2_Explosion/Ship2_Explosion_013.png" id="13_nspui"]
+[ext_resource type="Texture2D" uid="uid://dn1scl17b573n" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Explosions/Ship2_Explosion/Ship2_Explosion_014.png" id="14_fuc4b"]
+[ext_resource type="Texture2D" uid="uid://b022hbw5hskq2" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Explosions/Ship2_Explosion/Ship2_Explosion_015.png" id="15_msdvw"]
+[ext_resource type="Texture2D" uid="uid://btdb8pcdjmql5" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Explosions/Ship2_Explosion/Ship2_Explosion_016.png" id="16_6evii"]
+[ext_resource type="Texture2D" uid="uid://c020frr5jpv15" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Explosions/Ship2_Explosion/Ship2_Explosion_019.png" id="17_eahar"]
+[ext_resource type="Texture2D" uid="uid://bqmwu54g5qpi2" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Explosions/Ship2_Explosion/Ship2_Explosion_021.png" id="18_7br8n"]
+[ext_resource type="Texture2D" uid="uid://pulse1x7n9x5a2" path="res://asssets/enemies/Warped shooting fx files/Pixelart/Pulse/frames/pulse1.png" id="19_pulse1"]
+[ext_resource type="Texture2D" uid="uid://pulse2x7n9x5a2" path="res://asssets/enemies/Warped shooting fx files/Pixelart/Pulse/frames/pulse2.png" id="20_pulse2"]
+[ext_resource type="Texture2D" uid="uid://pulse3x7n9x5a2" path="res://asssets/enemies/Warped shooting fx files/Pixelart/Pulse/frames/pulse3.png" id="21_pulse3"]
+[ext_resource type="Texture2D" uid="uid://pulse4x7n9x5a2" path="res://asssets/enemies/Warped shooting fx files/Pixelart/Pulse/frames/pulse4.png" id="22_pulse4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t2xoq"]
 size = Vector2(151, 96)
@@ -15,29 +30,94 @@ size = Vector2(151, 96)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_exhaust_n1")
+"texture": ExtResource("3_rroe2")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_exhaust_n2")
+"texture": ExtResource("4_u6bwg")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_exhaust_n3")
+"texture": ExtResource("5_3clt1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_exhaust_n4")
+"texture": ExtResource("6_31mdj")
 }],
 "loop": true,
 "name": &"normal",
 "speed": 12.0
 }]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_srk38"]
-load_path = "res://.godot/imported/Ship1.png-26fdc9ec56d3a87c389d0965283f1aad.ctex"
+[sub_resource type="SpriteFrames" id="SpriteFrames_iui8b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_o5wvu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_tdipg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_sh2gs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_hjr4i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_xwkrs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_5k6m7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ei6cy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_nspui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_fuc4b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_msdvw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_6evii")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_eahar")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_7br8n")
+}],
+"loop": false,
+"name": &"explosion",
+"speed": 10.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_railgun_pulse"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_pulse1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_pulse2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_pulse3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_pulse4")
+}],
+"loop": true,
+"name": &"pulse",
+"speed": 16.0
+}]
 
 [node name="WardenBoss" type="CharacterBody2D" unique_id=627626200]
 collision_layer = 16
 collision_mask = 11
 script = ExtResource("1_script")
+debug_force_railgun = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=385227225]
 position = Vector2(26.5, 24)
@@ -51,14 +131,15 @@ texture = ExtResource("2_o5wvu")
 
 [node name="Exhaust" type="AnimatedSprite2D" parent="." unique_id=1439852685]
 z_index = -1
-position = Vector2(-55, 25)
-scale = Vector2(1.609375, 1.453125)
+position = Vector2(-82.00001, 22)
+scale = Vector2(2.461, 2.222)
 sprite_frames = SubResource("SpriteFrames_ship1_exhaust")
 animation = &"normal"
 autoplay = "normal"
+frame_progress = 0.5003476
 
 [node name="ProjectileSpawn" type="Marker2D" parent="." unique_id=76717281]
-position = Vector2(102, 21)
+position = Vector2(110, 21)
 
 [node name="RailgunOrigin" type="Marker2D" parent="." unique_id=2040670853]
 position = Vector2(30, 1)
@@ -69,11 +150,17 @@ texture_filter = 1
 width = 7.0
 default_color = Color(1, 0.85, 0.2, 0.95)
 
-[node name="SweepBeam" type="Line2D" parent="." unique_id=699105514]
+[node name="SweepBeam" type="AnimatedSprite2D" parent="." unique_id=699105514]
 top_level = true
 texture_filter = 1
-width = 26.0
-default_color = Color(1, 0.2, 0.2, 1)
+visible = false
+position = Vector2(0, 0)
+scale = Vector2(1, 1)
+sprite_frames = SubResource("SpriteFrames_railgun_pulse")
+animation = &"pulse"
+autoplay = &"pulse"
+frame_progress = 0.0
+modulate = Color(1, 0.2, 0.2, 1)
 
 [node name="RailgunTelegraph" type="Line2D" parent="." unique_id=1193310271]
 top_level = true
@@ -81,22 +168,36 @@ texture_filter = 1
 width = 8.0
 default_color = Color(1, 0.87, 0.25, 0.95)
 
-[node name="RailgunBeam" type="Line2D" parent="." unique_id=1360679005]
+[node name="RailgunBeam" type="AnimatedSprite2D" parent="." unique_id=1360679005]
 top_level = true
 texture_filter = 1
-width = 22.0
-default_color = Color(1, 0.22, 0.22, 1)
+visible = false
+position = Vector2(0, 0)
+scale = Vector2(1, 1)
+sprite_frames = SubResource("SpriteFrames_railgun_pulse")
+animation = &"pulse"
+autoplay = &"pulse"
+frame_progress = 0.0
+modulate = Color(0.74, 0.38, 1, 1)
 
 [node name="FrontArmorGlow" type="Sprite2D" parent="." unique_id=551200589]
 modulate = Color(0.3, 0.7, 1, 0.2)
 texture_filter = 1
 position = Vector2(27.249998, 22.25)
 scale = Vector2(2.4609375, 2.1484375)
-texture = ExtResource("2_ship")
+texture = ExtResource("2_o5wvu")
 
 [node name="RearReactorGlow" type="Sprite2D" parent="." unique_id=1720248240]
 modulate = Color(1, 0.25, 0.25, 0.2)
 texture_filter = 1
 position = Vector2(27.249998, 22.25)
 scale = Vector2(2.4609375, 2.1484375)
-texture = SubResource("CompressedTexture2D_srk38")
+texture = ExtResource("2_o5wvu")
+
+[node name="DeathExplosion" type="AnimatedSprite2D" parent="." unique_id=287275552]
+z_index = 200
+texture_filter = 1
+position = Vector2(28.000002, 22)
+scale = Vector2(2.4609375, 2.1484375)
+sprite_frames = SubResource("SpriteFrames_iui8b")
+animation = &"explosion"

@@ -1,0 +1,16 @@
+[remap]
+
+importer="texture_gif"
+importer_version=1
+type="GIFTexture"
+uid="uid://dic0i813jr3ki"
+path="res://.godot/imported/96x96 - LargeBombDetonate-export.gif-77fab14f612ef45b44f441d132b696ea.res"
+
+[deps]
+
+source_file="res://asssets/enemies/96x96 - Large Bomb/96x96 - LargeBombDetonate-export.gif"
+dest_files=["res://.godot/imported/96x96 - LargeBombDetonate-export.gif-77fab14f612ef45b44f441d132b696ea.res"]
+
+[params]
+
+storage/compress=true

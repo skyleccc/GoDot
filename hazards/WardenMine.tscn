@@ -1,13 +1,36 @@
 [gd_scene format=3 uid="uid://bmai0yyamch1k"]
 
 [ext_resource type="Script" uid="uid://cx87rfcyfwcl0" path="res://hazards/warden_mine.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://crl0e67pq6nc7" path="res://asssets/enemies/Boss(Ships)/PNG_Animations/Shots/Shot1/shot1_1.png" id="2_mine"]
+[ext_resource type="Texture2D" uid="uid://dtlkt1nb4v4ou" path="res://asssets/enemies/96x96 - Large Bomb/96x96 - LargeBombMovingFrame1.png" id="2_m1bmg"]
+[ext_resource type="Texture2D" uid="uid://b67p8netqe5r8" path="res://asssets/enemies/96x96 - Large Bomb/96x96 - LargeBombMovingFrame2.png" id="3_7ve7x"]
+[ext_resource type="Texture2D" uid="uid://csv0qh26jey6u" path="res://asssets/enemies/96x96 - Large Bomb/96x96 - LargeBombMovingFrame3.png" id="4_eruad"]
+[ext_resource type="Texture2D" uid="uid://dckk5u2go1ljl" path="res://asssets/enemies/96x96 - Large Bomb/96x96 - LargeBombMovingFrame4.png" id="5_fwhc0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_body"]
-radius = 12.0
+radius = 14.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cb3ps"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_m1bmg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7ve7x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_eruad")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_fwhc0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_detection"]
-radius = 16.0
+radius = 19.026299
 
 [node name="WardenMine" type="CharacterBody2D" unique_id=4117928]
 collision_layer = 8
@@ -17,11 +40,12 @@ script = ExtResource("1_script")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=27073763]
 shape = SubResource("CircleShape2D_body")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1626954517]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=2108207948]
 texture_filter = 1
-position = Vector2(67.99999, -2.9999998)
-scale = Vector2(5, 5)
-texture = ExtResource("2_mine")
+position = Vector2(1, 2.0000002)
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_cb3ps")
+frame_progress = 0.90822595
 
 [node name="DetectionArea" type="Area2D" parent="." unique_id=344068502]
 collision_layer = 0
