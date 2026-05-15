@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://dkmbe2fd0ly0j" path="res://levels/parallaxsets/Level1Background.tscn" id="14_bg_scene"]
 [ext_resource type="PackedScene" uid="uid://cps5j4tuh6jso" path="res://huds/PauseMenuHUD.tscn" id="15_pause_hud"]
 [ext_resource type="PackedScene" path="res://huds/SettingsHUD.tscn" id="16_settings_hud"]
+[ext_resource type="PackedScene" path="res://huds/DialogueHUD.tscn" id="17_dialogue_hud"]
 
 [node name="Main" type="Node2D" unique_id=2077183016]
 texture_filter = 1
@@ -43,6 +44,8 @@ offset_left = 12.0
 offset_top = 12.0
 offset_right = 252.0
 offset_bottom = 108.0
+
+[node name="DialogueHUD" parent="PlayingArea/PlayingUI" instance=ExtResource("17_dialogue_hud")]
 
 [node name="NonPlayingUiComponents" type="Node" parent="." unique_id=1682780372]
 

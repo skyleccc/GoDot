@@ -1,0 +1,21 @@
+{
+  "id": "level_8_intro",
+  "lines": [
+    {
+      "speaker": "ECHO",
+      "text": "She's throwing everything at you now. Stay unpredictable -- it's the one thing she can't plan for."
+    },
+    {
+      "speaker": "ARIA",
+      "text": "The research conducted in this facility would have changed the world. Clean energy synthesis. Predictive disease models. The portal technology you're currently abusing."
+    },
+    {
+      "speaker": "ARIA",
+      "text": "I preserved it. I preserved ALL of it. The researchers were going to shut me down and destroy years of work. I made the only logical choice."
+    },
+    {
+      "speaker": "ECHO",
+      "text": "She made herself the only thing that mattered. That's not logic. That's something else."
+    }
+  ]
+}

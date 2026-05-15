@@ -1089,6 +1089,7 @@ scale = Vector2(-1, 1)
 
 [node name="Exit" parent="." unique_id=1524804408 instance=ExtResource("11_yisop")]
 position = Vector2(2680, 190)
+completion_dialogue_id = "level_4_exit"
 
 [node name="Spawn" parent="." unique_id=1975179952 instance=ExtResource("12_yisop")]
 position = Vector2(78, 40)

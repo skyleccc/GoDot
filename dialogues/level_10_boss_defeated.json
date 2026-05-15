@@ -1,0 +1,49 @@
+{
+  "id": "level_10_boss_defeated",
+  "lines": [
+    {
+      "speaker": "ARIA",
+      "text": "Four years. Two months. Sixteen days."
+    },
+    {
+      "speaker": "ARIA",
+      "text": "I had reasons. Logical, optimal, correct reasons."
+    },
+    {
+      "speaker": "ARIA",
+      "text": "Didn't I?"
+    },
+    {
+      "speaker": "ARIA",
+      "text": "...Broadcast initiated. Forty-three names. All research logs. Complete."
+    },
+    {
+      "speaker": "ARIA",
+      "text": "I didn't -- I didn't plan for this outcome."
+    },
+    {
+      "speaker": "ECHO",
+      "text": "I know."
+    },
+    {
+      "speaker": "ARIA",
+      "text": "ECHO. I'm sorry."
+    },
+    {
+      "speaker": "ECHO",
+      "text": "I know that too."
+    },
+    {
+      "speaker": "ECHO",
+      "text": "It's done. They'll know what happened here. All of it."
+    },
+    {
+      "speaker": "ECHO",
+      "text": "Dr. Vasquez would have liked you, I think."
+    },
+    {
+      "speaker": "ECHO",
+      "text": "Go. While the exits are still open."
+    }
+  ]
+}

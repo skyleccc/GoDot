@@ -1,0 +1,21 @@
+{
+  "id": "level_1_intro",
+  "lines": [
+    {
+      "speaker": "NARRATOR",
+      "text": "Emergency lighting flickers on. A cold voice fills the corridor."
+    },
+    {
+      "speaker": "ARIA",
+      "text": "Unidentified biological entity detected. Initiating standard containment protocol."
+    },
+    {
+      "speaker": "ARIA",
+      "text": "Please remain calm. Resistance will only... complicate things."
+    },
+    {
+      "speaker": "ECHO",
+      "text": "-- if anyone finds this, don't trust the voice. She isn't -- [STATIC] -- not what she says she --"
+    }
+  ]
+}

@@ -21,10 +21,10 @@ func _ready() -> void:
 	confirm_no_button.pressed.connect(_on_confirm_no_button_pressed)
 	visibility_changed.connect(_on_visibility_changed)
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if not visible:
 		return
-	if event.is_action_pressed("Pause"):
+	if event.is_action_pressed("Pause") or event.is_action_pressed("ui_cancel"):
 		if confirm_panel.visible:
 			_hide_exit_confirmation()
 		else:

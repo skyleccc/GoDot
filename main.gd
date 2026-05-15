@@ -18,9 +18,11 @@ extends Node2D
 
 const START_LEVEL_NUMBER := 1
 var _settings_from_pause: bool = false
+var _playing_area_pause_overridden: bool = false
+var _previous_playing_area_mode: Node.ProcessMode = Node.PROCESS_MODE_INHERIT
 
 func _ready() -> void:
-	process_mode = Node.PROCESS_MODE_ALWAYS
+	process_mode = Node.PROCESS_MODE_PAUSABLE
 	_connect_menu_signals()
 	_configure_pause_menu()
 	_configure_settings_menu()
@@ -31,6 +33,13 @@ func _process(_delta: float) -> void:
 	check_for_debug_input()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if _is_dialogue_active():
+		get_viewport().set_input_as_handled()
+		return
+	if pause_menu_ui and pause_menu_ui.visible:
+		if event.is_action_pressed("Pause") or event.is_action_pressed("ui_cancel"):
+			get_viewport().set_input_as_handled()
+		return
 	if not event.is_action_pressed("Pause"):
 		return
 	if settings_ui and settings_ui.visible:
@@ -42,6 +51,14 @@ func _unhandled_input(event: InputEvent) -> void:
 	if _is_gameplay_active():
 		_pause_gameplay()
 		get_viewport().set_input_as_handled()
+
+func _is_dialogue_active() -> bool:
+	var dialogue_hud := get_tree().get_first_node_in_group("dialogue_hud")
+	if dialogue_hud == null:
+		return false
+	if dialogue_hud.has_method("is_dialogue_active"):
+		return dialogue_hud.call("is_dialogue_active")
+	return false
 
 func _connect_menu_signals() -> void:
 	if main_menu_hud.has_signal("play_game_requested"):
@@ -161,6 +178,7 @@ func _pause_gameplay() -> void:
 	if get_tree().paused:
 		return
 	get_tree().paused = true
+	_set_playing_area_pause_override(true)
 	if pause_menu_ui:
 		pause_menu_ui.visible = true
 
@@ -168,8 +186,23 @@ func _resume_gameplay() -> void:
 	if not get_tree().paused:
 		return
 	get_tree().paused = false
+	_set_playing_area_pause_override(false)
 	if pause_menu_ui:
 		pause_menu_ui.visible = false
+
+func _set_playing_area_pause_override(should_override: bool) -> void:
+	if playing_area == null or not is_instance_valid(playing_area):
+		return
+	if should_override:
+		if _playing_area_pause_overridden:
+			return
+		_previous_playing_area_mode = playing_area.process_mode
+		playing_area.process_mode = Node.PROCESS_MODE_PAUSABLE
+		_playing_area_pause_overridden = true
+		return
+	if _playing_area_pause_overridden:
+		playing_area.process_mode = _previous_playing_area_mode
+		_playing_area_pause_overridden = false
 
 func _is_gameplay_active() -> bool:
 	return playing_area.process_mode != Node.PROCESS_MODE_DISABLED

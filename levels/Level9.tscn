@@ -1105,6 +1105,7 @@ scale = Vector2(-1, 1)
 
 [node name="Exit" parent="." unique_id=1524804408 instance=ExtResource("13_7q4xn")]
 position = Vector2(1880, 174)
+completion_dialogue_id = "level_9_exit"
 
 [node name="StrikerEnemy3" parent="." unique_id=62109306 instance=ExtResource("7_8vqif")]
 position = Vector2(1703, 152)

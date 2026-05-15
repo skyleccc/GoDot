@@ -84,7 +84,7 @@ func _destroy() -> void:
 	var explosion_sound := AudioStreamPlayer2D.new()
 	explosion_sound.stream = preload("res://asssets/sounds/FREE FPS SFX Pack/Rocket_Explosion-001.wav")
 	explosion_sound.global_position = collision_shape.global_position
-	explosion_sound.bus = &"Master"
+	explosion_sound.bus = &"SFX"
 	get_tree().current_scene.add_child(explosion_sound)
 	explosion_sound.play()
 	

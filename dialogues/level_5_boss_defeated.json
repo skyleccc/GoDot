@@ -1,0 +1,17 @@
+{
+  "id": "level_5_boss_defeated",
+  "lines": [
+    {
+      "speaker": "ARIA",
+      "text": "..."
+    },
+    {
+      "speaker": "ARIA",
+      "text": "Recalibrating threat assessment. Upgrading your classification from 'anomaly' to 'priority target.'"
+    },
+    {
+      "speaker": "ECHO",
+      "text": "You did it. But she won't stop. She never stops."
+    }
+  ]
+}

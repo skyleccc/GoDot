@@ -133,6 +133,7 @@ collision_mask = 11
 script = ExtResource("1_script")
 aoe_damage = 0
 railgun_length = 1000.0
+defeat_dialogue_id = "level_5_boss_defeated"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=817699787]
 position = Vector2(24, 22)

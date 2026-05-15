@@ -110,7 +110,7 @@ func _spawn_detonation_explosion(spawn_position: Vector2) -> void:
 	var explosion_sound := AudioStreamPlayer2D.new()
 	explosion_sound.stream = preload("res://asssets/sounds/FREE FPS SFX Pack/Rocket_Explosion-002.wav")
 	explosion_sound.global_position = spawn_position
-	explosion_sound.bus = &"Master"
+	explosion_sound.bus = &"SFX"
 	get_tree().current_scene.add_child(explosion_sound)
 	explosion_sound.play()
 	await explosion_sound.finished

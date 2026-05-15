@@ -1004,6 +1004,7 @@ position = Vector2(1360, 737)
 
 [node name="Exit" parent="." unique_id=1524804408 instance=ExtResource("11_xo8nd")]
 position = Vector2(1903, 814)
+completion_dialogue_id = "level_8_exit"
 
 [node name="Saw6" parent="." unique_id=1399974081 instance=ExtResource("7_8w3ei")]
 position = Vector2(1706, 719)

@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://dq67u6ww3sebg"]
+
+[ext_resource type="Texture2D" uid="uid://5bmfnj0ogdhj" path="res://huds/components/Bars/Green/x1/Asset 4 - Copy.png" id="2_iit52"]
+[ext_resource type="Script" uid="uid://by3mf8h3fb8os" path="res://huds/dialogue_hud.gd" id="3_dialogue_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dialogue"]
+bg_color = Color(0.06, 0.06, 0.08, 0.9)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 10
+
+[node name="DialogueHud" type="Control" unique_id=1678053771]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("3_dialogue_script")
+
+[node name="DialoguePanel" type="Panel" parent="." unique_id=1775652461]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = -240.0
+offset_right = -40.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dialogue")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DialoguePanel" unique_id=786602750]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 16.0
+offset_right = -20.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="HeaderBar" type="TextureRect" parent="DialoguePanel/VBoxContainer" unique_id=1183167717]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_iit52")
+expand_mode = 3
+flip_h = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DialoguePanel/VBoxContainer" unique_id=300639211]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="SpeakerFrame" type="TextureRect" parent="DialoguePanel/VBoxContainer/HBoxContainer" unique_id=589187466]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_vertical = 0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SpeakerPortrait" type="TextureRect" parent="DialoguePanel/VBoxContainer/HBoxContainer/SpeakerFrame" unique_id=-2135491689]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SpeakerVBox" type="VBoxContainer" parent="DialoguePanel/VBoxContainer/HBoxContainer" unique_id=1347724278]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="SpeakerLabel" type="Label" parent="DialoguePanel/VBoxContainer/HBoxContainer/SpeakerVBox" unique_id=1552877140]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "SABLE"
+
+[node name="DialogueText" type="RichTextLabel" parent="DialoguePanel/VBoxContainer/HBoxContainer/SpeakerVBox" unique_id=1816020008]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Dialogue text appears here."
+fit_content = true
+autowrap_mode = 2
+
+[node name="ContinueLabel" type="Label" parent="DialoguePanel/VBoxContainer" unique_id=425070917]
+modulate = Color(1, 1, 1, 0.7)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Click or Space to continue"
+horizontal_alignment = 2
