@@ -1129,7 +1129,6 @@ scale = Vector2(-1, 1)
 
 [node name="Turret4" parent="." unique_id=330535997 instance=ExtResource("5_dsknv")]
 position = Vector2(328, 468)
-rotation = 3.1415927
 
 [node name="Turret2" parent="." unique_id=157179246 instance=ExtResource("5_dsknv")]
 position = Vector2(254, 476)

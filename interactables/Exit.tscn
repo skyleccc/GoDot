@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://jqn4qn73cm6" path="res://interactables/exit.gd" id="1_6310n"]
 [ext_resource type="AudioStream" uid="uid://clvyaccu6w1kf" path="res://interactables/sounds/Retro Charge 07.wav" id="2_l6mlc"]
+[ext_resource type="Script" uid="uid://y2kjtcrrajp5" path="res://interactables/ExitIndicator.gd" id="3_vrawk"]
 
 [sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_ngkh6"]
 _data = PackedByteArray("AAADAAUAAAABAAAAAAEAAAABAACMAQAAUklGRoQBAABXRUJQVlA4THgBAAAv/8A/ED9AqIFxZfSfvxAKyKIGmTDE5HDrHxGZtE2U9Jt/iZv/APC/hcJIow0g17bbNoJssgB1oAOn7YQGHBQqkNaOLMCx/jkGxKEFOIeI/jtw28aRpG2ea87gXgHq/fjP20nMNTOXYdjjukhMLRZCtDLmCtxXCVr5+6pyLhieEtDI1FFjaqSvV7FNSapWJUn6eh2Yjqmgl3o//vPODnu25zK1c1m4WBr5c4lmKH5fhyDZBD32ELEl+n9j/SBi1wvqIvGB/7lMHTWmRn9o61VsU5KqVUmSvF6DNZLUnyNJfg5Mx1TQ6xnfYcoUS1rjZeLrt9b22aMJE/TYun8QqH4uf7gPEap+rv/ly/+xt10Y8XQlXwzDHtdPEZqeS2QwnOC5bGOhW0svCBu+LBZonuGpQq+5twzDv+jMMXXUmBrp61VsU5KqVUmSvl4HpmMq6PWU6DAlgno//vP0h4Wb3SFcA5oLztRRY2qkj2KbklStSpL0cWA6phoA")
@@ -112,3 +113,6 @@ position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_ngkh6")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1093018923]
+
+[node name="ExitIndicator" type="Node2D" parent="." unique_id=1477353453]
+script = ExtResource("3_vrawk")
