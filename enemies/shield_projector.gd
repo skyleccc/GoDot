@@ -1,5 +1,7 @@
 extends StaticBody2D
 
+signal crystal_destroyed
+
 @export_group("Crystal Stats")
 @export var max_hp: int = 50
 @export var damage_taken_per_hit: int = 15
@@ -8,8 +10,6 @@ var current_hp: int = 0
 var _is_alive: bool = true
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
-
-signal crystal_destroyed
 
 # Explosion animation frames
 var explosion_frames: Array = [
@@ -23,30 +23,31 @@ var explosion_frames: Array = [
 	preload("res://asssets/Explosions/explosion pack 1/Explosions pack/explosion-1-b/Sprites/explosion-1-b-8.png")
 ]
 
+
 func _ready() -> void:
-	add_to_group("shield_projectors")
+	add_to_group("shield_projectors")  # ← This line is already here!
 	current_hp = max_hp
-	
-	# Setup projectile detection
 	_update_visual()
+
 
 func _physics_process(_delta: float) -> void:
 	pass  # StaticBody2D doesn't move
 
-	
 
 func take_damage(amount: int, hit_source_pos: Vector2 = Vector2(), _knockback: bool = true, _apply_slow: bool = false) -> void:
 	if not _is_alive:
 		return
+	
 	if hit_source_pos == Vector2():
 		hit_source_pos = global_position
-
+	
 	current_hp -= amount
 	_update_visual()
 	print("Crystal hit! HP: ", current_hp, " / ", max_hp)
-
+	
 	if current_hp <= 0:
 		_destroy()
+
 
 func _destroy() -> void:
 	_is_alive = false
@@ -63,7 +64,6 @@ func _destroy() -> void:
 	sprite_frames.add_animation("explosion")
 	for texture in explosion_frames:
 		sprite_frames.add_frame("explosion", texture, 1.0)
-	# Set animation to not loop
 	sprite_frames.set_animation_loop("explosion", false)
 	
 	var explosion := AnimatedSprite2D.new()
@@ -72,7 +72,6 @@ func _destroy() -> void:
 	explosion.centered = true
 	explosion.offset = Vector2.ZERO
 	explosion.scale = Vector2(1.6, 1.6)
-	# Lift the larger explosion slightly so it does not clip into the floor.
 	explosion.global_position = collision_shape.global_position + Vector2(0.0, -18.0)
 	explosion.z_index = 100
 	get_tree().current_scene.add_child(explosion)
@@ -94,6 +93,7 @@ func _destroy() -> void:
 	explosion_sound.queue_free()
 	queue_free()
 
+
 func _update_visual() -> void:
 	"""Update crystal color based on health."""
 	if not _is_alive:
@@ -114,6 +114,7 @@ func _update_visual() -> void:
 		$Decor3.modulate = color
 	if has_node("Decor4"):
 		$Decor4.modulate = color
+
 
 func is_alive() -> bool:
 	return _is_alive

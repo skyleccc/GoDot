@@ -342,3 +342,4 @@ func _normalize_speaker(speaker: String) -> String:
 
 func _is_narrator(speaker: String) -> bool:
 	return _normalize_speaker(speaker) == narrator_name.strip_edges().to_upper()
+	return _normalize_speaker(speaker) == narrator_name.strip_edges().to_upper()

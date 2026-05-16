@@ -1,3 +1,8 @@
+## WardenBoss.gd (Level 10)
+## Now requires shields to be destroyed first (like Level 5 boss used to),
+## AND THEN requires rear hits to deal damage (reactive armor from original Warden).
+## Two-layer challenge: destroy shields → redirect attacks to the rear.
+
 extends CharacterBody2D
 
 enum AttackType { BURST, SWEEP, MINE, SCRAMBLE, RAILGUN }
@@ -101,49 +106,26 @@ var _scrambled_portal_was_monitoring: bool = true
 func _ready() -> void:
 	add_to_group("enemies")
 	add_to_group("warden_boss")
+	add_to_group("boss") 
 	current_hp = max_hp
 
-	# FIX: Audio resources are now @export vars — assign them in the editor.
-	# The runtime path-guessing fallback below is kept as a safety net only
-	# if the exports were left null (e.g. during early dev / missing assets).
 	if death_sound_res == null:
-		var death_paths := [
-			"res://asssets/sounds/FREE FPS SFX Pack/Rocket_Explosion-001.wav",
-			"res://enemies/sounds/Rocket_Explosion-001.wav"
-		]
-		for p in death_paths:
+		for p in ["res://asssets/sounds/FREE FPS SFX Pack/Rocket_Explosion-001.wav", "res://enemies/sounds/Rocket_Explosion-001.wav"]:
 			if ResourceLoader.exists(p):
 				death_sound_res = ResourceLoader.load(p) as AudioStream
 				break
 
 	if shot_sound_res == null:
-		var shot_paths := [
-			"res://enemies/sounds/07_Weapon_Shot_SciFi.wav.wav",
-			"res://enemies/sounds/08_Weapon_Shot_SciFi.wav.wav",
-			"res://asssets/sounds/Weapon_Shot_SciFi.wav"
-		]
-		for p in shot_paths:
+		for p in ["res://enemies/sounds/07_Weapon_Shot_SciFi.wav.wav", "res://enemies/sounds/08_Weapon_Shot_SciFi.wav.wav"]:
 			if ResourceLoader.exists(p):
 				shot_sound_res = ResourceLoader.load(p) as AudioStream
 				break
 
 	if railgun_sound_res == null:
-		var rail_paths := [
-			"res://enemies/sounds/03_Energy_Hit.wav.wav",
-			"res://enemies/sounds/Laser Beam 2.wav",
-			"res://enemies/sounds/07_Weapon_Shot_SciFi.wav.wav",
-			"res://asssets/sounds/Energy_Hit.wav"
-		]
-		var _rail_loaded_path: String = ""
-		for p in rail_paths:
+		for p in ["res://enemies/sounds/Laser Beam 2.wav", "res://enemies/sounds/03_Energy_Hit.wav.wav"]:
 			if ResourceLoader.exists(p):
 				railgun_sound_res = ResourceLoader.load(p) as AudioStream
-				_rail_loaded_path = p
 				break
-		if railgun_sound_res == null:
-			print("[WardenBoss] railgun sound not found in known paths")
-		else:
-			print("[WardenBoss] railgun sound loaded from:", _rail_loaded_path)
 
 	_spawn_position = global_position
 	sweep_telegraph.visible = false
@@ -156,7 +138,6 @@ func _ready() -> void:
 	_sync_armor_visuals()
 
 	if debug_force_railgun:
-		print("[WardenBoss] debug_force_railgun enabled; scheduling test fire")
 		_delayed_debug_fire()
 
 
@@ -165,11 +146,8 @@ func _delayed_debug_fire() -> void:
 	await debug_fire_railgun()
 
 
-# FIX: await the railgun cycle so _attack_busy is cleared only after it finishes.
 func debug_fire_railgun() -> void:
-	print("[WardenBoss] debug_fire_railgun called")
 	if _attack_busy:
-		print("[WardenBoss] attack busy, cannot force fire")
 		return
 	_attack_busy = true
 	_open_reactor_window(1.2)
@@ -212,35 +190,21 @@ func _ensure_target() -> void:
 	target = get_tree().get_first_node_in_group("player") as Node2D
 
 
-func _play_sound(a: AudioStream, pos: Vector2, duration: float = 1.0, volume_db: float = 0.0, force_global: bool = false) -> void:
+func _play_sound(a: AudioStream, pos: Vector2, duration: float = 1.0, volume_db: float = 0.0) -> void:
 	if a == null:
 		return
-	var p: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
+	var p := AudioStreamPlayer2D.new()
 	p.stream = a
 	p.global_position = pos
 	p.bus = &"SFX"
 	p.volume_db = volume_db
 	get_tree().current_scene.add_child(p)
 	p.play()
-
-	var global_player: AudioStreamPlayer = null
-	if force_global:
-		global_player = AudioStreamPlayer.new()
-		global_player.stream = a
-		global_player.bus = &"SFX"
-		global_player.volume_db = volume_db
-		get_tree().root.add_child(global_player)
-		global_player.play()
-
 	await get_tree().create_timer(duration, false).timeout
 	if is_instance_valid(p):
 		p.queue_free()
-	if is_instance_valid(global_player):
-		global_player.queue_free()
 
 
-# FIX: Removed the unnecessary move_and_slide() call with zero velocity.
-# Directly setting global_position.y is sufficient and avoids wasted physics overhead.
 func _hover() -> void:
 	global_position.y = _spawn_position.y + sin(_time * hover_speed) * hover_amplitude
 
@@ -249,7 +213,6 @@ func _update_facing() -> void:
 	var desired_sign: float = 1.0 if target.global_position.x >= global_position.x else -1.0
 	if desired_sign == _facing_sign:
 		return
-
 	_facing_sign = desired_sign
 	_open_reactor_window(reactor_turn_open_time)
 	var current_scale: Vector2 = scale
@@ -259,28 +222,23 @@ func _update_facing() -> void:
 func _update_phase_timers(delta: float) -> void:
 	if _reactor_open_timer > 0.0:
 		_reactor_open_timer = maxf(_reactor_open_timer - delta, 0.0)
-
 	if _sweep_active:
 		_sweep_timer -= delta
 		if _sweep_timer <= 0.0:
 			_sweep_active = false
 			sweep_beam.visible = false
-
 	_sync_armor_visuals()
 
 
 func _update_scrambled_portal(delta: float) -> void:
 	if _scrambled_portal == null or not is_instance_valid(_scrambled_portal):
 		return
-
 	_scrambled_portal_restore_timer -= delta
 	if _scrambled_portal_restore_timer > 0.0:
 		return
-
 	_scrambled_portal.monitoring = _scrambled_portal_was_monitoring
 	if _scrambled_portal.has_node("AnimatedSprite2D"):
-		var sprite: CanvasItem = _scrambled_portal.get_node("AnimatedSprite2D") as CanvasItem
-		sprite.modulate = Color.WHITE
+		(_scrambled_portal.get_node("AnimatedSprite2D") as CanvasItem).modulate = Color.WHITE
 	_scrambled_portal = null
 
 
@@ -289,19 +247,13 @@ func _start_next_attack() -> void:
 	var pattern: Array = _get_pattern()
 	var attack: int = pattern[_attack_index % pattern.size()]
 	_attack_index += 1
-	print("[WardenBoss] next attack index:", _attack_index - 1, "selected:", attack)
 
 	match attack:
-		AttackType.BURST:
-			await _run_burst_cycle()
-		AttackType.SWEEP:
-			await _run_sweep_cycle()
-		AttackType.MINE:
-			await _run_mine_cycle()
-		AttackType.SCRAMBLE:
-			await _run_scramble_cycle()
-		AttackType.RAILGUN:
-			await _run_railgun_cycle()
+		AttackType.BURST:   await _run_burst_cycle()
+		AttackType.SWEEP:   await _run_sweep_cycle()
+		AttackType.MINE:    await _run_mine_cycle()
+		AttackType.SCRAMBLE: await _run_scramble_cycle()
+		AttackType.RAILGUN: await _run_railgun_cycle()
 
 	_attack_busy = false
 
@@ -341,31 +293,90 @@ func _run_mine_cycle() -> void:
 
 func _run_railgun_cycle() -> void:
 	_open_reactor_window(1.2)
-	print("[WardenBoss] starting railgun cycle")
 	await _fire_railgun_slug()
 	_next_attack_delay = railgun_cooldown
-	print("[WardenBoss] finished railgun cycle")
 
+
+# ── Shield Gate ────────────────────────────────────────────────────────────────
+
+func _are_shields_active() -> bool:
+	for crystal in get_tree().get_nodes_in_group("shield_projectors"):
+		if is_instance_valid(crystal) and crystal.has_method("is_alive") and crystal.is_alive():
+			return true
+	return false
+
+
+# ── Damage & Reactive Armor ────────────────────────────────────────────────────
+
+func _is_rear_hit(hit_source_pos: Vector2) -> bool:
+	return (hit_source_pos - global_position).x * _facing_sign < 0.0
+
+
+func _apply_hit(amount: int, hit_source_pos: Vector2, reflect: bool) -> void:
+	if _is_dead:
+		return
+
+	# LAYER 1: Shields must be destroyed first
+	if _are_shields_active():
+		print("[WardenBoss] Shields active — hit blocked!")
+		if reflect:
+			_reflect_attack(hit_source_pos, amount)
+		return
+
+	# LAYER 2: Must hit the rear weak spot
+	if _is_rear_hit(hit_source_pos):
+		current_hp = maxi(current_hp - amount, 0)
+		print("[WardenBoss] Rear hit! damage:", amount, " hp:", current_hp)
+		if current_hp <= 0:
+			_die()
+		return
+
+	if reflect:
+		_reflect_attack(hit_source_pos, amount)
+
+
+func _reflect_attack(hit_source_pos: Vector2, amount: int) -> void:
+	var direction := (hit_source_pos - global_position).normalized()
+	if direction == Vector2.ZERO:
+		direction = Vector2(_facing_sign, 0.0)
+	var reflected := projectile_scene.instantiate() as CharacterBody2D
+	reflected.global_position = global_position + direction * 48.0
+	reflected.damage = amount
+	reflected.speed = burst_speed
+	reflected.max_step_distance = 12.0
+	get_tree().current_scene.add_child(reflected)
+	reflected.set_shooter(self)
+	reflected.initialize(direction)
+
+
+func take_bullet_damage(amount: int, hit_source_pos: Vector2 = Vector2.ZERO) -> void:
+	_apply_hit(amount, hit_source_pos, true)
+
+
+func take_damage(amount: int, hit_source_pos: Vector2 = Vector2.ZERO, _knockback: bool = true, _apply_slow: bool = false) -> void:
+	_apply_hit(amount, hit_source_pos, false)
+
+
+# ── Attacks ────────────────────────────────────────────────────────────────────
 
 func _fire_burst_bolts() -> void:
-	var aim_direction: Vector2 = (target.global_position - projectile_spawn.global_position).normalized()
-	if aim_direction == Vector2.ZERO:
-		aim_direction = Vector2(_facing_sign, 0.0)
-
+	var aim: Vector2 = (target.global_position - projectile_spawn.global_position).normalized()
+	if aim == Vector2.ZERO:
+		aim = Vector2(_facing_sign, 0.0)
 	var half_spread: float = deg_to_rad(burst_spread_degrees)
 	for index in range(3):
 		var ratio: float = float(index) / 2.0
 		var offset: float = lerp(-half_spread, half_spread, ratio)
-		var projectile_direction: Vector2 = aim_direction.rotated(offset)
-		var projectile: CharacterBody2D = projectile_scene.instantiate() as CharacterBody2D
-		projectile.global_position = projectile_spawn.global_position + projectile_direction * 60.0
+		var dir: Vector2 = aim.rotated(offset)
+		var projectile := projectile_scene.instantiate() as CharacterBody2D
+		projectile.global_position = projectile_spawn.global_position + dir * 60.0
 		projectile.damage = burst_damage
 		projectile.speed = burst_speed
 		projectile.max_step_distance = 12.0
 		if projectile.has_method("set"):
 			projectile.set("redirectable", true)
 		projectile.set_shooter(self)
-		projectile.initialize(projectile_direction)
+		projectile.initialize(dir)
 		get_tree().current_scene.add_child(projectile)
 		if shot_sound_res != null:
 			_play_sound(shot_sound_res, projectile.global_position, 0.9)
@@ -375,7 +386,6 @@ func _fire_sweep_beam() -> void:
 	var y: float = clampf(target.global_position.y, arena_top, arena_bottom)
 	_sweep_y = y
 	_show_line(sweep_telegraph, Vector2(arena_left, y), Vector2(arena_right, y), Color(1.0, 0.85, 0.2, 0.95), 7.0)
-
 	await get_tree().create_timer(sweep_charge_time, false).timeout
 	sweep_telegraph.visible = false
 
@@ -392,8 +402,6 @@ func _fire_sweep_beam() -> void:
 	_sweep_active = true
 	_sweep_timer = sweep_beam_time
 
-	# FIX: Sweep damage is now continuous for the full beam duration (every 50ms tick)
-	# so players who walk into the beam after it fires still take damage.
 	var elapsed: float = 0.0
 	while elapsed < sweep_beam_time:
 		_apply_sweep_damage()
@@ -411,37 +419,30 @@ func _fire_sweep_beam() -> void:
 func _drop_mines() -> void:
 	if mine_scene == null:
 		return
-
 	var spawn_pos: Vector2 = projectile_spawn.global_position
 	if mine_spawn != null:
 		spawn_pos = mine_spawn.global_position
-
 	for mine_index in range(mine_count):
-		var mine: CharacterBody2D = mine_scene.instantiate() as CharacterBody2D
-		var horizontal_offset: float = (float(mine_index) - float(mine_count - 1) * 0.5) * mine_spacing
-		mine.global_position = spawn_pos + Vector2(horizontal_offset, 0.0)
+		var mine := mine_scene.instantiate() as CharacterBody2D
+		var h_offset: float = (float(mine_index) - float(mine_count - 1) * 0.5) * mine_spacing
+		mine.global_position = spawn_pos + Vector2(h_offset, 0.0)
 		if mine.has_method("launch_toward"):
 			mine.launch_toward((target.global_position - mine.global_position).normalized())
 		if mine.has_method("set"):
 			mine.set("damage", mine_damage)
 			mine.set("speed", mine_speed)
 			mine.set("arm_delay", mine_arm_delay)
-			# FIX: Mark mines as redirectable and pass warden reference so they
-			# can be portal-redirected into the boss's rear weak spot.
 			mine.set("redirectable", true)
 			mine.set("warden_ref", self)
 		get_tree().current_scene.add_child(mine)
 
 
 func _apply_sweep_damage() -> void:
-	if target == null or not is_instance_valid(target):
+	if target == null or not is_instance_valid(target) or not target.has_method("take_damage"):
 		return
-	if not target.has_method("take_damage"):
-		return
-
-	var start: Vector2 = Vector2(arena_left, _sweep_y)
-	var end: Vector2 = Vector2(arena_right, _sweep_y)
-	var closest: Vector2 = Geometry2D.get_closest_point_to_segment(target.global_position, start, end)
+	var start := Vector2(arena_left, _sweep_y)
+	var end := Vector2(arena_right, _sweep_y)
+	var closest := Geometry2D.get_closest_point_to_segment(target.global_position, start, end)
 	if target.global_position.distance_to(closest) <= sweep_width:
 		target.take_damage(sweep_damage, start, false, false)
 
@@ -465,22 +466,18 @@ func _fire_railgun_slug() -> void:
 	rail_audio.play()
 
 	_animate_railgun_beam(origin, end)
-
-	# FIX: Single damage check + single timer instead of an unreliable 0.016s loop.
-	# Damage is applied once at beam-fire; the timer simply waits for the visual to finish.
 	_apply_railgun_damage(origin, end)
 	await get_tree().create_timer(railgun_beam_time, false).timeout
-
 	railgun_beam.visible = false
 
-	if rail_audio != null and is_instance_valid(rail_audio):
+	if is_instance_valid(rail_audio):
 		var tween := create_tween()
 		tween.tween_property(rail_audio, "volume_db", -80.0, 0.3)
 		await tween.finished
 		rail_audio.stop()
 		rail_audio.queue_free()
 
-	var projectile: CharacterBody2D = projectile_scene.instantiate() as CharacterBody2D
+	var projectile := projectile_scene.instantiate() as CharacterBody2D
 	projectile.global_position = origin + direction * 60.0
 	projectile.damage = railgun_damage
 	projectile.speed = railgun_speed
@@ -495,80 +492,11 @@ func _fire_railgun_slug() -> void:
 	get_tree().current_scene.add_child(projectile)
 
 
-func _detach_railgun_fx_nodes() -> void:
-	var root := get_tree().root
-	if root == null:
-		return
-
-	if is_instance_valid(railgun_telegraph) and railgun_telegraph.get_parent() != root:
-		railgun_telegraph.reparent(root)
-		railgun_telegraph.top_level = true
-		railgun_telegraph.process_mode = Node.PROCESS_MODE_PAUSABLE
-
-	if is_instance_valid(railgun_beam) and railgun_beam.get_parent() != root:
-		railgun_beam.reparent(root)
-		railgun_beam.top_level = true
-		railgun_beam.process_mode = Node.PROCESS_MODE_PAUSABLE
-		railgun_beam.z_index = 500
-		railgun_beam.show_behind_parent = false
-
-
-func _animate_railgun_beam(origin: Vector2, end: Vector2) -> void:
-	var direction: Vector2 = (end - origin).normalized()
-	var length: float = origin.distance_to(end)
-	var base_texture: Texture2D = railgun_beam.sprite_frames.get_frame_texture("pulse", 0)
-	var base_width: float = maxf(base_texture.get_size().x, 1.0)
-	var scale_factor: float = length / base_width
-	railgun_beam.global_position = origin + direction * (length * 0.5)
-	railgun_beam.rotation = direction.angle()
-	railgun_beam.scale = Vector2(scale_factor, 1.0)
-	railgun_beam.modulate = Color(0.74, 0.38, 1.0, 1.0)
-	railgun_beam.z_index = 500
-	railgun_beam.show_behind_parent = false
-	railgun_beam.process_mode = Node.PROCESS_MODE_PAUSABLE
-	railgun_beam.visible = true
-	railgun_beam.frame = 0
-	railgun_beam.play("pulse")
-
-	var tween := create_tween()
-	tween.set_trans(Tween.TRANS_SINE)
-	tween.set_ease(Tween.EASE_IN_OUT)
-	for _pulse in range(4):
-		tween.tween_property(railgun_beam, "modulate", Color(0.92, 0.55, 1.0, 1.0), 0.04)
-		tween.tween_property(railgun_beam, "modulate", Color(0.74, 0.38, 1.0, 1.0), 0.04)
-
-
-func _animate_sweep_beam(y: float) -> void:
-	var length: float = arena_right - arena_left
-	var base_texture: Texture2D = sweep_beam.sprite_frames.get_frame_texture("pulse", 0)
-	var base_width: float = maxf(base_texture.get_size().x, 1.0)
-	var scale_factor: float = length / base_width
-	sweep_beam.global_position = Vector2(arena_left + length * 0.5, y)
-	sweep_beam.rotation = 0.0
-	sweep_beam.scale = Vector2(scale_factor, 1.0)
-	sweep_beam.modulate = Color(1.0, 0.2, 0.2, 1.0)
-	sweep_beam.z_index = 100
-	sweep_beam.show_behind_parent = false
-	sweep_beam.process_mode = Node.PROCESS_MODE_PAUSABLE
-	sweep_beam.visible = true
-	sweep_beam.frame = 0
-	sweep_beam.play("pulse")
-
-	var tween := create_tween()
-	tween.set_trans(Tween.TRANS_SINE)
-	tween.set_ease(Tween.EASE_IN_OUT)
-	for _pulse in range(4):
-		tween.tween_property(sweep_beam, "modulate", Color(1.0, 0.4, 0.4, 1.0), 0.04)
-		tween.tween_property(sweep_beam, "modulate", Color(1.0, 0.2, 0.2, 1.0), 0.04)
-
 
 func _scramble_portal() -> void:
 	var portals: Array = get_tree().get_nodes_in_group("portals")
 	if portals.is_empty():
 		return
-
-	# FIX: Prefer the portal closest to the player so scramble is always impactful,
-	# rather than randomly picking one that might not be placed yet.
 	var best_portal: Area2D = null
 	var best_dist: float = INF
 	for p in portals:
@@ -578,17 +506,14 @@ func _scramble_portal() -> void:
 		if d < best_dist:
 			best_dist = d
 			best_portal = p
-
 	if best_portal == null:
 		return
-
 	_scrambled_portal = best_portal
 	_scrambled_portal_was_monitoring = best_portal.monitoring
 	_scrambled_portal_restore_timer = scramble_disable_time
 	best_portal.monitoring = false
 	if best_portal.has_node("AnimatedSprite2D"):
-		var sprite: CanvasItem = best_portal.get_node("AnimatedSprite2D") as CanvasItem
-		sprite.modulate = Color(0.55, 0.55, 0.55, 1.0)
+		(best_portal.get_node("AnimatedSprite2D") as CanvasItem).modulate = Color(0.55, 0.55, 0.55, 1.0)
 
 
 func _show_line(line: Line2D, start: Vector2, finish: Vector2, color: Color, width: float) -> void:
@@ -602,14 +527,10 @@ func _show_line(line: Line2D, start: Vector2, finish: Vector2, color: Color, wid
 
 
 func _apply_railgun_damage(start: Vector2, finish: Vector2) -> bool:
-	if target == null or not is_instance_valid(target):
+	if target == null or not is_instance_valid(target) or not target.has_method("take_damage"):
 		return false
-	if not target.has_method("take_damage"):
-		return false
-
 	var closest := Geometry2D.get_closest_point_to_segment(target.global_position, start, finish)
-	var distance := target.global_position.distance_to(closest)
-	if distance <= 22.0:
+	if target.global_position.distance_to(closest) <= 22.0:
 		target.take_damage(railgun_damage, start, false, false)
 		return true
 	return false
@@ -628,47 +549,63 @@ func _sync_armor_visuals() -> void:
 		rear_reactor_glow.modulate = Color(1.0, 0.25, 0.25, alpha)
 
 
-func _is_rear_hit(hit_source_pos: Vector2) -> bool:
-	var relative: Vector2 = hit_source_pos - global_position
-	return relative.x * _facing_sign < 0.0
+# ── Death ──────────────────────────────────────────────────────────────────────
 
-
-func _apply_hit(amount: int, hit_source_pos: Vector2, reflect: bool) -> void:
-	if _is_dead:
+func _detach_railgun_fx_nodes() -> void:
+	var root := get_tree().root
+	if root == null:
 		return
-
-	if _is_rear_hit(hit_source_pos):
-		current_hp = maxi(current_hp - amount, 0)
-		print("Warden rear hit — damage:", amount, " hit_pos:", hit_source_pos, " hp:", current_hp)
-		if current_hp <= 0:
-			_die()
-		return
-
-	if reflect:
-		_reflect_attack(hit_source_pos, amount)
-
-
-func _reflect_attack(hit_source_pos: Vector2, amount: int) -> void:
-	var direction := (hit_source_pos - global_position).normalized()
-	if direction == Vector2.ZERO:
-		direction = Vector2(_facing_sign, 0.0)
-
-	var reflected: CharacterBody2D = projectile_scene.instantiate() as CharacterBody2D
-	reflected.global_position = global_position + direction * 48.0
-	reflected.damage = amount
-	reflected.speed = burst_speed
-	reflected.max_step_distance = 12.0
-	get_tree().current_scene.add_child(reflected)
-	reflected.set_shooter(self)
-	reflected.initialize(direction)
+	if is_instance_valid(railgun_telegraph) and railgun_telegraph.get_parent() != root:
+		railgun_telegraph.reparent(root)
+		railgun_telegraph.top_level = true
+		railgun_telegraph.process_mode = Node.PROCESS_MODE_ALWAYS
+	if is_instance_valid(railgun_beam) and railgun_beam.get_parent() != root:
+		railgun_beam.reparent(root)
+		railgun_beam.top_level = true
+		railgun_beam.process_mode = Node.PROCESS_MODE_ALWAYS
+		railgun_beam.z_index = 500
+		railgun_beam.show_behind_parent = false
 
 
-func take_bullet_damage(amount: int, hit_source_pos: Vector2 = Vector2.ZERO) -> void:
-	_apply_hit(amount, hit_source_pos, true)
+func _animate_railgun_beam(origin: Vector2, end: Vector2) -> void:
+	var direction: Vector2 = (end - origin).normalized()
+	var length: float = origin.distance_to(end)
+	var base_texture: Texture2D = railgun_beam.sprite_frames.get_frame_texture("pulse", 0)
+	var base_width: float = maxf(base_texture.get_size().x, 1.0)
+	railgun_beam.global_position = origin + direction * (length * 0.5)
+	railgun_beam.rotation = direction.angle()
+	railgun_beam.scale = Vector2(length / base_width, 1.0)
+	railgun_beam.modulate = Color(0.74, 0.38, 1.0, 1.0)
+	railgun_beam.z_index = 500
+	railgun_beam.process_mode = Node.PROCESS_MODE_ALWAYS
+	railgun_beam.visible = true
+	railgun_beam.frame = 0
+	railgun_beam.play("pulse")
+	var tween := create_tween()
+	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	for _p in range(4):
+		tween.tween_property(railgun_beam, "modulate", Color(0.92, 0.55, 1.0, 1.0), 0.04)
+		tween.tween_property(railgun_beam, "modulate", Color(0.74, 0.38, 1.0, 1.0), 0.04)
 
 
-func take_damage(amount: int, hit_source_pos: Vector2 = Vector2.ZERO, _knockback: bool = true, _apply_slow: bool = false) -> void:
-	_apply_hit(amount, hit_source_pos, false)
+func _animate_sweep_beam(y: float) -> void:
+	var length: float = arena_right - arena_left
+	var base_texture: Texture2D = sweep_beam.sprite_frames.get_frame_texture("pulse", 0)
+	var base_width: float = maxf(base_texture.get_size().x, 1.0)
+	sweep_beam.global_position = Vector2(arena_left + length * 0.5, y)
+	sweep_beam.rotation = 0.0
+	sweep_beam.scale = Vector2(length / base_width, 1.0)
+	sweep_beam.modulate = Color(1.0, 0.2, 0.2, 1.0)
+	sweep_beam.z_index = 100
+	sweep_beam.process_mode = Node.PROCESS_MODE_ALWAYS
+	sweep_beam.visible = true
+	sweep_beam.frame = 0
+	sweep_beam.play("pulse")
+	var tween := create_tween()
+	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	for _p in range(4):
+		tween.tween_property(sweep_beam, "modulate", Color(1.0, 0.4, 0.4, 1.0), 0.04)
+		tween.tween_property(sweep_beam, "modulate", Color(1.0, 0.2, 0.2, 1.0), 0.04)
 
 
 func _die() -> void:
@@ -683,29 +620,24 @@ func _die() -> void:
 	var death_node: AnimatedSprite2D = get_node_or_null("DeathExplosion") as AnimatedSprite2D
 	if death_node != null:
 		if has_node("Ship"):
-			var ship_node := get_node("Ship") as CanvasItem
-			ship_node.visible = false
-
+			(get_node("Ship") as CanvasItem).visible = false
 		death_node.visible = true
 		death_node.z_index = 200
 		death_node.play("explosion")
-
-		var s: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
+		var s := AudioStreamPlayer2D.new()
 		s.stream = death_sound_res
 		s.global_position = global_position
 		s.bus = &"SFX"
 		get_tree().current_scene.add_child(s)
 		s.play()
-
 	else:
-		var sprite_frames: SpriteFrames = SpriteFrames.new()
-		sprite_frames.add_animation("explosion")
+		var sf := SpriteFrames.new()
+		sf.add_animation("explosion")
 		for texture in death_explosion_frames:
-			sprite_frames.add_frame("explosion", texture, 1.0)
-		sprite_frames.set_animation_loop("explosion", false)
-
-		var explosion: AnimatedSprite2D = AnimatedSprite2D.new()
-		explosion.sprite_frames = sprite_frames
+			sf.add_frame("explosion", texture, 1.0)
+		sf.set_animation_loop("explosion", false)
+		var explosion := AnimatedSprite2D.new()
+		explosion.sprite_frames = sf
 		explosion.animation = "explosion"
 		explosion.centered = true
 		explosion.scale = Vector2(2.2, 2.2)
@@ -713,8 +645,7 @@ func _die() -> void:
 		explosion.z_index = 200
 		get_tree().current_scene.add_child(explosion)
 		explosion.play()
-
-		var s2: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
+		var s2 := AudioStreamPlayer2D.new()
 		s2.stream = death_sound_res
 		s2.global_position = global_position
 		s2.bus = &"SFX"
@@ -727,8 +658,6 @@ func _die() -> void:
 			exit_node.get_node("Area2D").monitoring = true
 			exit_node.visible = true
 
-	# FIX: Corrected indentation — _start_defeat_dialogue() was using 2-space
-	# indent instead of tabs, which would cause a parse error at runtime.
 	await get_tree().create_timer(1.25).timeout
 	_start_defeat_dialogue()
   
