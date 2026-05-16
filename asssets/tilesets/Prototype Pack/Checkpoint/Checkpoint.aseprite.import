@@ -3,11 +3,12 @@
 importer="Aseprite Sprite2D Import"
 type="PackedScene"
 uid="uid://t5ph68tv2puc"
-valid=false
+path="res://.godot/imported/Checkpoint.aseprite-1571c899a35b6858cecc0cc7d71d0089.scn"
 
 [deps]
 
 source_file="res://asssets/tilesets/Prototype Pack/Checkpoint/Checkpoint.aseprite"
+dest_files=["res://.godot/imported/Checkpoint.aseprite-1571c899a35b6858cecc0cc7d71d0089.scn"]
 
 [params]
 

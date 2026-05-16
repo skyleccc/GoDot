@@ -47,7 +47,10 @@ func _ready() -> void:
 
 
 func _init_shields() -> void:
-	_shields = get_tree().get_nodes_in_group("shield_projectors")
+	_shields = []
+	for node in get_tree().get_nodes_in_group("shield_projectors"):
+		if is_instance_valid(node):
+			_shields.append(node)
 	print("[ExitIndicator] Found ", _shields.size(), " shield projectors")
 
 

@@ -150,7 +150,11 @@ func _make_bar_row(title: String, bar_color: Color, min_width: int = 160) -> Dic
 # ── Node Binding ───────────────────────────────────────────────────────────────
 
 func _bind_nodes() -> void:
-	_shields = get_tree().get_nodes_in_group("shield_projectors")
+	# Filter out any freed/invalid nodes that may linger from a previous level
+	_shields = []
+	for node in get_tree().get_nodes_in_group("shield_projectors"):
+		if is_instance_valid(node):
+			_shields.append(node)
 	print("[BossHUD] Found ", _shields.size(), " shield projectors")
 
 	for i in range(mini(_shields.size(), 3)):
@@ -164,6 +168,8 @@ func _bind_nodes() -> void:
 	_boss = get_tree().get_first_node_in_group("boss")
 	if _boss == null:
 		for node in get_tree().get_nodes_in_group("enemies"):
+			if not is_instance_valid(node):
+				continue
 			if node.has_method("_are_shields_active"):
 				_boss = node
 				break
@@ -181,10 +187,12 @@ func _process(delta: float) -> void:
 		# Use our own destroyed flag — never touch freed nodes
 		if _shield_destroyed[i]:
 			continue
-		var shield: Node = _shields[i]
-		if not is_instance_valid(shield):
+		# Check validity BEFORE typed assignment to avoid
+		# "Trying to assign invalid previously freed instance" error
+		if not is_instance_valid(_shields[i]):
 			_shield_destroyed[i] = true
 			continue
+		var shield: Node = _shields[i]
 		if shield.has_method("get"):
 			_shield_bars[i].value = float(shield.get("current_hp"))
 

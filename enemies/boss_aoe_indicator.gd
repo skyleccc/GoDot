@@ -68,7 +68,7 @@ func _build_circle_visuals() -> void:
 	outline.default_color = Color(1.0, 0.9, 0.35, 0.9)
 
 func _detonate_after_delay() -> void:
-	await get_tree().create_timer(telegraph_time).timeout
+	await get_tree().create_timer(telegraph_time, false).timeout
 	fill.visible = false
 	outline.visible = false
 	# Enable monitoring just long enough to capture overlapping bodies,

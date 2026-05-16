@@ -127,6 +127,16 @@ func _on_level_loaded(level_number: int) -> void:
 	if start_dialogue_from_file(dialogue_path, auto_start_delay_seconds):
 		_played_dialogues[dialogue_path] = true
 
+func reset_for_level_load() -> void:
+	_start_token += 1
+	_lines.clear()
+	_line_index = 0
+	_current_dialogue_id = ""
+	_dialogue_pending = false
+	visible = false
+	_apply_dialogue_pause(false)
+	_played_dialogues.clear()
+
 func _load_dialogue_data(dialogue_path: String) -> Dictionary:
 	if not ResourceLoader.exists(dialogue_path):
 		push_warning("Dialogue file not found: %s" % dialogue_path)

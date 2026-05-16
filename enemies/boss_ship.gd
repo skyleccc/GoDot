@@ -199,7 +199,7 @@ func _fire_railgun() -> void:
 	
 	# Wait until 0.7 seconds before telegraph ends
 	var sound_start_time: float = railgun_charge_time - 0.7
-	await get_tree().create_timer(sound_start_time).timeout
+	await get_tree().create_timer(sound_start_time, false).timeout
 	
 	# Start the railgun sound during the last 0.7 seconds of telegraph
 	var rail_audio := AudioStreamPlayer2D.new()
@@ -210,7 +210,7 @@ func _fire_railgun() -> void:
 	rail_audio.play()
 	
 	# Wait for remaining telegraph time
-	await get_tree().create_timer(0.7).timeout
+	await get_tree().create_timer(0.7, false).timeout
 	telegraph_line.visible = false
 
 	_show_beam_animation(origin, dir)
@@ -222,7 +222,7 @@ func _fire_railgun() -> void:
 		elapsed += 0.016  # ~60fps tick
 		if not _railgun_hit_player:
 			_apply_railgun_damage(origin, end)
-		await get_tree().create_timer(0.016).timeout
+		await get_tree().create_timer(0.016, false).timeout
 
 	# hide beam and fade out sound after beam_time
 	beam_line.visible = false

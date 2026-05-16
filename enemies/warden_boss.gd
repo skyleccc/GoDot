@@ -76,7 +76,7 @@ var _is_dead: bool = false
 var _phase_two: bool = false
 var _attack_busy: bool = false
 var _attack_index: int = 0
-var _next_attack_delay: float = 1.2
+var _next_attack_delay: float = 3.0
 var _facing_sign: float = 1.0
 var _reactor_open_timer: float = 0.0
 var _sweep_active: bool = false
@@ -161,7 +161,7 @@ func _ready() -> void:
 
 
 func _delayed_debug_fire() -> void:
-	await get_tree().create_timer(0.9).timeout
+	await get_tree().create_timer(0.9, false).timeout
 	await debug_fire_railgun()
 
 
@@ -218,7 +218,7 @@ func _play_sound(a: AudioStream, pos: Vector2, duration: float = 1.0, volume_db:
 	var p: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
 	p.stream = a
 	p.global_position = pos
-	p.bus = "Master"
+	p.bus = &"SFX"
 	p.volume_db = volume_db
 	get_tree().current_scene.add_child(p)
 	p.play()
@@ -227,12 +227,12 @@ func _play_sound(a: AudioStream, pos: Vector2, duration: float = 1.0, volume_db:
 	if force_global:
 		global_player = AudioStreamPlayer.new()
 		global_player.stream = a
-		global_player.bus = "Master"
+		global_player.bus = &"SFX"
 		global_player.volume_db = volume_db
 		get_tree().root.add_child(global_player)
 		global_player.play()
 
-	await get_tree().create_timer(duration).timeout
+	await get_tree().create_timer(duration, false).timeout
 	if is_instance_valid(p):
 		p.queue_free()
 	if is_instance_valid(global_player):
@@ -315,7 +315,7 @@ func _get_pattern() -> Array:
 func _run_burst_cycle() -> void:
 	_open_reactor_window(0.85)
 	_fire_burst_bolts()
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.3, false).timeout
 	_next_attack_delay = burst_cooldown
 
 
@@ -328,14 +328,14 @@ func _run_sweep_cycle() -> void:
 func _run_scramble_cycle() -> void:
 	_open_reactor_window(0.7)
 	_scramble_portal()
-	await get_tree().create_timer(scramble_disable_time).timeout
+	await get_tree().create_timer(scramble_disable_time, false).timeout
 	_next_attack_delay = scramble_cooldown
 
 
 func _run_mine_cycle() -> void:
 	_open_reactor_window(0.8)
 	_drop_mines()
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.3, false).timeout
 	_next_attack_delay = mine_cooldown
 
 
@@ -376,16 +376,15 @@ func _fire_sweep_beam() -> void:
 	_sweep_y = y
 	_show_line(sweep_telegraph, Vector2(arena_left, y), Vector2(arena_right, y), Color(1.0, 0.85, 0.2, 0.95), 7.0)
 
-	await get_tree().create_timer(sweep_charge_time).timeout
+	await get_tree().create_timer(sweep_charge_time, false).timeout
 	sweep_telegraph.visible = false
 
 	var sweep_audio: AudioStreamPlayer = null
 	if railgun_sound_res != null:
 		sweep_audio = AudioStreamPlayer.new()
 		sweep_audio.stream = railgun_sound_res
-		sweep_audio.bus = "Master"
+		sweep_audio.bus = &"SFX"
 		sweep_audio.volume_db = 4.0
-		sweep_audio.process_mode = Node.PROCESS_MODE_ALWAYS
 		get_tree().root.add_child(sweep_audio)
 		sweep_audio.play()
 
@@ -398,7 +397,7 @@ func _fire_sweep_beam() -> void:
 	var elapsed: float = 0.0
 	while elapsed < sweep_beam_time:
 		_apply_sweep_damage()
-		await get_tree().create_timer(0.05).timeout
+		await get_tree().create_timer(0.05, false).timeout
 		elapsed += 0.05
 
 	if sweep_audio != null and is_instance_valid(sweep_audio):
@@ -455,14 +454,13 @@ func _fire_railgun_slug() -> void:
 	var end: Vector2 = origin + direction * 1500.0
 
 	_show_line(railgun_telegraph, origin, end, Color(1.0, 0.85, 0.2, 0.95), 8.0)
-	await get_tree().create_timer(railgun_charge_time).timeout
+	await get_tree().create_timer(railgun_charge_time, false).timeout
 	railgun_telegraph.visible = false
 
 	var rail_audio := AudioStreamPlayer.new()
 	rail_audio.stream = railgun_sound_res
-	rail_audio.bus = "Master"
+	rail_audio.bus = &"SFX"
 	rail_audio.volume_db = 4.0
-	rail_audio.process_mode = Node.PROCESS_MODE_ALWAYS
 	get_tree().root.add_child(rail_audio)
 	rail_audio.play()
 
@@ -471,7 +469,7 @@ func _fire_railgun_slug() -> void:
 	# FIX: Single damage check + single timer instead of an unreliable 0.016s loop.
 	# Damage is applied once at beam-fire; the timer simply waits for the visual to finish.
 	_apply_railgun_damage(origin, end)
-	await get_tree().create_timer(railgun_beam_time).timeout
+	await get_tree().create_timer(railgun_beam_time, false).timeout
 
 	railgun_beam.visible = false
 
@@ -505,12 +503,12 @@ func _detach_railgun_fx_nodes() -> void:
 	if is_instance_valid(railgun_telegraph) and railgun_telegraph.get_parent() != root:
 		railgun_telegraph.reparent(root)
 		railgun_telegraph.top_level = true
-		railgun_telegraph.process_mode = Node.PROCESS_MODE_ALWAYS
+		railgun_telegraph.process_mode = Node.PROCESS_MODE_PAUSABLE
 
 	if is_instance_valid(railgun_beam) and railgun_beam.get_parent() != root:
 		railgun_beam.reparent(root)
 		railgun_beam.top_level = true
-		railgun_beam.process_mode = Node.PROCESS_MODE_ALWAYS
+		railgun_beam.process_mode = Node.PROCESS_MODE_PAUSABLE
 		railgun_beam.z_index = 500
 		railgun_beam.show_behind_parent = false
 
@@ -527,7 +525,7 @@ func _animate_railgun_beam(origin: Vector2, end: Vector2) -> void:
 	railgun_beam.modulate = Color(0.74, 0.38, 1.0, 1.0)
 	railgun_beam.z_index = 500
 	railgun_beam.show_behind_parent = false
-	railgun_beam.process_mode = Node.PROCESS_MODE_ALWAYS
+	railgun_beam.process_mode = Node.PROCESS_MODE_PAUSABLE
 	railgun_beam.visible = true
 	railgun_beam.frame = 0
 	railgun_beam.play("pulse")
@@ -551,7 +549,7 @@ func _animate_sweep_beam(y: float) -> void:
 	sweep_beam.modulate = Color(1.0, 0.2, 0.2, 1.0)
 	sweep_beam.z_index = 100
 	sweep_beam.show_behind_parent = false
-	sweep_beam.process_mode = Node.PROCESS_MODE_ALWAYS
+	sweep_beam.process_mode = Node.PROCESS_MODE_PAUSABLE
 	sweep_beam.visible = true
 	sweep_beam.frame = 0
 	sweep_beam.play("pulse")
@@ -695,7 +693,7 @@ func _die() -> void:
 		var s: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
 		s.stream = death_sound_res
 		s.global_position = global_position
-		s.bus = "Master"
+		s.bus = &"SFX"
 		get_tree().current_scene.add_child(s)
 		s.play()
 
@@ -719,7 +717,7 @@ func _die() -> void:
 		var s2: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
 		s2.stream = death_sound_res
 		s2.global_position = global_position
-		s2.bus = "Master"
+		s2.bus = &"SFX"
 		get_tree().current_scene.add_child(s2)
 		s2.play()
 

@@ -13,7 +13,12 @@ signal level_loaded(level_number: int)
 const DYNAMIC_GROUPS: Array[StringName] = [
 	&"portals",
 	&"turret_bullets",
-	&"striker_bullets"
+	&"striker_bullets",
+	&"hazards",
+	&"enemies",
+	&"shield_projectors",
+	&"warden_boss",
+	&"boss_aoe"
 ]
 
 var current_level: Node2D = null
@@ -67,6 +72,10 @@ func _load_level(level_number: int) -> void:
 
 	if current_level and is_instance_valid(current_level):
 		current_level.queue_free()
+		# Wait two frames: queue_free() deletes at the END of a frame, but
+		# process_frame fires at the START. Two awaits ensure old nodes are
+		# fully freed and removed from groups before the new level is added.
+		await get_tree().process_frame
 		await get_tree().process_frame
 
 	var level_path := "res://levels/Level%d.tscn" % level_number
@@ -93,15 +102,70 @@ func _load_level(level_number: int) -> void:
 	print("Loaded %s" % level_path)
 
 func _cleanup_before_level_load() -> void:
+	var dialogue_hud := get_tree().get_first_node_in_group("dialogue_hud")
+	if dialogue_hud and dialogue_hud.has_method("reset_for_level_load"):
+		dialogue_hud.call("reset_for_level_load")
+
 	if player and player.has_node("PortalGun"):
 		var portal_gun := player.get_node("PortalGun")
 		if portal_gun and portal_gun.has_method("_clear_portals"):
 			portal_gun._clear_portals()
 
+	# Free all nodes in dynamic combat groups (enemies, projectiles, hazards, etc.)
 	for group_name in DYNAMIC_GROUPS:
 		for node in get_tree().get_nodes_in_group(group_name):
 			if node is Node and is_instance_valid(node):
+				# Stop processing to prevent coroutines from resuming on freed nodes
+				node.set_process(false)
+				node.set_physics_process(false)
 				node.queue_free()
+
+	# Clean up orphaned nodes on the scene root that were reparented there
+	# (WardenBoss reparents railgun_telegraph / railgun_beam to root,
+	#  and adds AudioStreamPlayer for sweep/railgun sounds)
+	var root := get_tree().root
+	if root != null:
+		for child in root.get_children():
+			if not is_instance_valid(child):
+				continue
+			# Only clean up nodes that have no owner (dynamically reparented)
+			# and are not the current scene itself
+			if child == get_tree().current_scene:
+				continue
+			if child.owner != null:
+				continue
+			if child is Line2D or child is AnimatedSprite2D:
+				child.queue_free()
+			elif child is AudioStreamPlayer:
+				child.stop()
+				child.queue_free()
+
+	# Clean up orphaned nodes on current_scene that were spawned by bosses/projectiles
+	# (explosions, hit effects, AoE indicators, audio players, etc.)
+	var scene := get_tree().current_scene
+	if scene != null and _level_mount_parent != null:
+		for child in scene.get_children():
+			if not is_instance_valid(child):
+				continue
+			# Skip persistent structural nodes
+			if child == _level_mount_parent:
+				continue
+			if child.name == _level_mount_parent.name:
+				continue
+			# Skip other known persistent scene children (NonPlayingUiComponents, etc.)
+			if child.name == &"NonPlayingUiComponents" or child.name == &"BackgroundMusicManager" or child.name == &"LevelManager":
+				continue
+			# Skip if it's a known persistent sibling under _level_mount_parent
+			if persistent_sibling_names.has(child.name):
+				continue
+			# If the child is part of the original Main scene, skip it
+			if child.owner == scene:
+				continue
+			# Everything else is a dynamically-added node — free it
+			if child is Node:
+				child.set_process(false)
+				child.set_physics_process(false)
+				child.queue_free()
 
 	if _level_mount_parent == null:
 		return

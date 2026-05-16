@@ -165,7 +165,7 @@ func _play_hit_effect() -> void:
 	# no collision SFX here (played by boss when firing)
 	get_tree().current_scene.add_child(s)
 	# keep silent; remove player after short time to avoid orphan nodes
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.1, false).timeout
 	if is_instance_valid(s):
 		s.queue_free()
 

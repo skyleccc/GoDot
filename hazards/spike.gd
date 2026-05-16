@@ -75,7 +75,7 @@ func _enter_activating() -> void:
 	_state = SpikeState.ACTIVATING
 	anim_player.play("Activate")
 	# Enable hitbox 0.3s into the Activate animation
-	get_tree().create_timer(0.3).timeout.connect(_enable_hitbox_early)
+	get_tree().create_timer(0.3, false).timeout.connect(_enable_hitbox_early)
 
 
 func _on_animation_finished(anim_name: StringName) -> void:
