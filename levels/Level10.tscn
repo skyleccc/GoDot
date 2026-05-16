@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://d05ihsescdp0j" path="res://hazards/Laser.tscn" id="11_4hkux"]
 [ext_resource type="PackedScene" uid="uid://c65m3w6poefid" path="res://hazards/Spike.tscn" id="12_2v8bv"]
 [ext_resource type="PackedScene" uid="uid://vehj50puik7c" path="res://hazards/Saw.tscn" id="13_4hkux"]
+[ext_resource type="PackedScene" uid="uid://cptfqlv7wl1il" path="res://enemies/ShieldProjector.tscn" id="14_n6nda"]
+[ext_resource type="PackedScene" uid="uid://cf2v1xnlngkl2" path="res://huds/BossHUD.tscn" id="15_2xryj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2v8bv"]
 texture = ExtResource("1_c0r8l")
@@ -1149,5 +1151,16 @@ position = Vector2(1990, 55)
 
 [node name="EndPoint" parent="Saw" index="2" unique_id=1408913955]
 position = Vector2(-203, 0)
+
+[node name="ShieldProjector1" parent="." unique_id=773128156 instance=ExtResource("14_n6nda")]
+position = Vector2(164, -272)
+
+[node name="ShieldProjector2" parent="." unique_id=1122564383 instance=ExtResource("14_n6nda")]
+position = Vector2(898, 191)
+
+[node name="ShieldProjector3" parent="." unique_id=1676848260 instance=ExtResource("14_n6nda")]
+position = Vector2(1616, -271)
+
+[node name="BossHUD" parent="." unique_id=850273961 instance=ExtResource("15_2xryj")]
 
 [editable path="Saw"]

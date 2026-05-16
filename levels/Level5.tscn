@@ -963,9 +963,17 @@ position = Vector2(-71, 200)
 visible = false
 position = Vector2(914, 222)
 
+[node name="ShieldProjector1" parent="Exit" unique_id=773128156 instance=ExtResource("14_shield")]
+position = Vector2(164, -272)
+
+[node name="ShieldProjector2" parent="Exit" unique_id=576634312 instance=ExtResource("14_shield")]
+position = Vector2(898, 191)
+
+[node name="ShieldProjector3" parent="Exit" unique_id=1246648416 instance=ExtResource("14_shield")]
+position = Vector2(1616, -271)
+
 [node name="Boss" parent="." unique_id=1904503373 instance=ExtResource("7_boss")]
 position = Vector2(891, -346)
-max_hp = 100
 
 [node name="Turret" parent="." unique_id=1947750520 instance=ExtResource("8_ouh6h")]
 position = Vector2(-55, 93)
@@ -1003,15 +1011,6 @@ position = Vector2(1830, -93.00001)
 
 [node name="StrikerEnemy" parent="." unique_id=1519992613 instance=ExtResource("10_2v8bv")]
 position = Vector2(237, -52)
-
-[node name="ShieldProjector1" parent="." unique_id=796344027 instance=ExtResource("14_shield")]
-position = Vector2(164, -272)
-
-[node name="ShieldProjector2" parent="." unique_id=1426525597 instance=ExtResource("14_shield")]
-position = Vector2(898, 191)
-
-[node name="ShieldProjector3" parent="." unique_id=1648306111 instance=ExtResource("14_shield")]
-position = Vector2(1616, -271)
 
 [node name="StrikerEnemy2" parent="." unique_id=373931725 instance=ExtResource("10_2v8bv")]
 position = Vector2(242, 137)
