@@ -729,8 +729,7 @@ func _die() -> void:
 	
 	# queue free after short delay to let animation/sfx play
 	await get_tree().create_timer(1.25).timeout
-  
-  _start_defeat_dialogue()
+	_start_defeat_dialogue()
   
 	queue_free()
 

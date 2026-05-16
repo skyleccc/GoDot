@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bg54u7l01pam6"]
 
 [ext_resource type="PackedScene" uid="uid://mt1ocmq0mbun" path="res://huds/components/Bars/Heart.tscn" id="1_k83r7"]
+[ext_resource type="Script" uid="uid://c76w5x5bqnka" path="res://huds/lives_hud.gd" id="2_c76w5"]
 
 [node name="LivesHud" type="Control" unique_id=869905535]
 layout_mode = 3
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("2_c76w5")
 
 [node name="Heart" parent="." unique_id=235811570 instance=ExtResource("1_k83r7")]
 layout_mode = 0
