@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://d1lwgbhgcpmv7" path="res://asssets/tilesets/Prototype Pack/Tilesets/LeftAngle/BlueprintTilesetLeftAngleCold.png" id="4_6x4p6"]
 [ext_resource type="PackedScene" uid="uid://dqta1qxd6epnr" path="res://interactables/Spawn.tscn" id="5_rop0j"]
 [ext_resource type="PackedScene" uid="uid://dd43j4ktu3mp1" path="res://interactables/Exit.tscn" id="6_8ln3t"]
-[ext_resource type="PackedScene" uid="uid://cpc0iqgjhuh4j" path="res://enemies/Boss.tscn" id="7_boss"]
+[ext_resource type="PackedScene" uid="uid://cgw62shyyvp2x" path="res://enemies/WardenBoss.tscn" id="7_boss"]
 [ext_resource type="PackedScene" uid="uid://cskb0soup0xpw" path="res://hazards/Turret.tscn" id="8_ouh6h"]
 [ext_resource type="PackedScene" uid="uid://dbh2abpt3lm42" path="res://enemies/NightBorneEnemy.tscn" id="9_8ln3t"]
 [ext_resource type="PackedScene" uid="uid://ylegae54155u" path="res://enemies/StrikerEnemy.tscn" id="10_2v8bv"]
@@ -950,6 +950,7 @@ sources/3 = SubResource("TileSetAtlasSource_l0dh8")
 [node name="Level5" type="Node2D" unique_id=1679341811]
 
 [node name="BossHUD" parent="." unique_id=850273961 instance=ExtResource("1_l0dh8")]
+force_no_shields = true
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=658461979]
 texture_filter = 1
@@ -963,16 +964,7 @@ position = Vector2(-71, 200)
 visible = false
 position = Vector2(914, 222)
 
-[node name="ShieldProjector1" parent="Exit" unique_id=773128156 instance=ExtResource("14_shield")]
-position = Vector2(164, -272)
-
-[node name="ShieldProjector2" parent="Exit" unique_id=576634312 instance=ExtResource("14_shield")]
-position = Vector2(898, 191)
-
-[node name="ShieldProjector3" parent="Exit" unique_id=1246648416 instance=ExtResource("14_shield")]
-position = Vector2(1616, -271)
-
-[node name="Boss" parent="." unique_id=1904503373 instance=ExtResource("7_boss")]
+[node name="WardenBoss" parent="." unique_id=1904503373 instance=ExtResource("7_boss")]
 position = Vector2(891, -346)
 
 [node name="Turret" parent="." unique_id=1947750520 instance=ExtResource("8_ouh6h")]

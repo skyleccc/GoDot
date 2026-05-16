@@ -203,8 +203,8 @@ func _bind_nodes() -> void:
 	print("[BossHUD] Found ", _shields.size(), " shield projectors")
 	print("[BossHUD] _bind_nodes called, _boss_bar is: ", _boss_bar)
 
-	if _shields.size() > 0:
-		for i in range(_shields.size()):
+	if _shields.size() > 0 and _shield_bars.size() > 0:
+		for i in range(mini(_shields.size(), _shield_bars.size())):
 			var shield: Node = _shields[i]
 			if shield.has_method("get") and shield.get("max_hp") != null:
 				_shield_bars[i].max_value = float(shield.get("max_hp"))

@@ -8,7 +8,7 @@ extends CharacterBody2D
 enum AttackType { BURST, SWEEP, MINE, SCRAMBLE, RAILGUN }
 
 @export_group("Boss Stats")
-@export var max_hp: int = 10
+@export var max_hp: int = 150
 @export var defeat_dialogue_id: String = ""
 @export var hover_amplitude: float = 18.0
 @export var hover_speed: float = 1.15

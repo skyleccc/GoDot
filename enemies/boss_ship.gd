@@ -111,7 +111,8 @@ func _physics_process(delta: float) -> void:
 		_projectile_timer = projectile_cooldown
 
 	if _aoe_timer <= 0.0:
-		_cast_aoe_pattern()
+		if not _are_shields_active():
+			_cast_aoe_pattern()
 		_aoe_timer = aoe_cooldown
 
 	if _railgun_timer <= 0.0:
@@ -180,20 +181,14 @@ func _is_rear_hit(hit_source_pos: Vector2) -> bool:
 	return relative.x * _facing_sign < 0.0
 
 
-## Damage only accepted from the rear. Front hits are reflected.
-func _apply_hit(amount: int, hit_source_pos: Vector2, reflect: bool) -> void:
+## Damage accepted from any direction.
+func _apply_hit(amount: int, _hit_source_pos: Vector2, _reflect: bool) -> void:
 	if _is_dead:
 		return
-
-	if _is_rear_hit(hit_source_pos):
-		current_hp = maxi(current_hp - amount, 0)
-		print("[BossShip] Rear hit! damage:", amount, " hp:", current_hp)
-		if current_hp <= 0:
-			_die()
-		return
-
-	if reflect:
-		_reflect_attack(hit_source_pos, amount)
+	current_hp = maxi(current_hp - amount, 0)
+	print("[BossShip] Hit! damage:", amount, " hp:", current_hp)
+	if current_hp <= 0:
+		_die()
 
 
 func _reflect_attack(hit_source_pos: Vector2, amount: int) -> void:
@@ -242,6 +237,14 @@ func _play_sound(sound: AudioStream, pos: Vector2) -> void:
 	audio_player.play()
 	await audio_player.finished
 	audio_player.queue_free()
+
+
+func _are_shields_active() -> bool:
+	var shields := get_tree().get_nodes_in_group("shield_projectors")
+	for s in shields:
+		if is_instance_valid(s) and s.has_method("is_alive") and s.is_alive():
+			return true
+	return false
 
 
 func _cast_aoe_pattern() -> void:
