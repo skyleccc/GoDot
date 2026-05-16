@@ -41,6 +41,7 @@ signal hp_changed(current_hp_value: int, max_hp_value: int)
 @export var oob_fall_y: float = 3000.0        # respawn if player falls below this Y
 @export var oob_left_x: float = -3000.0       # optional left boundary
 @export var oob_right_x: float = 3000.0      # optional right boundary
+@export var oob_startup_grace: float = 1.25   # ignore OOB checks briefly after spawn/respawn
 
 # Sound list
 const footstep_streams: Array[AudioStream] = [
@@ -107,6 +108,7 @@ var _footstep_timer: float = 0.0
 ## Set to true once the first footstep offset (0.2 s) has fired this stride
 var _footstep_first_hit: bool = false
 var _low_health_cooldown_timer: float = 0.0
+var _oob_grace_timer: float = 0.0
 
 # ── Polyphonic playback handles ───────────────────────────────────────────────
 var _footstep_playback: AudioStreamPlaybackPolyphonic
@@ -118,6 +120,7 @@ func _ready() -> void:
 	animation_tree.active = true
 	_state_machine = animation_tree.get("parameters/playback")
 	start_position = global_position
+	_oob_grace_timer = oob_startup_grace
 	print("Player spawned — HP: ", current_hp, " / ", max_hp)
 
 	# Grab polyphonic playback objects so we can fire one-shots freely
@@ -126,6 +129,11 @@ func _ready() -> void:
 
 	_vo_player.play()
 	_vo_playback = _vo_player.get_stream_playback()
+	
+	print("=== PLAYER: Emitting hp_changed signal ===")
+	call_deferred("_emit_initial_hp")
+	
+func _emit_initial_hp() -> void:
 	hp_changed.emit(current_hp, max_hp)
 
 ## Override: clear coyote time and jump buffer on portal exit so the player
@@ -136,6 +144,8 @@ func notify_portal_launch() -> void:
 	_jump_buffer_timer = 0.0
 
 func _physics_process(delta: float) -> void:	
+	if _oob_grace_timer > 0.0:
+		_oob_grace_timer -= delta
 	
 	if _is_invincible:
 		_invincibility_timer -= delta
@@ -430,6 +440,15 @@ func _start_die() -> void:
 
 ## Called after die animation + respawn delay.
 func _finish_die() -> void:
+	# Check if the player should respawn (lives system allows it)
+	var lives_hud = get_tree().get_first_node_in_group("lives_hud")
+	if lives_hud != null and lives_hud.has_method("should_respawn"):
+		if not lives_hud.should_respawn():
+			print("Player died! No lives remaining - Game Over")
+			_awaiting_respawn = false
+			_is_dying = true  # Stay in death state
+			return
+	
 	print("Player died! Respawning...")
 	_awaiting_respawn = false
 	_respawn()
@@ -440,6 +459,7 @@ func _respawn() -> void:
 	hp_changed.emit(current_hp, max_hp)
 	global_position = start_position
 	velocity = Vector2.ZERO
+	_oob_grace_timer = maxf(0.5, oob_startup_grace)
 	_play_spawn_activation_at(global_position)
 	launched_by_portal = false
 	_is_dying = false
@@ -510,8 +530,11 @@ func _travel_if_not(state_name: String) -> void:
 
 ## Respawn the player if they leave the map
 func _check_out_of_bounds() -> void:
+	if _oob_grace_timer > 0.0:
+		return
 	if global_position.y > oob_fall_y \
 	or global_position.x < oob_left_x \
 	or global_position.x > oob_right_x:
 		print("Player out of bounds at ", global_position, " — respawning.")
-		_respawn()
+		# Treat out of bounds as lethal damage to trigger lives system
+		take_damage(max_hp, global_position, false, false)

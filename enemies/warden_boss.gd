@@ -733,6 +733,7 @@ func _die() -> void:
 	# indent instead of tabs, which would cause a parse error at runtime.
 	await get_tree().create_timer(1.25).timeout
 	_start_defeat_dialogue()
+  
 	queue_free()
 
 
